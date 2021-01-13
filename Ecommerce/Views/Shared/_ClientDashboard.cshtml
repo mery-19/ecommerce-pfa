@@ -1,0 +1,61 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="wrapper d-flex">
+    <div class="sideMenu bg-mattBlackLight">
+        <div class="sidebar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="#" class="nav-link px-2 sideMenuToggler">
+                        <i class="material-icons icon expandView ">
+                            view_list
+                        </i>
+                        <span class="text">Resize</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="~/Dashboard/Client" class="nav-link px-2">
+                        <i class="material-icons icon">
+                            shopping_cart
+                        </i>
+                            <span class="text">Vos commandes</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link px-2">
+                        <i class="material-icons icon">
+                            favorite_border
+                        </i><span class="text">Liste d'envies</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link px-2">
+                        <i class="material-icons icon">
+                            settings
+                        </i>
+                        <span class="text">Mon compte</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link px-2">
+                        <i class="material-icons icon">
+                            clear
+                        </i>
+                        <span class="text">Déconnecte</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <main>
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+        </main>
+    </div>
+</div>

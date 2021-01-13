@@ -1,0 +1,73 @@
+﻿@model Ecommerce.Models.RegisterViewModel
+
+<div class="">
+    @{
+        ViewBag.Title = "Register";
+    }
+
+    <div class="form-center">
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal register-form", role = "form" }))
+        {
+
+            <div class="title">
+                <h2>@ViewBag.Title.</h2>
+
+                @Html.AntiForgeryToken()
+                <h4>Créer un compte.</h4>
+
+            </div>
+            <hr />
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+
+            <div class="form-group row">
+                @Html.LabelFor(m => m.UserName, new { @class = "col-4 col-xs-12 control-label" })
+                <div class="col-8 col-xs-12">
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(m => m.Email, new { @class = "col-4 col-xs-12 control-label" })
+                <div class="col-8 col-xs-12">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(m => m.Password, new { @class = "col-4 col-xs-12 control-label" })
+                <div class="col-8 col-xs-12">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-4 col-xs-12 control-label" })
+                <div class="col-8 col-xs-12">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-5 col-xs-12">
+                    <input type="submit" class="btn my-btn btn-save" value="Register" />
+                </div>
+                <div class="col-5 col-xs-12">
+                    <input type="submit" class="btn my-btn btn-danger" value="Cancel" />
+                </div>
+            </div>
+
+            <hr/>
+
+
+
+            
+        }
+    </div>
+
+            </div>
+
+            @Html.Partial("Footer")
+
+
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }
