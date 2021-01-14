@@ -23,6 +23,49 @@ $(document).ready(function () {
         console.log("resize");
     });
 
+/*    var click = function () {
+        var demo = $("#demo");
+        $('button[data-toggle="modal"]').click(function (e) {
+            var url = $(this).data('url');
+            console.log(url);
+            $.get(url).done(function (data) {
+                console.log(data);
 
+                demo.html(data);
+                demo.find('.modal').modal('show');
+            })
+
+        })
+    };
+
+    
+    click();*/
+
+    var frensh = {
+        "language": {
+            "sProcessing": "Traitement en cours ...",
+            "sLengthMenu": "Afficher _MENU_ lignes",
+            "sZeroRecords": "Aucun résultat trouvé",
+            "sEmptyTable": "Aucune donnée disponible",
+            "sInfo": "Lignes _START_ à _END_ sur _TOTAL_",
+            "sInfoEmpty": "Aucune ligne affichée",
+            "sInfoFiltered": "(Filtrer un maximum de_MAX_)",
+            "sInfoPostFix": "",
+            "sSearch": "Chercher:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Chargement...",
+            "oPaginate": {
+                "sFirst": "Premier", "sLast": "Dernier", "sNext": "Suivant", "sPrevious": "Précédent"
+            },
+            "oAria": {
+                "sSortAscending": ": Trier par ordre croissant", "sSortDescending": ": Trier par ordre décroissant"
+            }
+        }
+    }
+
+    window.$('#categorie').DataTable(frensh);
+    window.$('#produitTable').DataTable(frensh);
 
 });
+
