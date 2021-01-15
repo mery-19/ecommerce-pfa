@@ -5,28 +5,24 @@
 }
 
 <div class="margin-top container">
-    <h4>Votre compte</h4>
+    <h4>
+        Votre compte
+    </h4>
     <hr />
 
-    <div class="row">
+    <div class="row d-flex">
 
         <div class="col-md-6 col-12">
-            <div class="card">
+            <div class="card card_info h-100">
                 <div class="card-header d-flex justify-content-between">
                     <div>
                         INFORMATIONS PERSONNELLES
                     </div>
-                    <a href="~/Dashboard" class="icon_bg">
-                        <i class="material-icons icon ">
-                            edit
-                        </i>
-                    </a>
-
                 </div>
                 <div class="card-body">
                     <h5 class="card-title"> @Model.name</h5>
                     <p class="card-text">@Model.email</p>
-                    [
+
                     @if (Model.hasPassword)
                     {
                         @Html.ActionLink("Changer le mot de passe", "ChangePassword", "Manage")
@@ -35,33 +31,81 @@
                     {
                         @Html.ActionLink("Create", "SetPassword", "Manage")
                     }
-                    ]
+
                 </div>
             </div>
         </div>
         <div class="col-md-6 col-12">
-            <div class="card">
+            <div class="card card_info h-100">
                 <div class="card-header d-flex justify-content-between">
                     <div>
                         INFORMATIONS DE CONTACTS
                     </div>
-                    <a href="~/Dashboard" class="icon_bg">
-                        <i class="material-icons icon">
+                    <a style="cursor:pointer" class="icon_bg" data-toggle="modal" data-target="#exampleModal">
+                        <i class="material-icons icon ">
                             edit
                         </i>
                     </a>
-
                 </div>
                 <div class="card-body">
                     <p class="card-text">
-                        <span class="font-weight-bold">Adresse:</span>@Model.address
+                        <span class="font-weight-bold">Adresse: </span> @Model.address
+                        <br/>
+                        <span class="font-weight-bold">Téléphone: </span> @Model.phone
                     </p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-  
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        @using (Html.BeginForm())
+        {
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.address, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.address, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.address, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.phone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
 
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-save text-white">Save changes</button>
+                </div>
+            </div>
+        }
+        </div>
 </div>

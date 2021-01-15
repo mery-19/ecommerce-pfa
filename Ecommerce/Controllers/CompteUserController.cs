@@ -1,6 +1,7 @@
 ﻿using Ecommerce.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,8 +10,10 @@ namespace Ecommerce.Controllers
 {
     public class CompteUserController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db = new ApplicationDbContext(); 
+
         // GET: CompteUser
+        [HttpGet]
         public ActionResult Index()
         {
             CompteUser compte = new CompteUser();
@@ -25,6 +28,25 @@ namespace Ecommerce.Controllers
             else compte.hasPassword = false;
             return View(compte);
         }
+
+        [HttpPost]
+        public ActionResult Index(CompteUser user)
+        {
+
+            /* if (ModelState.IsValid)
+             {*/
+            ApplicationUser thisUser = new ApplicationUser();
+            thisUser = db.Users.Where(x => x.UserName.Equals(user.name)).FirstOrDefault();
+
+            thisUser.PhoneNumber = user.phone;
+            thisUser.Address = user.address;
+            db.Entry(thisUser).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+/*            }
+*/            
+        }
+
 
         // GET: CompteUser/Details/5
         public ActionResult Details(int id)
