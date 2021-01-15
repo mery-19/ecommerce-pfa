@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -13,6 +14,12 @@ namespace Ecommerce.Models
         public virtual ICollection<Produit> Produits { get; set; }
         public virtual ICollection<Envies> Envies { get; set; }
         public virtual ICollection<Commande> Commandes { get; set; }
+
+        [Display(Name = "Adresse")]
+        public string Address { get; set; }
+
+        [Display(Name = "Image")]
+        public string image { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

@@ -23,6 +23,7 @@ $(document).ready(function () {
         console.log("resize");
     });
 
+
 /*    var click = function () {
         var demo = $("#demo");
         $('button[data-toggle="modal"]').click(function (e) {
@@ -69,3 +70,15 @@ $(document).ready(function () {
 
 });
 
+
+// for save category without image
+$(function () {
+    $("#SaveCategory").click(function () {
+        console.log("clicked");
+        if ($("#categoryImage").val() == "") {
+            $("#err").fadeIn();
+            $("#view-err").text("l'image de catégorie requis.");
+            return false; //for not submit informations to server 
+        }
+    });
+});

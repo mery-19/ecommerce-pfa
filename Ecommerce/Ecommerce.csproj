@@ -172,6 +172,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ClientDashboardController.cs" />
+    <Compile Include="Controllers\CompteUserController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -188,6 +189,7 @@
     <Compile Include="Models\BonAchat.cs" />
     <Compile Include="Models\Categorie.cs" />
     <Compile Include="Models\Commande.cs" />
+    <Compile Include="Models\CompteUser.cs" />
     <Compile Include="Models\Envies.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LigneCommande.cs" />
@@ -613,6 +615,7 @@
     <Content Include="Views\Produits\Details.cshtml" />
     <Content Include="Views\Produits\Edit.cshtml" />
     <Content Include="Views\Produits\Index.cshtml" />
+    <Content Include="Views\CompteUser\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

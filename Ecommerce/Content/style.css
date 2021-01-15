@@ -9,6 +9,12 @@ body {
 /*    background-color: #FFE0CF;
 */}
 
+.icon_bg {
+    color: #FF7C5B;
+}
+    .icon_bg:hover {
+        color:  #2D3E50;
+    }
 .footer {
     min-height: 30vh;
     background-color: #2D3E50;

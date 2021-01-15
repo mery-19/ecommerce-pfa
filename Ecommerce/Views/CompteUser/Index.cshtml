@@ -1,0 +1,67 @@
+﻿@model Ecommerce.Models.CompteUser
+
+@{
+    Layout = "~/Views/Shared/_adminDashboard.cshtml";
+}
+
+<div class="margin-top container">
+    <h4>Votre compte</h4>
+    <hr />
+
+    <div class="row">
+
+        <div class="col-md-6 col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div>
+                        INFORMATIONS PERSONNELLES
+                    </div>
+                    <a href="~/Dashboard" class="icon_bg">
+                        <i class="material-icons icon ">
+                            edit
+                        </i>
+                    </a>
+
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title"> @Model.name</h5>
+                    <p class="card-text">@Model.email</p>
+                    [
+                    @if (Model.hasPassword)
+                    {
+                        @Html.ActionLink("Changer le mot de passe", "ChangePassword", "Manage")
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Create", "SetPassword", "Manage")
+                    }
+                    ]
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div>
+                        INFORMATIONS DE CONTACTS
+                    </div>
+                    <a href="~/Dashboard" class="icon_bg">
+                        <i class="material-icons icon">
+                            edit
+                        </i>
+                    </a>
+
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        <span class="font-weight-bold">Adresse:</span>@Model.address
+                    </p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+
+</div>
