@@ -14,7 +14,7 @@ namespace Ecommerce.Models
         public int id { get; set; }
 
         [Required(ErrorMessage = "Libele requis", AllowEmptyStrings = false)]
-        [Display(Name = "Libele")]
+        [Display(Name = "Categorie")]
         public string libele { get; set; }
 
         [Display(Name = "Upload image")]

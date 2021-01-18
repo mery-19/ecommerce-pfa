@@ -53,7 +53,7 @@ namespace Ecommerce.Models
         [ForeignKey("id_user")]
         public virtual ApplicationUser User { get; set; }
 
-        public int id_categorie { get; set; }
+        public int? id_categorie { get; set; }
         [ForeignKey("id_categorie")]
         public virtual Categorie Categorie { get; set; }
 

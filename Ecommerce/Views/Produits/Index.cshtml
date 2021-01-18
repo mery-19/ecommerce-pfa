@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_adminDashboard.cshtml";
 }
 
-<div class="mt-5">
+<div class="m-5">
 
 
     <div class="row justify-content-around">
@@ -83,14 +83,14 @@
                             visibility
                         </i>
                     </a>
-                    <a href="@Url.Action("Delete", "Produits", new { id = item.id })" class="text-danger">
+                    <a data-delete-id="@item.id" class="text-danger delete-link-produit pointer">
                         <i class="material-icons icon ">
                             delete
                         </i>
                     </a>
-                    @*      @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.id })*@
+                    @Html.Hidden("__RequestVerificationToken", @Html.AntiForgeryToken())
+
+
                 </td>
             </tr>
             }

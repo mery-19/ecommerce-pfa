@@ -96,7 +96,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label" })
                 <div>
-                    <input type="file" name="image" id="produitImage" class="form-control" />
+                    <input type="file" name="image" id="image" class="form-control" />
                     @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -142,6 +142,6 @@
     }
 
     <div>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Retour à la liste", "Index")
     </div>
 </div>

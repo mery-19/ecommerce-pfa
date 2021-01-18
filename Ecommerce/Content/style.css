@@ -188,3 +188,7 @@ body {
     .btn-orange:hover {
         background-color: #2D3E50;
     }
+
+.pointer{
+    cursor:pointer;
+}

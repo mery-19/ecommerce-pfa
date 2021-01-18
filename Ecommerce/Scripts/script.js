@@ -81,4 +81,50 @@ $(function () {
             return false; //for not submit informations to server 
         }
     });
+
+    $(function () {
+        $("a.delete-link-produit").click(function () {
+
+            var token = $("[name='__RequestVerificationToken']").val();
+
+            console.log(token);
+            var checkstr = confirm('are you sure you want to delete this?');
+            if (checkstr == true) {
+                $.ajax({
+                    url: '/Produits/Delete/' + $(".delete-link-produit").attr('data-delete-id'),
+                    type: "POST",
+                    data: {
+                        __RequestVerificationToken: token,
+                    },
+                    success: function () {
+                        window.location.replace("https://localhost:44352/Produits/Index");
+                    }
+                });
+            }
+        }
+        );
+    });
+
+    $(function () {
+        $("a.delete-link-categorie").click(function () {
+
+            var token = $("[name='__RequestVerificationToken']").val();
+
+            console.log(token);
+            var checkstr = confirm('are you sure you want to delete this?');
+            if (checkstr == true) {
+                $.ajax({
+                    url: '/Categories/Delete/' + $(".delete-link-categorie").attr('data-delete-id'),
+                    type: "POST",
+                    data: {
+                        __RequestVerificationToken: token,
+                    },
+                    success: function () {
+                        window.location.replace("https://localhost:44352/Categories/Index");
+                    }
+                });
+            }
+        }
+        );
+    });
 });

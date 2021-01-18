@@ -6,64 +6,82 @@
 @{
     ViewBag.Title = "Index";
 }
-<div id="demo"></div>
 
+<div class="m-5">
 
-<h2>Index</h2>
+    <div class="row justify-content-around">
+        <div class="col-md-6 col-12">
+            <h2>Les catégories</h2>
+        </div>
+        <div class="col-md-6 col-12">
+            <p>
+                <a href="@Url.Action("create", "Categories")" class="btn btn-orange text-white d-flex w-50 justify-content-around">
+                    <i class="material-icons icon">control_point </i><span> Créer un nouveau</span>
+                </a>
+                @*        @Html.ActionLink("créer un nouveau", "Create", new { @class = "btn btn-save" })
+                *@
+            </p>
+        </div>
+    </div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table" id="categorie">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.libele)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.image)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <hr />
+    <table class="table" id="categorie">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.libele)
-                </td>
-                <td>
-                    <img src="~/Uploads/Categorie_image/@Html.DisplayFor(model => item.image)" class="img-thumbnail" style="width:48px; height:48px;" />
-                </td>
-                <td>
-                    @*  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_categorie"
-                data-url="@Url.Action($"Edit/{item.id}")">
-            Edit
-        </button>*@
-                    <a href="@Url.Action("Edit", "Categories", new { id = item.id })" class="text-warning">
-                        <i class="material-icons icon ">
-                            edit
-                        </i>
-                    </a>
-                    <a href="@Url.Action("Details", "Categories", new { id = item.id })" class="text-success">
-                        <i class="material-icons icon ">
-                            visibility
-                        </i>
-                    </a>
-                    <a href="@Url.Action("Delete", "Categories", new { id = item.id })" class="text-danger">
-                        <i class="material-icons icon ">
-                            delete
-                        </i>
-                    </a>
-
-                    @*    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.id })*@
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.libele)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.image)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.libele)
+                    </td>
+                    <td>
+                        <img src="~/Uploads/Categorie_image/@Html.DisplayFor(model => item.image)" class="img-thumbnail" style="width:48px; height:48px;" />
+                    </td>
+                    <td>
+                        @*  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_categorie"
+                                    data-url="@Url.Action($"Edit/{item.id}")">
+                                Edit
+                            </button>*@
+                        <a href="@Url.Action("Edit", "Categories", new { id = item.id })" class="text-warning">
+                            <i class="material-icons icon ">
+                                edit
+                            </i>
+                        </a>
+                        <a href="@Url.Action("Details", "Categories", new { id = item.id })" class="text-success">
+                            <i class="material-icons icon ">
+                                visibility
+                            </i>
+                        </a>
+                        @* <a href="@Url.Action("Delete", "Categories", new { id = item.id })" class="text-danger">
+                                <i class="material-icons icon ">
+                                    delete
+                                </i>
+                            </a>*@
+                        <a data-delete-id="@item.id" class="text-danger delete-link-categorie pointer">
+                            <i class="material-icons icon ">
+                                delete
+                            </i>
+                        </a>
 
-</table>
+                        @*    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.id })*@
+                    </td>
+                </tr>
+            }
+        </tbody>
 
+    </table>
+
+
+</div>

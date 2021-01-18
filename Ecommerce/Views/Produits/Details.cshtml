@@ -2,107 +2,118 @@
 @{
     Layout = "~/Views/Shared/_adminDashboard.cshtml";
 }
-@{
-    ViewBag.Title = "Details";
-}
 
-<h2>Details</h2>
 
-<div>
-    <h4>Produit</h4>
+
+<div class="m-5">
+    <h2>Details</h2>
+
+    <h4>@Model.name</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Categorie.libele)
-        </dt>
+    <div class="row">
+        <div class="col-md-9 col-12">
+            <dl class="dl-horizontal row">
 
-        <dd>
-            @Html.DisplayFor(model => model.Categorie.libele)
-        </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Categorie.libele)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Promotion.libele)
-        </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Categorie.libele)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Promotion.libele)
-        </dd>
+                @if (Model.Promotion != null)
+                {
+                    <dt class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Promotion.libele)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.User.Email)
-        </dt>
+                    <dd class="col-sm-9">
+                        @Html.DisplayFor(model => model.Promotion.libele)
+                    </dd>
+                }
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.User.Email)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.User.Email)
-        </dd>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.User.Email)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.description)
-        </dt>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.description)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.description)
-        </dd>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.description)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.prix_achat)
-        </dt>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.prix_achat)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.prix_achat)
-        </dd>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.prix_achat) DH
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.prix_vente)
-        </dt>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.prix_vente)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.prix_vente)
-        </dd>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.prix_vente) DH
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.quantite_stock)
-        </dt>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.quantite_stock)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.quantite_stock)
-        </dd>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.quantite_stock)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tva)
-        </dt>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.tva)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.tva)
-        </dd>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.tva) %
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.image)
-        </dt>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.image)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.image)
-        </dd>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.image)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.date_ajout)
-        </dt>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.date_ajout)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.date_ajout)
-        </dd>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.date_ajout)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.date_modification)
-        </dt>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.date_modification)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.date_modification)
-        </dd>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.date_modification)
+                </dd>
 
-    </dl>
+            </dl>
+        </div>
+        <div class="col-md-3 col-12">
+            <img src="~/Uploads/Produit_image/@Model.image" class="h-100 w-100" />
+        </div>
+
+    </div>
+    <p>
+        @Html.ActionLink("Modifier", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Retour à la liste", "Index")
+    </p>
+
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

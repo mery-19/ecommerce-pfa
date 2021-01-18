@@ -11,6 +11,7 @@ using Ecommerce.Models;
 
 namespace Ecommerce.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProduitsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -51,7 +52,7 @@ namespace Ecommerce.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Produit produit,HttpPostedFileBase myimage)
+        public ActionResult Create(Produit produit,HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
@@ -59,9 +60,9 @@ namespace Ecommerce.Controllers
                 ApplicationUser user = db.Users.Where(x => x.UserName.Equals(name)).FirstOrDefault();
                 produit.id_user = user.Id;
                 produit.date_ajout = DateTime.Now;
-                string path = Path.Combine(Server.MapPath("~/Uploads/Produit_image"), myimage.FileName);
-                myimage.SaveAs(path);
-                produit.image = myimage.FileName;
+                string path = Path.Combine(Server.MapPath("~/Uploads/Produit_image"), image.FileName);
+                image.SaveAs(path);
+                produit.image = image.FileName;
                 db.Produits.Add(produit);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -136,7 +137,7 @@ namespace Ecommerce.Controllers
         // POST: Produits/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+         public ActionResult DeleteConfirmed(int id)
         {
             Produit produit = db.Produits.Find(id);
             db.Produits.Remove(produit);
