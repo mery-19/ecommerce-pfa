@@ -7,11 +7,16 @@ using System.Web;
 
 namespace Ecommerce.Models
 {
+    
     public class Produit
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
+
+        [Required(ErrorMessage = "Le nom de produit requis.", AllowEmptyStrings = false)]
+        [Display(Name = "Le nom de produit")]
+        public string name { get; set; }
 
         [Required(ErrorMessage = "La description de produit requis.", AllowEmptyStrings = false)]
         [Display(Name = "Description")]
@@ -37,7 +42,7 @@ namespace Ecommerce.Models
         public string image { get; set; }
 
         [Display(Name = "Date d'ajout")]
-        public DateTime date_ajout { get; set; }
+        public DateTime? date_ajout { get ; set; }
 
         [Display(Name = "Date de modification")]
         public DateTime? date_modification { get; set; }

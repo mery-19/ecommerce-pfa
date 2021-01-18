@@ -620,6 +620,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\Categorie_image\" />
+    <Folder Include="Uploads\Produit_image\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

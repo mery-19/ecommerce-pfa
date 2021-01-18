@@ -180,3 +180,11 @@ body {
     .form-control{
         width:100%;
     }
+
+.btn-orange {
+    background-color: #FF7C5B;
+}
+
+    .btn-orange:hover {
+        background-color: #2D3E50;
+    }

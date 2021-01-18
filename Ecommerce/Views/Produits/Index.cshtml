@@ -2,83 +2,98 @@
 @{
     Layout = "~/Views/Shared/_adminDashboard.cshtml";
 }
-@{
-    ViewBag.Title = "Index";
-}
 
-<h2>Index</h2>
+<div class="mt-5">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table" id="produitTable">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Categorie.libele)
-            </th>
-           
-            <th>
-                Ajouté par
-            </th>
-           
-            
-            <th>
-                @Html.DisplayNameFor(model => model.prix_vente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.quantite_stock)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.tva)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.image)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.date_ajout)
-            </th>
-           
-            <th></th>
-        </tr>
-    </thead>
 
-    <tbody>
+    <div class="row justify-content-around">
+        <div class="col-md-6 col-12">
+            <h2>Les produits</h2>
+        </div>
+        <div class="col-md-6 col-12">
+            <p>
+                <a href="@Url.Action("create", "Produits")" class="btn btn-orange text-white d-flex w-50 justify-content-around">
+                    <i class="material-icons icon">control_point </i><span> Créer un nouveau</span>
+                </a>
+                @*        @Html.ActionLink("créer un nouveau", "Create", new { @class = "btn btn-save" })
+                *@
+            </p>
+        </div>
+    </div>
 
-        @foreach (var item in Model)
-        {
+    <hr />
+   
+    <table class="table" id="produitTable">
+        <thead>
             <tr>
+                <th>
+                    Nom
+                </th>
+                <th>
+                    Catégorie
+                </th>
+
+                <th>
+                    Ajouté par
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.image)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.date_ajout)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Categorie.libele)
                 </td>
-               
+
                 <td>
                     @Html.DisplayFor(modelItem => item.User.UserName)
                 </td>
-              
-                
+
                 <td>
-                    @Html.DisplayFor(modelItem => item.prix_vente)
+                    <img src="~/Uploads/Produit_image/@Html.DisplayFor(model => item.image)" class="img-thumbnail" style="width:48px; height:48px;" />
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.quantite_stock)
+@*                    @Html.DisplayFor(modelItem => item.date_ajout.ToShortDateString())
+*@                    @Convert.ToDateTime(item.date_ajout).ToString("dd/MM/yyyy")
+
                 </td>
+
                 <td>
-                    @Html.DisplayFor(modelItem => item.tva)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.image)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.date_ajout)
-                </td>
-               
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                    <a href="@Url.Action("Edit", "Produits", new { id = item.id })" class="text-warning">
+                        <i class="material-icons icon ">
+                            edit
+                        </i>
+                    </a>
+                    <a href="@Url.Action("Details", "Produits", new { id = item.id })" class="text-success">
+                        <i class="material-icons icon ">
+                            visibility
+                        </i>
+                    </a>
+                    <a href="@Url.Action("Delete", "Produits", new { id = item.id })" class="text-danger">
+                        <i class="material-icons icon ">
+                            delete
+                        </i>
+                    </a>
+                    @*      @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.id })*@
                 </td>
             </tr>
-        }
-    </tbody>
-</table>
+            }
+        </tbody>
+    </table>
+</div>

@@ -37,14 +37,29 @@
                     <img src="~/Uploads/Categorie_image/@Html.DisplayFor(model => item.image)" class="img-thumbnail" style="width:48px; height:48px;" />
                 </td>
                 <td>
-                  @*  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_categorie"
-                            data-url="@Url.Action($"Edit/{item.id}")">
-                        Edit
-                    </button>*@
+                    @*  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit_categorie"
+                data-url="@Url.Action($"Edit/{item.id}")">
+            Edit
+        </button>*@
+                    <a href="@Url.Action("Edit", "Categories", new { id = item.id })" class="text-warning">
+                        <i class="material-icons icon ">
+                            edit
+                        </i>
+                    </a>
+                    <a href="@Url.Action("Details", "Categories", new { id = item.id })" class="text-success">
+                        <i class="material-icons icon ">
+                            visibility
+                        </i>
+                    </a>
+                    <a href="@Url.Action("Delete", "Categories", new { id = item.id })" class="text-danger">
+                        <i class="material-icons icon ">
+                            delete
+                        </i>
+                    </a>
 
-                    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                    @*    @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+        @Html.ActionLink("Details", "Details", new { id = item.id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.id })*@
                 </td>
             </tr>
         }

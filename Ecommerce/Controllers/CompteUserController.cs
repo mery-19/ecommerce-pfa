@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Ecommerce.Controllers
 {
+    [Authorize]
     public class CompteUserController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext(); 
