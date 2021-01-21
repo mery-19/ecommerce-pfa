@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.Claims;
@@ -20,6 +21,9 @@ namespace Ecommerce.Models
 
         [Display(Name = "Image")]
         public string image { get; set; }
+
+        [Display(Name = "date d'adhésion")]
+        public DateTime date_ajout { get; set; } = DateTime.Now;
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -61,5 +65,6 @@ namespace Ecommerce.Models
         public virtual DbSet<StatusCommande> StatusCommandes { get; set; }
         public virtual DbSet<Produit> Produits { get; set; }
 
-    }
+/*        public System.Data.Entity.DbSet<Ecommerce.Models.ApplicationUser> ApplicationUsers { get; set; }
+*/    }
 }

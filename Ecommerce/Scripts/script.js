@@ -65,8 +65,9 @@ $(document).ready(function () {
         }
     }
 
-    window.$('#categorie').DataTable(frensh);
-    window.$('#produitTable').DataTable(frensh);
+  /*  window.$('#categorie').DataTable(frensh);
+    window.$('#produitTable').DataTable(frensh);*/
+    window.$('.table').DataTable(frensh);
 
 });
 
@@ -127,4 +128,111 @@ $(function () {
         }
         );
     });
+
+    $(function () {
+        $("a.delete-link-user").click(function () {
+
+            var token = $("[name='__RequestVerificationToken']").val();
+
+            console.log(token);
+            var checkstr = confirm('are you sure you want to delete this?');
+            if (checkstr == true) {
+                $.ajax({
+                    url: '/ApplicationUsers/Delete/' + $(".delete-link-user").attr('data-delete-id'),
+                    type: "POST",
+                    data: {
+                        __RequestVerificationToken: token,
+                    },
+                    success: function () {
+                        window.location.replace("https://localhost:44352/ApplicationUsers/Index");
+                    }
+                });
+            }
+        }
+        );
+    });
+
+    $(function () {
+        $("a.delete-link-promo").click(function () {
+
+            var token = $("[name='__RequestVerificationToken']").val();
+
+            console.log(token);
+            var checkstr = confirm('are you sure you want to delete this?');
+            if (checkstr == true) {
+                $.ajax({
+                    url: '/Promotions/Delete/' + $(".delete-link-promo").attr('data-delete-id'),
+                    type: "POST",
+                    data: {
+                        __RequestVerificationToken: token,
+                    },
+                    success: function () {
+                        window.location.replace("https://localhost:44352/Promotions/Index");
+                    }
+                });
+            }
+        }
+        );
+    });
+
+
+    $(function () {
+        $('#Produits').selectpicker();
+       
+    });
+
+
+   /* $(function () {
+        $(".modal_promo").click(function () {
+            var my = $(this).data('id');
+            console.log(my)
+            $.ajax({
+                url: '/Produits',
+                type: "GET",
+                success: function (res) {
+                    console.log(res);
+                }
+            });
+        }
+        );
+    });*/
+
+    $(function () {
+        $("#create").click(function () {
+            var obj = [],
+                items = '';
+            /*  var tab = $('.produit_multi option:selected');
+              for (i = 0; i < tab.length; i++){
+                  console.log($('.produit_multi option:selected')[i].outerHTML);
+        }*/
+            $('.produit_multi option:selected').each(function (i) {
+                obj.push($(this).val());
+                console.log($(this).val());
+            });
+
+            taux =  $("input[name=taux_promotion]").val();
+            date = $("input[name=date_expiration]").val();
+            libele = $("input[name=libele]").val();
+            description = $("input[name=description]").val();
+            data = {
+                taux_promotion:taux,
+                date_expiration:date,
+                libele,
+                description,
+               obj
+            }
+            // send select ittems to controlelr
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                url:"/Promotions/CreateTest",
+                data: JSON.stringify(data),
+                success: function (data) {
+                    console.log(data);
+                    window.location.replace("https://localhost:44352/Promotions/Index");
+                }
+            });
+
+        });
+    })
 });

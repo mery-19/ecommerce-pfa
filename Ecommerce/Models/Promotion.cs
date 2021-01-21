@@ -28,7 +28,7 @@ namespace Ecommerce.Models
         public DateTime? date_expiration { get; set; }
 
         [Display(Name = "Date d'ajout")]
-        public DateTime date_ajout { get; set; }
+        public DateTime date_ajout { get; set; } = DateTime.Now;
 
         [Display(Name = "Date de modification")]
         public DateTime? date_modification { get; set; }

@@ -1,0 +1,67 @@
+﻿@model Ecommerce.Models.Promotion
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_adminDashboard.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Promotion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.libele)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.libele)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.taux_promotion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.taux_promotion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date_expiration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_expiration)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date_ajout)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_ajout)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date_modification)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_modification)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
