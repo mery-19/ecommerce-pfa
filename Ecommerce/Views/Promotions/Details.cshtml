@@ -5,63 +5,107 @@
     Layout = "~/Views/Shared/_adminDashboard.cshtml";
 }
 
-<h2>Details</h2>
+<div class="m-5">
+    <h2>Les détails</h2>
 
-<div>
-    <h4>Promotion</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.libele)
-        </dt>
+    <div>
+        <h4>Promotion</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-6 col-12">
+                <dl class="dl-horizontal row">
+                    <dt class="col-md-4">
+                        @Html.DisplayNameFor(model => model.libele)
+                    </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.libele)
-        </dd>
+                    <dd class="col-md-8">
+                        @Html.DisplayFor(model => model.libele)
+                    </dd>
+                    <dt class="col-md-4">
+                        @Html.DisplayNameFor(model => model.description)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.description)
-        </dt>
+                    <dd class="col-md-8">
+                        @Html.DisplayFor(model => model.description)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.description)
-        </dd>
+                    <dt class="col-md-4">
+                        @Html.DisplayNameFor(model => model.taux_promotion)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.taux_promotion)
-        </dt>
+                    <dd class="col-md-8">
+                        @Html.DisplayFor(model => model.taux_promotion) %
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.taux_promotion)
-        </dd>
+                    <dt class="col-md-4">
+                        @Html.DisplayNameFor(model => model.date_expiration) 
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.date_expiration)
-        </dt>
+                    <dd class="col-md-8">
+                       @Convert.ToDateTime(Model.date_expiration).ToString("dd/MM/yyyy")
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.date_expiration)
-        </dd>
+                    <dt class="col-md-4">
+                        @Html.DisplayNameFor(model => model.date_ajout)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.date_ajout)
-        </dt>
+                    <dd class="col-md-8">
+                        @Html.DisplayFor(model => model.date_ajout)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.date_ajout)
-        </dd>
+                    <dt class="col-md-4">
+                        @Html.DisplayNameFor(model => model.date_modification)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.date_modification)
-        </dt>
+                    <dd class="col-md-8">
+                        @Html.DisplayFor(model => model.date_modification)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.date_modification)
-        </dd>
+                </dl>
+            </div>
+            <div class="col-md-6 col-12">
+                <table class="table-no-searh cell-border" id="produitTable" style="width:100%">
+                    <caption style=" caption-side: top; text-align: center; color:black;font-weight:bold;text-decoration:underline">Les produits qui exist dans cette promotion</caption>
 
-    </dl>
+                    <thead>
+                        <tr class="border">
+                            <th>
+                                Nom
+                            </th>
+                            <th>
+                                Catégorie
+                            </th>
+
+                            <th>
+                                Quantité
+                            </th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model.Produits)
+                        {
+                            <tr class="border">
+                                <td>
+                                    @item.name
+                                </td>
+                                <td>
+                                    @item.Categorie.libele
+                                </td>
+                                <td>
+                                    @item.quantite_stock
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <p>
+        @Html.ActionLink("Modifier", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Retour à la liste", "Index")
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

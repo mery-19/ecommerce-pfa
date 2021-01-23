@@ -12,6 +12,17 @@ body {
 .card_info{
    
 }
+.table-no-searh {
+    margin:10px;
+/*    border:1px solid black;
+*/    text-align:center;
+}
+.border {
+    margin: 10px;
+/*    border: 1px solid black;
+*/    text-align: center;
+}
+
 .icon_bg {
     color: #FF7C5B;
 }

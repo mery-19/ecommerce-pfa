@@ -85,8 +85,7 @@ namespace Ecommerce.Controllers
                 }
                 /*                return RedirectToAction("Index");
                 */
-                return Json(true, JsonRequestBehavior.AllowGet);
-
+                return Json(new { data = true });
             }
 
             ViewBag.Produits = new MultiSelectList(db.Produits, "id", "name");
@@ -101,6 +100,7 @@ namespace Ecommerce.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            ViewBag.Produits = new MultiSelectList(db.Produits, "id", "name");
             Promotion promotion = db.Promotions.Find(id);
             if (promotion == null)
             {
@@ -114,10 +114,11 @@ namespace Ecommerce.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,libele,description,taux_promotion,date_expiration,date_ajout,date_modification")] Promotion promotion)
+        public ActionResult Edit( Promotion promotion)
         {
             if (ModelState.IsValid)
             {
+                promotion.date_modification = DateTime.Now;
                 db.Entry(promotion).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

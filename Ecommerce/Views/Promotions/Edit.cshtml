@@ -5,74 +5,132 @@
     Layout = "~/Views/Shared/_adminDashboard.cshtml";
 }
 
-<h2>Edit</h2>
+<div class="m-5">
+    <h2>Modifier Promotion</h2>
+    <h3>@Model.libele</h3>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Promotion</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.id)
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.libele, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.libele, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.libele, "", new { @class = "text-danger" })
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <div class="form-group">
+
+                @Html.LabelFor(model => model.libele, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.EditorFor(model => model.libele, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.libele, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.taux_promotion, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.taux_promotion, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.taux_promotion, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.date_expiration, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.date_expiration, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.date_expiration, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.date_ajout, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.date_ajout, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.date_ajout, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.date_modification, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.date_modification, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.date_modification, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+        <div class="col-md-6 col-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.taux_promotion, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.EditorFor(model => model.taux_promotion, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.taux_promotion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.date_expiration, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.EditorFor(model => model.date_expiration, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                    @*                            @Convert.ToDateTime(Model.date_expiration).ToString("dd/MM/yyyy")
+                    *@                            @Html.ValidationMessageFor(model => model.date_expiration, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <div class="form-group">
+                <input type="submit" value="Enregistrer les modification" class="btn btn-save text-white" />
+            </div>
+        </div>
+    </div>
+
+</div>
+    }
+
+    <!--<div class="row">-->
+    @* @Html.DropDownListFor(model => model.Produits, ViewBag.produits as SelectList, new { @multiple = true })
+    *@
+    <!--@Html.DropDownList("Produits", null, "-- Produits --", htmlAttributes: new { @class = "form-control produit_multi", style = "z-index:1", @multiple = true })
+
+
+    </div>
+    <div class="row">
+
+        <table class="table-no-searh" id="produitTable" style="width:100%">
+            <caption style=" caption-side: top; text-align: center; color:black;font-weight:bold;text-decoration:underline">Les produits qui exist dans cette promotion</caption>
+
+            <thead>
+                <tr class="border">
+                    <th>
+                        Nom
+                    </th>
+                    <th>
+                        Catégorie
+                    </th>
+
+                    <th>
+                        Quantité
+                    </th>
+                    <th>
+                        Supprimmer
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model.Produits)
+                {
+                    <tr class="border">
+                        <td>
+                            @item.name
+                        </td>
+                        <td>
+                            @item.Categorie.libele
+                        </td>
+                        <td>
+                            @item.quantite_stock
+                        </td>
+                        <td>
+                            <a data-delete-id="@item.id" class="text-danger delete-link-promo pointer">
+                                <i class="material-icons icon ">
+                                    delete
+                                </i>
+                            </a>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>-->
+
+    <div>
+        @Html.ActionLink("Retour à la liste", "Index")
+    </div>
 </div>

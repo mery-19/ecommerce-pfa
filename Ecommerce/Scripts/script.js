@@ -65,9 +65,29 @@ $(document).ready(function () {
         }
     }
 
-  /*  window.$('#categorie').DataTable(frensh);
-    window.$('#produitTable').DataTable(frensh);*/
     window.$('.table').DataTable(frensh);
+    window.$('.table-no-searh ').DataTable({
+        searching: false, "lengthChange": false, bInfo: false, "language": {
+            "sProcessing": "Traitement en cours ...",
+            "sLengthMenu": "Afficher _MENU_ lignes",
+            "sZeroRecords": "Aucun résultat trouvé",
+            "sEmptyTable": "Aucune donnée disponible",
+            "sInfo": "Lignes _START_ à _END_ sur _TOTAL_",
+            "sInfoEmpty": "Aucune ligne affichée",
+            "sInfoFiltered": "(Filtrer un maximum de_MAX_)",
+            "sInfoPostFix": "",
+            "sSearch": "Chercher:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Chargement...",
+            "oPaginate": {
+                "sFirst": "Premier", "sLast": "Dernier", "sNext": "Suivant", "sPrevious": "Précédent"
+            },
+            "oAria": {
+                "sSortAscending": ": Trier par ordre croissant", "sSortDescending": ": Trier par ordre décroissant"
+            }
+        } });
+
 
 });
 
@@ -198,7 +218,8 @@ $(function () {
     });*/
 
     $(function () {
-        $("#create").click(function () {
+        $("#create").click(function (e) {
+            e.preventDefault();
             var obj = [],
                 items = '';
             /*  var tab = $('.produit_multi option:selected');
@@ -229,10 +250,22 @@ $(function () {
                 data: JSON.stringify(data),
                 success: function (data) {
                     console.log(data);
-                    window.location.replace("https://localhost:44352/Promotions/Index");
+
+                    if (data) {
+                        window.location.href = "https://localhost:44352/Promotions/Index";
+                    }
+                    else {
+                        alert("Probléme d'envoyer les informations.");
+
+                    }
+                    
+                },
+                error: function (errorThrown) {
+                    alert(errorThrown);
                 }
             });
 
         });
     })
+       
 });

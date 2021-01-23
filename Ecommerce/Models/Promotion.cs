@@ -25,6 +25,8 @@ namespace Ecommerce.Models
         public float taux_promotion { get; set; }
 
         [Display(Name = "Date d'expiration")]
+        [Column(TypeName ="Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? date_expiration { get; set; }
 
         [Display(Name = "Date d'ajout")]
