@@ -9,8 +9,37 @@ body {
 /*    background-color: #FFE0CF;
 */}
 
-.card_info{
-   
+.panier-bg {
+    background: #2D3E50;
+}
+/*main font text*/
+.font-baloo {
+    font-family: "Baloo Thambi 2", cursive;
+}
+
+/*font for notes*/
+.font-rale {
+    font-family: "Raleway", cursive;
+}
+
+.font-rubik {
+    font-family: "Rubik", cursive;
+}
+
+.font-size-12 {
+    font-size: 12px;
+}
+
+.font-size-14 {
+    font-size: 14px;
+}
+
+.font-size-16 {
+    font-size: 16px;
+}
+
+.font-size-20 {
+    font-size: 20px;
 }
 .table-no-searh {
     margin:10px;

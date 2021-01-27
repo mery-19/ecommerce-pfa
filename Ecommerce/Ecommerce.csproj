@@ -177,6 +177,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProduitDetailsController.cs" />
     <Compile Include="Controllers\ProduitsController.cs" />
     <Compile Include="Controllers\PromotionsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -198,7 +199,9 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ModeLivraison.cs" />
     <Compile Include="Models\ModePaiement.cs" />
+    <Compile Include="Models\Panier.cs" />
     <Compile Include="Models\Produit.cs" />
+    <Compile Include="Models\ProduitDetails.cs" />
     <Compile Include="Models\Promotion.cs" />
     <Compile Include="Models\StatusCommande.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -627,6 +630,7 @@
     <Content Include="Views\Promotions\Details.cshtml" />
     <Content Include="Views\Promotions\Edit.cshtml" />
     <Content Include="Views\Promotions\Index.cshtml" />
+    <Content Include="Views\ProduitDetails\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
