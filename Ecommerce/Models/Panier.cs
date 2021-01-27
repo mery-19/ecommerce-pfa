@@ -18,10 +18,10 @@ namespace Ecommerce.Models
         public virtual ApplicationUser User { get; set; }
 
         [Display(Name = "Prix total")]
-        public float prix_total { get; set; }
+        public float prix_total { get; set; } = 0;
 
         [Display(Name = "TVA")]
-        public float tva { get; set; }
+        public float tva { get; set; } = 0;
 
         public virtual ICollection<LignePanier> LignePaniers { get; set; }
 

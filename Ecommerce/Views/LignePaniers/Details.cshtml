@@ -1,0 +1,59 @@
+﻿@model Ecommerce.Models.LignePanier
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_ClientDashboard.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LignePanier</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Panier.id_user)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Panier.id_user)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Produit.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Produit.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.quantite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.quantite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prix_total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prix_total)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tva)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tva)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

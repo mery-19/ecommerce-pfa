@@ -1,7 +1,14 @@
 ﻿@model Ecommerce.Models.CompteUser
 
-@{
+@if (User.IsInRole("Admin"))
+{
     Layout = "~/Views/Shared/_adminDashboard.cshtml";
+
+}
+else if (User.IsInRole("User"))
+{
+Layout = "~/Views/Shared/_ClientDashboard.cshtml";
+
 }
 
 <div class="margin-top container">
@@ -50,7 +57,7 @@
                 <div class="card-body">
                     <p class="card-text">
                         <span class="font-weight-bold">Adresse: </span> @Model.address
-                        <br/>
+                        <br />
                         <span class="font-weight-bold">Téléphone: </span> @Model.phone
                     </p>
                 </div>
@@ -107,5 +114,5 @@
                 </div>
             </div>
         }
-        </div>
+    </div>
 </div>

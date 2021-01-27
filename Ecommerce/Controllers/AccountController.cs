@@ -15,6 +15,8 @@ namespace Ecommerce.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -166,6 +168,11 @@ namespace Ecommerce.Controllers
                 if (result.Succeeded)
                 {
                     UserManager.AddToRole(user.Id, "User");
+                    // --START-- create a panier for the new user
+                    Panier panier = new Panier() {id_user = user.Id };
+                    db.Paniers.Add(panier);
+                    db.SaveChanges();
+                    // --END-- create a panier for the new user
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 

@@ -13,14 +13,12 @@ $(document).ready(function () {
             height: document.documentElement.clientHeight - $('.navbar').outerHeight()
         });
 
-        console.log(document.documentElement.clientHeight - $('.navbar').outerHeight());
     };
 
     adjustSidebar();
 
     $(window).resize(function () {
         adjustSidebar();
-        console.log("resize");
     });
 
 
@@ -267,5 +265,33 @@ $(function () {
 
         });
     })
+
+
+
+    /* --START-- On quantity change*/
+    $("#qty").change(function () {
+        console.log($("#qty option:selected").text());
+        var qty = $("#qty option:selected").text();
+        var id_produit = $("#Produit_id").val();
+        data = {
+            qty, id_produit
+        }
+        console.log(data);
+        $.ajax({
+            url: '/ProduitDetails/addProduit',
+            type: "POST",
+            data: data,
+            success: function (res) {
+                console.log(res);
+                if (res.success) {
+                    alert(res.responseText);
+                } else {
+                    alert(res.responseText);
+
+                }
+            }
+        });
+    });
+    /* --END-- On quantity change*/
        
 });

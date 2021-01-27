@@ -176,6 +176,7 @@
     <Compile Include="Controllers\CompteUserController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LignePaniersController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProduitDetailsController.cs" />
     <Compile Include="Controllers\ProduitsController.cs" />
@@ -631,6 +632,11 @@
     <Content Include="Views\Promotions\Edit.cshtml" />
     <Content Include="Views\Promotions\Index.cshtml" />
     <Content Include="Views\ProduitDetails\Index.cshtml" />
+    <Content Include="Views\LignePaniers\Create.cshtml" />
+    <Content Include="Views\LignePaniers\Delete.cshtml" />
+    <Content Include="Views\LignePaniers\Details.cshtml" />
+    <Content Include="Views\LignePaniers\Edit.cshtml" />
+    <Content Include="Views\LignePaniers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Ecommerce.Models.LignePanier>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ClientDashboard.cshtml";
+}
+
+<div class="m-5">
+
+    <h2>
+        Panier (@Session["coutPanier"] articles)
+    </h2>
+    <table class="table">
+        <tr>
+            <th>
+                ARTICLE
+            </th>
+            <th>
+                QUANTITÉ
+            </th>
+            <th>
+                PRIX UNITAIRE
+            </th>
+            <th>
+                SOUS-TOTAL
+            </th>
+            @* <th>
+                    ACTION
+                </th>*@
+        </tr>
+
+        @if (Model != null)
+        {
+
+            foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    <img src="~/Uploads/Produit_image/@Html.DisplayFor(modelItem => item.Produit.image)" style="height: 120px; width:120px;" alt="produit" class="img-fluid">
+                    <div class="d-flex">
+                        <button type="submit" class="btn text-danger px-3 border-right">Supprimer</button>
+                        <button type="submit" class="btn text-danger">METTRE DE CÔTÉ</button>
+                    </div>
+
+                </td>
+                <td>
+                    @*            @Html.DropDownList("Qty", null, htmlAttributes: new { @class = "form-control" })
+                    *@
+                </td>
+
+                <td>
+                    @{float prix_unitaire = item.Produit.prix_vente + (item.Produit.prix_vente *item.Produit.tva)/100;
+
+                        float prix_unitair_promotion = prix_unitaire - (prix_unitaire * item.Produit.Promotion.taux_promotion) / 100;
+                        float prix_total = prix_unitair_promotion * item.quantite;
+                        }
+                    @prix_unitair_promotion
+                </td>
+                <td>
+                    @prix_total
+                </td>
+                <!--<td>
+                    <div class="d-flex">
+                        <button type="submit" class="btn text-danger px-3 border-right">Supprimer</button>
+                        <button type="submit" class="btn text-danger">METTRE DE CÔTÉ</button>
+                    </div>-->
+                @*            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                <!--</td>-->
+            </tr>
+        }
+        }
+    </table>
+    </div>
