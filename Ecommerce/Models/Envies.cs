@@ -18,8 +18,5 @@ namespace Ecommerce.Models
         public int id_produit { get; set; }
         [ForeignKey("id_produit")]
         public virtual Produit Produit { get; set; }
-
-        public virtual ICollection<Produit> Produits { get; set; }
-
     }
 }

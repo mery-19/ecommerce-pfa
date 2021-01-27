@@ -14,7 +14,7 @@ namespace Ecommerce.Models
     {
         public virtual ICollection<Produit> Produits { get; set; }
         public virtual ICollection<Envies> Envies { get; set; }
-        public virtual ICollection<Commande> Commandes { get; set; }
+        public virtual ICollection<Panier> Paniers { get; set; }
 
         [Display(Name = "Adresse")]
         public string Address { get; set; }
@@ -64,7 +64,12 @@ namespace Ecommerce.Models
         public virtual DbSet<Promotion> Promotions { get; set; }
         public virtual DbSet<StatusCommande> StatusCommandes { get; set; }
         public virtual DbSet<Produit> Produits { get; set; }
+        public virtual DbSet<LignePanier> LignePaniers { get; set; }
+        public virtual DbSet<Panier> Paniers { get; set; }
+        public virtual DbSet<Commande> Commandes { get; set; }
+        public virtual DbSet<Envies> Envies { get; set; }
 
-/*        public System.Data.Entity.DbSet<Ecommerce.Models.ApplicationUser> ApplicationUsers { get; set; }
-*/    }
+        /*        public System.Data.Entity.DbSet<Ecommerce.Models.ApplicationUser> ApplicationUsers { get; set; }
+        */
+    }
 }

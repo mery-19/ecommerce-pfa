@@ -7,12 +7,12 @@ using System.Web;
 
 namespace Ecommerce.Models
 {
-    public class LigneCommande
+    public class LignePanier
     {
         [Key, Column(Order = 1)]
-        public string id_commande { get; set; }
-        [ForeignKey("id_commande")]
-        public virtual ApplicationUser User { get; set; }
+        public int id_panier { get; set; }
+        [ForeignKey("id_panier")]
+        public virtual Panier Panier { get; set; }
 
         [Key, Column(Order = 2)]
         public int id_produit { get; set; }

@@ -17,19 +17,13 @@ namespace Ecommerce.Models
         [Column(TypeName = "text")]
         public string description { get; set; }
 
-        [Display(Name = "Prix total")]
-        public float prix_total { get; set; }
-
-        [Display(Name = "TVA")]
-        public float tva { get; set; }
-
         [Display(Name = "Date d'ajout")]
-        public DateTime date_ajout { get; set; }
+        public DateTime date_ajout { get; set; } = DateTime.Now;
 
         /******** Add foreign keys *************/
-        public string id_user { get; set; }
-        [ForeignKey("id_user")]
-        public virtual ApplicationUser User { get; set; }
+        public int id_panier { get; set; }
+        [ForeignKey("id_panier")]
+        public virtual Panier Panier { get; set; }
 
         public int id_status { get; set; }
         [ForeignKey("id_status")]
@@ -44,7 +38,6 @@ namespace Ecommerce.Models
         public virtual ModePaiement ModePaiement { get; set; }
 
 
-        public virtual ICollection<Produit> Produits { get; set; }
 
     }
 }

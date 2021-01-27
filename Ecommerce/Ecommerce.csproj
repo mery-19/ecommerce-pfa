@@ -195,7 +195,7 @@
     <Compile Include="Models\CompteUser.cs" />
     <Compile Include="Models\Envies.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\LigneCommande.cs" />
+    <Compile Include="Models\LignePanier.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ModeLivraison.cs" />
     <Compile Include="Models\ModePaiement.cs" />
