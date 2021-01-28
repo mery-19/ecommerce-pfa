@@ -10,6 +10,7 @@ using Ecommerce.Models;
 
 namespace Ecommerce.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class PromotionsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

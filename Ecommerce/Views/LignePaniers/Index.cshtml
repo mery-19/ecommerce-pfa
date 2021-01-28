@@ -5,71 +5,110 @@
     Layout = "~/Views/Shared/_ClientDashboard.cshtml";
 }
 
+
+
 <div class="m-5">
+    @Html.Hidden("__RequestVerificationToken", @Html.AntiForgeryToken())
 
     <h2>
         Panier (@Session["coutPanier"] articles)
     </h2>
-    <table class="table">
-        <tr>
-            <th>
-                ARTICLE
-            </th>
-            <th>
-                QUANTITÉ
-            </th>
-            <th>
-                PRIX UNITAIRE
-            </th>
-            <th>
-                SOUS-TOTAL
-            </th>
-            @* <th>
-                    ACTION
-                </th>*@
-        </tr>
-
-        @if (Model != null)
-        {
-
-            foreach (var item in Model)
-            {
-            <tr>
-                <td>
-                    <img src="~/Uploads/Produit_image/@Html.DisplayFor(modelItem => item.Produit.image)" style="height: 120px; width:120px;" alt="produit" class="img-fluid">
-                    <div class="d-flex">
-                        <button type="submit" class="btn text-danger px-3 border-right">Supprimer</button>
-                        <button type="submit" class="btn text-danger">METTRE DE CÔTÉ</button>
-                    </div>
-
-                </td>
-                <td>
-                    @*            @Html.DropDownList("Qty", null, htmlAttributes: new { @class = "form-control" })
-                    *@
-                </td>
-
-                <td>
-                    @{float prix_unitaire = item.Produit.prix_vente + (item.Produit.prix_vente *item.Produit.tva)/100;
-
-                        float prix_unitair_promotion = prix_unitaire - (prix_unitaire * item.Produit.Promotion.taux_promotion) / 100;
-                        float prix_total = prix_unitair_promotion * item.quantite;
-                        }
-                    @prix_unitair_promotion
-                </td>
-                <td>
-                    @prix_total
-                </td>
-                <!--<td>
-                    <div class="d-flex">
-                        <button type="submit" class="btn text-danger px-3 border-right">Supprimer</button>
-                        <button type="submit" class="btn text-danger">METTRE DE CÔTÉ</button>
-                    </div>-->
-                @*            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
-                <!--</td>-->
+    <table class="table-no-searh w-100">
+        <thead>
+            <tr class="border">
+                <th>
+                    ARTICLE
+                </th>
+                <th>
+                    QUANTITÉ
+                </th>
+                <th>
+                    PRIX UNITAIRE
+                </th>
+                <th>
+                    SOUS-TOTAL
+                </th>
+                @* <th>
+                        ACTION
+                    </th>*@
             </tr>
-        }
-        }
+        </thead>
+        <tbody>
+
+            @if (Model != null)
+            {
+
+                foreach (var item in Model)
+                {
+
+
+                    float prix_unitaire = item.Produit.prix_vente + (item.Produit.prix_vente * item.Produit.tva) / 100;
+                    float economie_unitaire = (prix_unitaire * item.Produit.Promotion.taux_promotion) / 100;
+                    float prix_unitair_promotion = prix_unitaire - economie_unitaire;
+                    float economie_total = economie_unitaire * item.quantite;
+                    float prix_total = prix_unitair_promotion * item.quantite;
+
+                    <tr class="border">
+                        <td class="p-3">
+                            <img src="~/Uploads/Produit_image/@Html.DisplayFor(modelItem => item.Produit.image)" style="height: 120px; width:120px;" alt="produit" class="img-fluid">
+                            <div class="d-flex">
+                                <a class="btn text-danger px-3 border-right delete-link-panier pointer" id-produit="@item.id_produit" id-panier="@item.id_panier">Supprimer</a>
+                                <button type="submit" class="btn text-danger">METTRE DE CÔTÉ</button>
+                            </div>
+
+                        </td>
+                        <td>
+                            <div class="d-flex justify-content-around">
+
+                                @{
+                                    int qty = item.Produit.quantite_stock;
+                                    int max_qty = (qty <= 5) ? qty : 5;
+                                    List<int> qtys = new List<int>();
+                                    for (int i = 1; i <= max_qty; i++)
+                                    {
+                                        qtys.Add(i);
+                                    }
+                                }
+                                @Html.DropDownList(
+                                    "produit" + item.Produit.id.ToString(),
+                                    new SelectList(qtys, qtys.Where(x => x == item.quantite).First()), htmlAttributes: new { @class = "panier_qty form-control", @idProduit = item.Produit.id.ToString() })
+
+
+
+                            </div>
+                        </td>
+
+                        <td>
+
+                            <span class="font-weight-bold">@String.Format("{0:0.00}", @prix_unitair_promotion) DHs</span>
+                            <p class=" font-rale">
+                                Economie:
+                                <span class="font-size-16 text-success">@String.Format("{0:0.00}", economie_unitaire) DHs</span>
+                            <p />
+                        </td>
+                        <td>
+
+                            <span class="font-weight-bold"> @String.Format("{0:0.00}", @prix_total) DHs</span>
+                            <p class=" font-rale">
+                                Economie:
+                                <span class="font-size-16 text-success">@String.Format("{0:0.00}", economie_total) DHs</span>
+                            <p />
+
+                        </td>
+                        <!--<td>
+                        <div class="d-flex">
+                            <button type="submit" class="btn text-danger px-3 border-right">Supprimer</button>
+                            <button type="submit" class="btn text-danger">METTRE DE CÔTÉ</button>
+                        </div>-->
+                        @*            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                        <!--</td>-->
+                    </tr>
+                }
+
+            }
+        </tbody>
+
     </table>
-    </div>
+</div>

@@ -46,11 +46,12 @@ body {
 /*    border:1px solid black;
 */    text-align:center;
 }
-.border {
-    margin: 10px;
-/*    border: 1px solid black;
-*/    text-align: center;
-}
+    .table-no-searh tr {
+        margin: 10px;
+        /*    border: 1px solid black;
+*/ text-align: center;
+    }
+
 
 .icon_bg {
     color: #FF7C5B;
@@ -231,4 +232,9 @@ body {
 
 .pointer{
     cursor:pointer;
+}
+
+a.page-link.active{
+    background: #2D3E50;
+    
 }

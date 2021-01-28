@@ -134,6 +134,25 @@ namespace Ecommerce.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleleLignePanier(int id_produit,int id_panier)
+        {
+
+            LignePanier lignePanier = db.LignePaniers.Where(x=> x.id_panier == id_panier && x.id_produit == id_produit).FirstOrDefault();
+            db.LignePaniers.Remove(lignePanier);
+            int res = db.SaveChanges();
+
+            if (res != 0)
+            {
+                return Json(new { success = true, responseText = "Deletes successfully." }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, responseText = "deleted error" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

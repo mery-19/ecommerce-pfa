@@ -19,9 +19,9 @@
                 <div class="col-sm-6 h-100">
                     <img src="~/Uploads/Produit_image/@Html.DisplayFor(model => model.Produit.image)" alt="product" class="img-fluid">
                     <div class="form-row pt-4 font-size-16 font-baloo">
-                   @*     <div class="col">
-                            <button type="submit" class="btn btn-danger form-control" style="text-transform:uppercase;"><i class="fas fa-shopping-cart"></i> J'achète</button>
-                        </div>*@
+                        @*     <div class="col">
+                                <button type="submit" class="btn btn-danger form-control" style="text-transform:uppercase;"><i class="fas fa-shopping-cart"></i> J'achète</button>
+                            </div>*@
                         <div class="col">
                             <button type="submit" class="btn btn-warning form-control"><i class="far fa-heart"></i> SAUVGARDER</button>
                         </div>
@@ -33,7 +33,7 @@
                     <hr class="m-0">
 
                     <!---    product price       -->
-                    <table class="my-3">
+                    <table  class="my-3">
                         <tr class="font-rale font-size-14">
                             <td>Prix:</td>
                             <td>
@@ -64,7 +64,6 @@
 
 
                     <div class="row">
-
                         <div class="d-flex justify-content-around">
                             <h6 class="font-baloo">QUANTITÉ: &nbsp;&nbsp;&nbsp;&nbsp;</h6>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @Html.DropDownList("qty", null, htmlAttributes: new { @class = "form-control" })
@@ -93,3 +92,5 @@
     </section>
     <!--   !product  -->
 </div>
+
+@Html.Partial("Footer")

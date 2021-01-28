@@ -38,6 +38,7 @@ namespace Ecommerce.Controllers
             return View(produit);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Produits/Create
         public ActionResult Create()
         {
@@ -47,6 +48,7 @@ namespace Ecommerce.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         // POST: Produits/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -74,6 +76,7 @@ namespace Ecommerce.Controllers
             return View(produit);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Produits/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -92,6 +95,7 @@ namespace Ecommerce.Controllers
             return View(produit);
         }
 
+        [Authorize(Roles = "Admin")]
         // POST: Produits/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -119,6 +123,7 @@ namespace Ecommerce.Controllers
             return View(produit);
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: Produits/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -134,6 +139,7 @@ namespace Ecommerce.Controllers
             return View(produit);
         }
 
+        [Authorize(Roles = "Admin")]
         // POST: Produits/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

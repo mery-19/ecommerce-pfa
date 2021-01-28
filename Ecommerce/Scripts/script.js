@@ -1,6 +1,7 @@
 ﻿
 
 $(document).ready(function () {
+
     $('.sideMenuToggler').on('click', function () {
         $('.wrapper').toggleClass('active');
 
@@ -89,8 +90,7 @@ $(document).ready(function () {
 
 });
 
-
-// for save category without image
+/*--Start-- on save category with empty image */
 $(function () {
     $("#SaveCategory").click(function () {
         console.log("clicked");
@@ -100,7 +100,9 @@ $(function () {
             return false; //for not submit informations to server 
         }
     });
+/*--END-- on save category with empty image */
 
+/*--START-- on delete item*/
     $(function () {
         $("a.delete-link-produit").click(function () {
 
@@ -193,6 +195,7 @@ $(function () {
         );
     });
 
+/*--Start-- on delete item*/
 
     $(function () {
         $('#Produits').selectpicker();
@@ -200,21 +203,7 @@ $(function () {
     });
 
 
-   /* $(function () {
-        $(".modal_promo").click(function () {
-            var my = $(this).data('id');
-            console.log(my)
-            $.ajax({
-                url: '/Produits',
-                type: "GET",
-                success: function (res) {
-                    console.log(res);
-                }
-            });
-        }
-        );
-    });*/
-
+/* --START-- Create promotions with multiple product*/
     $(function () {
         $("#create").click(function (e) {
             e.preventDefault();
@@ -265,14 +254,40 @@ $(function () {
 
         });
     })
+/* --END-- Create promotions with multiple product*/
 
 
 
-    /* --START-- On quantity change*/
+/* --START-- On quantity change*/
+
+    //in details page
     $("#qty").change(function () {
         console.log($("#qty option:selected").text());
         var qty = $("#qty option:selected").text();
         var id_produit = $("#Produit_id").val();
+        postQty(qty, id_produit);
+    });
+
+    //in panier
+    var dropdowns = $(".panier_qty");
+    var id_dropdowns = [];
+    for (var i = 0; i < dropdowns.length; i++) {
+        console.log(dropdowns[i]);
+        console.log(dropdowns[i].id);
+        id_dropdowns.push(dropdowns[i].id);
+    }
+        for (var i = 0; i < id_dropdowns.length; i++) {
+                var id = "#" + id_dropdowns[i]
+                console.log(id_dropdowns[i]);
+                $(id).change(function () {
+                    var qty = $("option:selected", this).text();
+                    var id_produit = $(this).attr("idProduit");
+                    postQty(qty, id_produit);
+            })
+    }
+
+    //post function
+    var postQty = function (qty, id_produit) {
         data = {
             qty, id_produit
         }
@@ -285,13 +300,53 @@ $(function () {
                 console.log(res);
                 if (res.success) {
                     alert(res.responseText);
+                    location.reload();
+
                 } else {
                     alert(res.responseText);
 
                 }
             }
         });
+
+
+    };
+/* --END-- On quantity change*/
+
+/* --START-- Delete from panier*/
+
+    $(function () {
+        $("a.delete-link-panier").click(function () {
+
+            var token = $("[name='__RequestVerificationToken']").val();
+            var id_panier = $(".delete-link-panier").attr('id-panier');
+            var id_produit = $(".delete-link-panier").attr('id-produit');
+            var data = { id_panier, id_produit, __RequestVerificationToken: token, };
+            console.log(data);
+            var checkstr = confirm('are you sure you want to delete this?');
+            if (checkstr == true) {
+                $.ajax({
+                    url: '/LignePaniers/DeleleLignePanier',
+                    type: "POST",
+                    data:data,
+                    success: function (res) {
+                        console.log(res);
+                        if (res.success) {
+                            alert(res.responseText);
+                            location.reload();
+
+                        } else {
+                            alert(res.responseText);
+
+                        }
+                    }
+                });
+            }
+        }
+        );
     });
-    /* --END-- On quantity change*/
-       
+
+/* --END-- Delete from panier*/
+
+
 });

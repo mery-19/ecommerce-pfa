@@ -398,6 +398,11 @@ namespace Ecommerce.Controllers
                     if (result.Succeeded)
                     {
                         UserManager.AddToRole(user.Id, "User");
+                        // --START-- create a panier for the new user
+                        Panier panier = new Panier() { id_user = user.Id };
+                        db.Paniers.Add(panier);
+                        db.SaveChanges();
+                        // --END-- create a panier for the new user
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         return RedirectToLocal(returnUrl);
                     }
