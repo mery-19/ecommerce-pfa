@@ -5,7 +5,11 @@
     Layout = "~/Views/Shared/_ClientDashboard.cshtml";
 }
 
+@{ 
+    float total = 0;
+    float economie_commande = 0;
 
+}
 
 <div class="m-5">
     @Html.Hidden("__RequestVerificationToken", @Html.AntiForgeryToken())
@@ -41,12 +45,20 @@
                 foreach (var item in Model)
                 {
 
-
                     float prix_unitaire = item.Produit.prix_vente + (item.Produit.prix_vente * item.Produit.tva) / 100;
-                    float economie_unitaire = (prix_unitaire * item.Produit.Promotion.taux_promotion) / 100;
-                    float prix_unitair_promotion = prix_unitaire - economie_unitaire;
-                    float economie_total = economie_unitaire * item.quantite;
-                    float prix_total = prix_unitair_promotion * item.quantite;
+                    float prix_total = prix_unitaire * item.quantite;
+                    float economie = 0;
+                    float economie_total = 0;
+
+                    if (item.Produit.Promotion != null)
+                    {
+                        economie = (prix_unitaire * item.Produit.Promotion.taux_promotion) / 100;
+                        economie_total = economie * item.quantite;
+                        prix_unitaire = prix_unitaire - economie;
+                        prix_total = prix_total - economie_total;
+
+                    }
+
 
                     <tr class="border">
                         <td class="p-3">
@@ -69,9 +81,24 @@
                                         qtys.Add(i);
                                     }
                                 }
-                                @Html.DropDownList(
-                                    "produit" + item.Produit.id.ToString(),
-                                    new SelectList(qtys, qtys.Where(x => x == item.quantite).First()), htmlAttributes: new { @class = "panier_qty form-control", @idProduit = item.Produit.id.ToString() })
+
+                                @if (qty > 0)
+                                {
+                                    @Html.DropDownList(
+                                  "produit" + item.Produit.id.ToString(),
+                                  new SelectList(qtys, qtys.Where(x => x == item.quantite).First()), htmlAttributes: new { @class = "panier_qty form-control", @idProduit = item.Produit.id.ToString() })
+
+                                    total += prix_total;
+                                    economie_commande += economie_total;
+                                }
+                                else
+                                {
+                                        <span class="material-icons text-danger">
+                                            remove_circle_outline
+                                        </span>
+                                        <p class="text-danger font-baloo uppercase">épuisé
+                                        </p>
+                                }
 
 
 
@@ -80,30 +107,43 @@
 
                         <td>
 
-                            <span class="font-weight-bold">@String.Format("{0:0.00}", @prix_unitair_promotion) DHs</span>
-                            <p class=" font-rale">
-                                Economie:
-                                <span class="font-size-16 text-success">@String.Format("{0:0.00}", economie_unitaire) DHs</span>
-                            <p />
+                            <span class="font-weight-bold">@String.Format("{0:0.00}", @prix_unitaire) DHs</span>
+
+                            @if (item.Produit.Promotion != null)
+                            {
+                                <p class=" font-rale">
+
+                                    Economie: <span class="text-success">- @item.Produit.Promotion.taux_promotion % </span>  <br />
+                                    <span class="font-size-16 text-success">@String.Format("{0:0.00}", @economie) DHs</span>
+                                </p>
+                            }
+
+
                         </td>
                         <td>
 
-                            <span class="font-weight-bold"> @String.Format("{0:0.00}", @prix_total) DHs</span>
-                            <p class=" font-rale">
-                                Economie:
-                                <span class="font-size-16 text-success">@String.Format("{0:0.00}", economie_total) DHs</span>
-                            <p />
+                            @if (qty > 0)
+                            {
 
+                                <span class="font-weight-bold"> @String.Format("{0:0.00}", @prix_total) DHs</span>
+                                if (item.Produit.Promotion != null)
+                                {
+                                    <p class=" font-rale">
+                                        Economie:
+                                        <span class="font-size-16 text-success">@String.Format("{0:0.00}", @economie_total) DHs</span>
+                                    </p>
+                                }
+                            }
+                            else
+                            {
+                                <span class="material-icons text-danger">
+                                    remove_circle_outline
+                                </span>
+                                <p class="text-danger font-baloo uppercase">
+                                    épuisé
+                                </p>
+                            }
                         </td>
-                        <!--<td>
-                        <div class="d-flex">
-                            <button type="submit" class="btn text-danger px-3 border-right">Supprimer</button>
-                            <button type="submit" class="btn text-danger">METTRE DE CÔTÉ</button>
-                        </div>-->
-                        @*            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
-                        <!--</td>-->
                     </tr>
                 }
 
@@ -111,4 +151,26 @@
         </tbody>
 
     </table>
+    <hr />
+
+    <div>
+        <p>
+            <span class="font-baloo font-weight-bold font-size-20">Total:</span> @String.Format("{0:0.00}", total)  DHs
+            @if (economie_commande != 0)
+            {
+
+                <span class="font-baloo font-weight-bold text-success font-size-12"> <br />Economie: @String.Format("{0:0.00}", economie_commande)  DHs</span>
+            }
+        </p>
+       
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-12 w-100">
+            <div class="form-group">
+                <button class="btn btn-save text-white" id="create">Finaliser la commande</button>
+            </div>
+        </div>
+    </div>
+
 </div>

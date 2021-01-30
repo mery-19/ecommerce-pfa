@@ -32,41 +32,72 @@
 
                     <hr class="m-0">
 
-                    <!---    product price       -->
-                    <table  class="my-3">
-                        <tr class="font-rale font-size-14">
-                            <td>Prix:</td>
-                            <td>
-                                <strike>
-                                    @String.Format("{0:0.00}", Model.real_price) DHs
-                                </strike>
-                            </td>
-                        </tr>
-                        <tr class="font-rale font-size-14">
-                            <td>
-                                prix de transaction:
-                            </td>
-                            <td class="font-size-20 text-danger">
-                                <span>@String.Format("{0:0.00}", Model.deal_price) DHs</span><small class="text-dark font-size-12">
-                                    &nbsp;&nbsp;Toutes taxes comprises
-                                </small>
-                            </td>
-                        </tr>
-                        <tr class="font-rale font-size-14">
-                            <td>Economie:</td>
-                            <td><span class="font-size-16 text-danger">@String.Format("{0:0.00}", Model.save_price) DHs</span></td>
-                        </tr>
-                    </table>
-                    <!---    !product price       -->
+                    <table class="my-3">
+                        @if (Model.deal_price != null)
+                        {
+                            <tr class="font-rale font-size-14">
 
+                                <td>Prix:</td>
+                                <td>
+                                    <strike>
+                                        @String.Format("{0:0.00}", Model.real_price) DHs
+                                    </strike>
+                                </td>
+                            </tr>
+                            <tr class="font-rale font-size-14">
+                                <td>
+                                    prix de transaction:
+                                </td>
+                                <td class="font-size-20 text-danger">
+                                    <span>@String.Format("{0:0.00}", Model.deal_price) DHs</span><small class="text-dark font-size-12">
+                                        &nbsp;&nbsp;Toutes taxes comprises
+                                    </small>
+                                </td>
+                            </tr>
+                            <tr class="font-rale font-size-14">
+                                <td>Economie:</td>
+                                <td><span class="font-size-16 text-success">@String.Format("{0:0.00}", Model.save_price) DHs</span></td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr class="font-rale font-size-14">
+                                <td>
+                                    prix de transaction:
+                                </td>
+                                <td class="font-size-20 text-success">
+                                    <span>@String.Format("{0:0.00}", Model.real_price) DHs</span><small class="text-dark font-size-12">
+                                        &nbsp;&nbsp;Toutes taxes comprises
+                                    </small>
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
                     <hr>
 
 
 
                     <div class="row">
                         <div class="d-flex justify-content-around">
-                            <h6 class="font-baloo">QUANTITÉ: &nbsp;&nbsp;&nbsp;&nbsp;</h6>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; @Html.DropDownList("qty", null, htmlAttributes: new { @class = "form-control" })
+                            @if (ViewBag.qty != null)
+                            {
+                                <h6 class="font-baloo">QUANTITÉ: &nbsp;&nbsp;&nbsp;&nbsp;</h6>
+                                <span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; @Html.DropDownList("qty", null, htmlAttributes: new { @class = "form-control" })</span>
+                            }
+                            else
+                            {
+                        <div class="row m-5 ">
+                            <span class="material-icons text-danger">
+                                remove_circle_outline
+                            </span>
+                            <p class="text-danger font-baloo uppercase">
+                                épuisé
+                            </p>
+                        </div>
+                              
+                            }
+
                         </div>
                     </div>
                     <hr />

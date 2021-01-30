@@ -23,8 +23,11 @@ namespace Ecommerce.Controllers
             ProduitDetails produitDetails = new ProduitDetails();
             produitDetails.Produit = produit;
             produitDetails.real_price = produit.prix_vente + (produit.prix_vente * produit.tva) / 100;
-            produitDetails.save_price = (produitDetails.real_price * produit.Promotion.taux_promotion) / 100;
-            produitDetails.deal_price = produitDetails.real_price - produitDetails.save_price;
+            if(produit.Promotion != null)
+            {
+                produitDetails.save_price = (produitDetails.real_price * produit.Promotion.taux_promotion) / 100;
+                produitDetails.deal_price = produitDetails.real_price - produitDetails.save_price;
+            }
             /* --END-- get information of produit */
 
             int qty = produit.quantite_stock;
@@ -34,8 +37,9 @@ namespace Ecommerce.Controllers
             {
                 qtys.Add(i);
             }
+            if(qtys.Count != 0)
             ViewBag.qty = new SelectList(qtys);
-
+            
             /* --START-- See if the user connected and has the product in Panier */
             ApplicationUser user = new ApplicationUser();
             string name = System.Web.HttpContext.Current.User.Identity.Name;
@@ -45,6 +49,7 @@ namespace Ecommerce.Controllers
                 Panier panier = user.Paniers.Last();
                 LignePanier exist = db.LignePaniers.Find(panier.id, produit.id);
                 if(exist != null){
+                    if (qtys.Count != 0)
                     ViewBag.qty = new SelectList(qtys, qtys.Where(x=> x == exist.quantite).First());
                 }
             }

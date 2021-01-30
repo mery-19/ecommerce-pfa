@@ -238,3 +238,7 @@ a.page-link.active{
     background: #2D3E50;
     
 }
+
+.uppercase{
+    text-transform:uppercase;
+}
