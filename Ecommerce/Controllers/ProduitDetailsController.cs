@@ -75,8 +75,6 @@ namespace Ecommerce.Controllers
                 ligne.id_panier = panier.id;
                 ligne.id_produit = Convert.ToInt32(id_produit);
                 ligne.quantite = Convert.ToInt32(qty);
-                ligne.prix_total = produit.prix_vente * Convert.ToInt32(qty);
-                ligne.tva = ligne.prix_total + (ligne.prix_total*produit.tva)/100;
                 LignePanier exist = db.LignePaniers.Find(ligne.id_panier, ligne.id_produit);
                 if (exist == null)
                 {
@@ -84,8 +82,6 @@ namespace Ecommerce.Controllers
                 }else
                 {
                     exist.quantite = ligne.quantite;
-                    exist.prix_total = ligne.prix_total;
-                    exist.tva = ligne.tva;
                     db.Entry(exist).State = EntityState.Modified;
                 }
                 int res = db.SaveChanges();

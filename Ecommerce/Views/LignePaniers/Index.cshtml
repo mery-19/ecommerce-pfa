@@ -56,8 +56,9 @@
                         economie_total = economie * item.quantite;
                         prix_unitaire = prix_unitaire - economie;
                         prix_total = prix_total - economie_total;
-
                     }
+
+                    Session["total"] = prix_total;
 
 
                     <tr class="border">
@@ -99,14 +100,10 @@
                                         <p class="text-danger font-baloo uppercase">épuisé
                                         </p>
                                 }
-
-
-
                             </div>
                         </td>
 
                         <td>
-
                             <span class="font-weight-bold">@String.Format("{0:0.00}", @prix_unitaire) DHs</span>
 
                             @if (item.Produit.Promotion != null)
@@ -117,8 +114,6 @@
                                     <span class="font-size-16 text-success">@String.Format("{0:0.00}", @economie) DHs</span>
                                 </p>
                             }
-
-
                         </td>
                         <td>
 
@@ -146,7 +141,6 @@
                         </td>
                     </tr>
                 }
-
             }
         </tbody>
 
@@ -168,8 +162,9 @@
     <div class="row">
         <div class="col-md-6 col-12 w-100">
             <div class="form-group">
-                <button class="btn btn-save text-white" id="create">Finaliser la commande</button>
-            </div>
+                @(Html.ActionLink("Finaliser la Commande","FinaliserCommande", new { id = "" },new { @class= "btn btn-save text-white" } ))
+@*                <button class="" id="create">Finaliser la commande</button>
+*@            </div>
         </div>
     </div>
 

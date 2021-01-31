@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Ecommerce.Models.Commande>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_adminDashboard.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ModeLivraison.libele)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModePaiement.libele)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Panier.id_user)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StatusCommande.libele)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date_ajout)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModeLivraison.libele)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModePaiement.libele)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Panier.id_user)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusCommande.libele)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date_ajout)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

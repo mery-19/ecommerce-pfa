@@ -31,109 +31,6 @@ namespace Ecommerce.Controllers
 
         }
 
-        // GET: LignePaniers/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            LignePanier lignePanier = db.LignePaniers.Find(id);
-            if (lignePanier == null)
-            {
-                return HttpNotFound();
-            }
-            return View(lignePanier);
-        }
-
-        // GET: LignePaniers/Create
-        public ActionResult Create()
-        {
-            ViewBag.id_panier = new SelectList(db.Paniers, "id", "id");
-            ViewBag.id_produit = new SelectList(db.Produits, "id", "name");
-            return View();
-        }
-
-        // POST: LignePaniers/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id_panier,id_produit,quantite,prix_total,tva")] LignePanier lignePanier)
-        {
-            if (ModelState.IsValid)
-            {
-                db.LignePaniers.Add(lignePanier);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.id_panier = new SelectList(db.Paniers, "id", "id", lignePanier.id_panier);
-            ViewBag.id_produit = new SelectList(db.Produits, "id", "name", lignePanier.id_produit);
-            return View(lignePanier);
-        }
-
-        // GET: LignePaniers/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            LignePanier lignePanier = db.LignePaniers.Find(id);
-            if (lignePanier == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.id_panier = new SelectList(db.Paniers, "id", "id", lignePanier.id_panier);
-            ViewBag.id_produit = new SelectList(db.Produits, "id", "name", lignePanier.id_produit);
-            return View(lignePanier);
-        }
-
-        // POST: LignePaniers/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id_panier,id_produit,quantite,prix_total,tva")] LignePanier lignePanier)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(lignePanier).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.id_panier = new SelectList(db.Paniers, "id", "id", lignePanier.id_panier);
-            ViewBag.id_produit = new SelectList(db.Produits, "id", "name", lignePanier.id_produit);
-            return View(lignePanier);
-        }
-
-        // GET: LignePaniers/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            LignePanier lignePanier = db.LignePaniers.Find(id);
-            if (lignePanier == null)
-            {
-                return HttpNotFound();
-            }
-            return View(lignePanier);
-        }
-
-        // POST: LignePaniers/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            LignePanier lignePanier = db.LignePaniers.Find(id);
-            db.LignePaniers.Remove(lignePanier);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DeleleLignePanier(int id_produit,int id_panier)
@@ -151,6 +48,23 @@ namespace Ecommerce.Controllers
             {
                 return Json(new { success = false, responseText = "deleted error" }, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        //GET finaliser la commande
+        public ActionResult FinaliserCommande()
+        {
+            //send mode de paiment
+            List<ModePaiement> modesP = new List<ModePaiement>();
+            modesP = db.ModePaiements.ToList();
+            ViewBag.modesPaiement = modesP;
+
+            //sant mode de livraison
+            List<ModeLivraison> modesL = new List<ModeLivraison>();
+            modesL = db.ModeLivraisons.ToList();
+            ViewBag.modesLivraisons = modesL;
+
+            return View();
+
         }
 
         protected override void Dispose(bool disposing)

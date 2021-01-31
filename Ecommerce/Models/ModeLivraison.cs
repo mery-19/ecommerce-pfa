@@ -19,6 +19,10 @@ namespace Ecommerce.Models
         [Display(Name = "Frais de livraison")]
         public float frais_livraison { get; set; }
 
+        [Display(Name = "Description")]
+        [Column(TypeName = "Text")]
+        public string description { get; set; }
+
         public virtual ICollection<Commande> Commandes { get; set; }
 
     }

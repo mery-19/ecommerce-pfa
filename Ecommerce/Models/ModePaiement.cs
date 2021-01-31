@@ -17,6 +17,10 @@ namespace Ecommerce.Models
         [Display(Name = "Libele")]
         public string libele { get; set; }
 
+        [Display(Name = "Description")]
+        [Column(TypeName = "Text")]
+        public string description { get; set; }
+
         public virtual ICollection<Commande> Commandes { get; set; }
 
     }

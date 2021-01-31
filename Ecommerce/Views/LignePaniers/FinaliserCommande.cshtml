@@ -1,0 +1,164 @@
+﻿@using Ecommerce.Models
+
+@{
+    Layout = "~/Views/Shared/_ClientDashboard.cshtml";
+}
+
+
+@*  --START-- Get the user address and phone number*@
+@functions{
+    public CompteUser UserInfo()
+    {
+        ApplicationDbContext db = new ApplicationDbContext();
+        CompteUser compte = new CompteUser();
+        ApplicationUser user = new ApplicationUser();
+        string name = System.Web.HttpContext.Current.User.Identity.Name;
+        user = db.Users.Where(x => x.UserName.Equals(name)).FirstOrDefault();
+        compte.email = user.Email;
+        compte.name = user.UserName;
+        compte.address = user.Address;
+        compte.phone = user.PhoneNumber;
+        if (user.PasswordHash != null) compte.hasPassword = true;
+        else compte.hasPassword = false;
+
+        return compte;
+    }
+}
+
+@{ 
+    List<ModePaiement> modesP = new List<ModePaiement>();
+    modesP = ViewBag.modesPaiement;
+
+    List<ModeLivraison> modesL = new List<ModeLivraison>();
+    modesL = ViewBag.modesLivraisons;
+}
+@*  --END-- Get the user address and phone number*@
+
+<div class="margin-top">
+    <h2 class="pl-4">Finaliser la commande</h2>
+    @if (@Session["total"] != null)
+    {
+
+        <h4 class="pl-4">Total: <span class="font-rubik text-success">@Session["total"].ToString()DHs</span></h4>
+    }
+
+    <hr />
+    @using (Html.BeginForm("Create", "Commandes", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row px-4 py-1">
+            <div class="col-ms-8 col-12">
+                <div class="card card_info h-100">
+                    <div class="card-header d-flex justify-content-between">
+                        <div>
+                            1. INFORMATIONS DE CONTACTS
+                        </div>
+                        <a style="cursor:pointer" class="icon_bg" data-toggle="modal" data-target="#exampleModal">
+                            <i class="material-icons icon ">
+                                edit
+                            </i>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <span class="font-weight-bold">Adresse: </span> @UserInfo().address
+                            <br />
+                            <span class="font-weight-bold">Téléphone: </span> @UserInfo().phone
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row px-4 py-1">
+            <div class="col-ms-8 col-12">
+                <div class="card card_info h-100">
+                    <div class="card-header d-flex justify-content-between">
+                        <div>
+                            2. MODE DE LIVRAISON
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            @foreach (var item in modesL)
+                            {
+                                <input type="radio" id="type-livraison" name="id_mode_livraison" value=@item.id>
+                                <label for="item.libele">@item.libele</label><br>
+                            }
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row px-4 py-1">
+            <div class="col-ms-8 col-12">
+                <div class="card card_info h-100">
+                    <div class="card-header d-flex justify-content-between">
+                        <div>
+                            3. MODE DE PAIEMENT
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            @foreach (var item in modesP)
+                            {
+                                <input type="radio" id="type-livraison" name="id_paiement" value=@item.id>
+                                <label for="item.libele">@item.libele</label><br>
+                            }
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row w-50 px-4 py-5 justify-content-center">
+            <div class="col-12">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-save  text-white w-100">Enregistrer</button>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        @using (Html.BeginForm("Index", "CompteUser",FormMethod.Post))
+        {
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@UserInfo().name</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                   @Html.HiddenFor(model => @UserInfo().name)
+                    <div class="form-group row">
+                        @Html.Label("Adresse", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(Model => @UserInfo().address, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        @Html.Label("Téléphone", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(Model=> @UserInfo().phone, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-save text-white">Save changes</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

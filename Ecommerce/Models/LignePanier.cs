@@ -22,10 +22,13 @@ namespace Ecommerce.Models
         [Display(Name = "Quantité")]
         public float quantite { get; set; }
 
-        [Display(Name = "Prix total")]
-        public float prix_total { get; set; }
+        [Display(Name = "Prix HT")]
+        public float? prix_ht { get; set; }
 
         [Display(Name = "TVA")]
-        public float tva { get; set; }
+        public float? prix_tva { get; set; }
+
+        [Display(Name = "Prix total")]
+        public float? prix_total { get; set; }
     }
 }

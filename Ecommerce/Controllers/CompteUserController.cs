@@ -43,9 +43,9 @@ namespace Ecommerce.Controllers
             thisUser.Address = user.address;
             db.Entry(thisUser).State = EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("Index");
-/*            }
-*/            
+            return Redirect(Request.UrlReferrer.ToString());
+            /*            }
+            */
         }
 
 
