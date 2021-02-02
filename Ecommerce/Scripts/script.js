@@ -65,7 +65,7 @@ $(document).ready(function () {
     }
 
     window.$('.table').DataTable(frensh);
-    window.$('.table-no-searh ').DataTable({
+    window.$('.table-no-searh').DataTable({
         searching: false, "lengthChange": false, bInfo: false, "language": {
             "sProcessing": "Traitement en cours ...",
             "sLengthMenu": "Afficher _MENU_ lignes",
@@ -347,6 +347,65 @@ $(function () {
     });
 
 /* --END-- Delete from panier*/
+
+/*--START-- on finaliser commande*/
+    $(function () {
+        $("#finaliser-commande").click(function (e) {
+            console.log("clicked");
+            var id_liv = $("input[name='id_mode_livraison']:checked").val();
+            var id_pai = $("input[name='id_paiement']:checked").val();
+            console.log(id_liv);
+            console.log(id_pai);
+            if (id_liv == null || id_pai == null) {
+                $("#err").fadeIn();
+                $("#view-err").text("Tous les parties sont requis.");
+                return false; //for not submit informations to server 
+            }
+        });
+    });
+/*--END-- on finaliser commande */
+
+/*--START-- close the alert */
+    $(".close_err").click(function (e) {
+        e.preventDefault();
+                   $("#err").fadeOut();
+            return false; //for not submit informations to server 
+    });
+/*--END-- close the alert */
+
+
+/*--START-- detaills d'un commande */
+    $(".btn-details-commande").click(function (e) {
+        e.preventDefault();
+        var id_commande = $(this).attr("id");
+        var total = 0;
+
+        console.log(id_commande);
+        $.ajax({
+            url: '/Commandes/showProductInCommande',
+            type: "POST",
+            data: {
+                "id" : id_commande
+            },
+            success: function (data) {
+                console.log(data);
+                var row;
+                $.each(JSON.parse(data), function (i, v) {
+
+                    row += "<tr class='border'><td>" + v.name + "</td><td>  <img src='/Uploads/Produit_image/" + v.image + "' style='height: 120px; width: 120px; ' alt='produit' class='img-fluid'> </td><td>" + v.qty + "</td><td>" + v.prix.toFixed(2) + " DHs";
+                    total = total + parseFloat(v.prix);
+                    console.log(total);
+                });
+
+                $(".mesProduits").append(row);
+                $(".prix").text(total.toFixed(2) + " DHs");
+
+            }
+        });
+
+
+    });
+/*--END-- detaills d'un commande  */
 
 
 });

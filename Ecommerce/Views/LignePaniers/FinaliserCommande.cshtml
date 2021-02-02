@@ -35,7 +35,14 @@
 @*  --END-- Get the user address and phone number*@
 
 <div class="margin-top">
+    <div id="err" class="alert alert-danger" style="display:none;">
+        <span id="view-err">
+        </span>
+
+        <span class="close_err pointer">X</span>
+    </div>
     <h2 class="pl-4">Finaliser la commande</h2>
+
     @if (@Session["total"] != null)
     {
 
@@ -81,9 +88,10 @@
                     </div>
                     <div class="card-body">
                         <p class="card-text">
+                            @Html.ValidationMessage("id_mode_livraison", "", new { @class = "text-danger" })
                             @foreach (var item in modesL)
                             {
-                                <input type="radio" id="type-livraison" name="id_mode_livraison" value=@item.id>
+                                <input type="radio" id="id_mode_livraison" name="id_mode_livraison" value=@item.id>
                                 <label for="item.libele">@item.libele</label><br>
                             }
                         </p>
@@ -102,9 +110,10 @@
                     </div>
                     <div class="card-body">
                         <p class="card-text">
+                            @Html.ValidationMessage("id_paiement", "", new { @class = "text-danger" })
                             @foreach (var item in modesP)
                             {
-                                <input type="radio" id="type-livraison" name="id_paiement" value=@item.id>
+                                <input type="radio" id="id_paiement" name="id_paiement" value=@item.id>
                                 <label for="item.libele">@item.libele</label><br>
                             }
                         </p>
@@ -118,7 +127,7 @@
         <div class="row w-50 px-4 py-5 justify-content-center">
             <div class="col-12">
                 <div class="form-group">
-                    <button type="submit" class="btn btn-save  text-white w-100">Enregistrer</button>
+                    <button type="submit" id="finaliser-commande" class="btn btn-save  text-white w-100">Enregistrer</button>
                 </div>
             </div>
         </div>

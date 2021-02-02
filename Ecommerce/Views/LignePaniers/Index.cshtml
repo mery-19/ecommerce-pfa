@@ -58,7 +58,6 @@
                         prix_total = prix_total - economie_total;
                     }
 
-                    Session["total"] = prix_total;
 
 
                     <tr class="border">
@@ -91,6 +90,9 @@
 
                                     total += prix_total;
                                     economie_commande += economie_total;
+
+                                    Session["total"] = total ;
+
                                 }
                                 else
                                 {

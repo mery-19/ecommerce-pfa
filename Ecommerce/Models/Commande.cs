@@ -13,9 +13,14 @@ namespace Ecommerce.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
 
-        [Display(Name = "Description")]
-        [Column(TypeName = "text")]
-        public string description { get; set; }
+        [Display(Name = "Prix HT")]
+        public float prix_ht { get; set; }
+
+        [Display(Name = "TVA")]
+        public float prix_tva { get; set; }
+
+        [Display(Name = "Prix total")]
+        public float prix_total { get; set; }
 
         [Display(Name = "Date d'ajout")]
         public DateTime date_ajout { get; set; } = DateTime.Now;
@@ -25,7 +30,7 @@ namespace Ecommerce.Models
         [ForeignKey("id_panier")]
         public virtual Panier Panier { get; set; }
 
-        public int id_status { get; set; }
+        public int id_status { get; set; } = 1;
         [ForeignKey("id_status")]
         public virtual StatusCommande StatusCommande { get; set; }
 

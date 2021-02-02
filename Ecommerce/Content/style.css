@@ -109,7 +109,8 @@ body {
     width: 12.5rem;
     transition: all ease 0.25s;
     transform: translateX(-100%);
-    z-index: 2000;
+/*    z-index: 2000;
+*/    z-index: 2;
 }
 
 .wrapper .content {
@@ -241,4 +242,9 @@ a.page-link.active{
 
 .uppercase{
     text-transform:uppercase;
+}
+
+.normal-table tr td{
+    padding:20px;
+    font-weight:bold;
 }
