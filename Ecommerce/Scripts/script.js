@@ -379,8 +379,11 @@ $(function () {
         e.preventDefault();
         var id_commande = $(this).attr("id");
         var total = 0;
-
-        console.log(id_commande);
+        var row = "";
+        console.log("--------------------------");
+        console.log("id_commande: " + id_commande);
+        console.log(row);
+        console.log("--------------------------");
         $.ajax({
             url: '/Commandes/showProductInCommande',
             type: "POST",
@@ -388,17 +391,17 @@ $(function () {
                 "id" : id_commande
             },
             success: function (data) {
-                console.log(data);
-                var row;
                 $.each(JSON.parse(data), function (i, v) {
 
+                    console.log("enter 1");
                     row += "<tr class='border'><td>" + v.name + "</td><td>  <img src='/Uploads/Produit_image/" + v.image + "' style='height: 120px; width: 120px; ' alt='produit' class='img-fluid'> </td><td>" + v.qty + "</td><td>" + v.prix.toFixed(2) + " DHs";
-                    total = total + parseFloat(v.prix);
-                    console.log(total);
+                    total +=  parseFloat(v.prix);
+                    console.log("enter 1");
                 });
 
-                $(".mesProduits").append(row);
+                $(".mesProduits").html(row);
                 $(".prix").text(total.toFixed(2) + " DHs");
+
 
             }
         });
