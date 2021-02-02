@@ -20,7 +20,7 @@ namespace Ecommerce.Models
         public virtual Produit Produit { get; set; }
 
         [Display(Name = "Quantité")]
-        public float quantite { get; set; }
+        public int quantite { get; set; }
 
         [Display(Name = "Prix HT")]
         public float? prix_ht { get; set; }

@@ -100,12 +100,16 @@ namespace Ecommerce.Controllers
                 db.Entry(ligne).State = EntityState.Modified;
 
                 //Update quantite produit
+                ligne.Produit.quantite_stock -= ligne.quantite;
+                db.Entry(ligne.Produit).State = EntityState.Modified;
             }
 
             //CALCUL AND SET prix_ht; prix_tva, prix_total pour les produits dans la ligne de panier
             commande.prix_ht = prix_ht_commande;
             commande.prix_tva = prix_tva_commande;
             commande.prix_total = prix_total_commande;
+            commande.address = user.Address;
+            commande.phone = user.PhoneNumber;
 
             db.Commandes.Add(commande);
             int res = db.SaveChanges();
@@ -227,6 +231,6 @@ class lesProduits
 {
     public string name { get; set; }
     public string image { get; set; }
-    public float qty { get; set; }
+    public int qty { get; set; }
     public float? prix { get; set; }
 }

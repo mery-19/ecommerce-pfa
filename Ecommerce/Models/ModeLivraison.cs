@@ -13,15 +13,11 @@ namespace Ecommerce.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
 
-        [Display(Name = "Libele")]
+        [Display(Name = "Mode de livraison")]
         public string libele { get; set; }
 
-        [Display(Name = "Frais de livraison")]
-        public float frais_livraison { get; set; }
-
-        [Display(Name = "Description")]
-        [Column(TypeName = "Text")]
-        public string description { get; set; }
+        /*   [Display(Name = "Frais de livraison")]
+           public float frais_livraison { get; set; }*/
 
         public virtual ICollection<Commande> Commandes { get; set; }
 

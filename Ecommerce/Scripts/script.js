@@ -374,9 +374,11 @@ $(function () {
 /*--END-- close the alert */
 
 
-/*--START-- detaills d'un commande */
-    $(".btn-details-commande").click(function (e) {
+    /*--START-- detaills d'un commande */
+
+    $('#commandes-table tbody').on('click', '.btn-details-commande', function (e) {
         e.preventDefault();
+        console.log("clicked");
         var id_commande = $(this).attr("id");
         var total = 0;
         var row = "";
@@ -388,14 +390,14 @@ $(function () {
             url: '/Commandes/showProductInCommande',
             type: "POST",
             data: {
-                "id" : id_commande
+                "id": id_commande
             },
             success: function (data) {
                 $.each(JSON.parse(data), function (i, v) {
 
                     console.log("enter 1");
                     row += "<tr class='border'><td>" + v.name + "</td><td>  <img src='/Uploads/Produit_image/" + v.image + "' style='height: 120px; width: 120px; ' alt='produit' class='img-fluid'> </td><td>" + v.qty + "</td><td>" + v.prix.toFixed(2) + " DHs";
-                    total +=  parseFloat(v.prix);
+                    total += parseFloat(v.prix);
                     console.log("enter 1");
                 });
 
@@ -405,9 +407,9 @@ $(function () {
 
             }
         });
-
-
     });
+
+
 /*--END-- detaills d'un commande  */
 
 

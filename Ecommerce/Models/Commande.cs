@@ -22,6 +22,14 @@ namespace Ecommerce.Models
         [Display(Name = "Prix total")]
         public float prix_total { get; set; }
 
+
+        [Display(Name = "Adresse de livraison")]
+        [Column(TypeName = "Text")]
+        public string address { get; set; }
+
+        [Display(Name = "Tél.")]
+        public string phone { get; set; }
+
         [Display(Name = "Date d'ajout")]
         public DateTime date_ajout { get; set; } = DateTime.Now;
 
