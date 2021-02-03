@@ -83,7 +83,7 @@
                             @if (ViewBag.qty != null)
                             {
                                 <h6 class="font-baloo">QUANTITÉ: &nbsp;&nbsp;&nbsp;&nbsp;</h6>
-                                <span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; @Html.DropDownList("qty", null, htmlAttributes: new { @class = "form-control" })</span>
+                                <span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; @Html.DropDownList("qty", null, "-- Select -- ", htmlAttributes: new { @class = "form-control" })</span>
                             }
                             else
                             {
@@ -110,7 +110,7 @@
 
                 <div class="row mt-5">
                     <div class="col-12">
-                        <h6 class="font-baloo">Product Description</h6>
+                        <h6 class="font-baloo">Description de produit</h6>
                         <hr>
                         <p class="font-rale font-size-14">
                             @Model.Produit.description

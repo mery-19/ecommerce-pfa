@@ -195,6 +195,29 @@ $(function () {
         );
     });
 
+    $(function () {
+        $("a.delete-produit-envie").click(function () {
+
+            var token = $("[name='__RequestVerificationToken']").val();
+
+            console.log(token);
+            var checkstr = confirm('are you sure you want to delete this?');
+            if (checkstr == true) {
+                $.ajax({
+                    url: '/Envies/Delete/' + $(this,".delete-produit-envie").attr('data-delete-id'),
+                    type: "POST",
+                    data: {
+                        __RequestVerificationToken: token,
+                    },
+                    success: function () {
+                        location.reload();
+                    }
+                });
+            }
+        }
+        );
+    });
+
 /*--Start-- on delete item*/
 
     $(function () {
@@ -348,15 +371,49 @@ $(function () {
 
 /* --END-- Delete from panier*/
 
+/* --START-- Mettre au cote*/
+
+    $(function () {
+        $("a.envie").click(function () {
+
+            var token = $("[name='__RequestVerificationToken']").val();
+            var id_produit = $(this,".envie").attr('id');
+            console.log("id produit: " + id_produit);
+            var data = { id_produit, __RequestVerificationToken: token, };
+            console.log(data);
+                $.ajax({
+                    url: '/Envies/Add',
+                    type: "POST",
+                    data: data,
+                    success: function (res) {
+                        console.log(res);
+                        if (res.success) {
+                            alert(res.responseText);
+                            location.reload();
+
+                        } else {
+                            alert(res.responseText);
+
+                        }
+                    }
+                });
+            }
+        );
+    });
+
+/* --END-- Mettre au cote*/
+
 /*--START-- on finaliser commande*/
     $(function () {
         $("#finaliser-commande").click(function (e) {
             console.log("clicked");
             var id_liv = $("input[name='id_mode_livraison']:checked").val();
             var id_pai = $("input[name='id_paiement']:checked").val();
-            console.log(id_liv);
-            console.log(id_pai);
-            if (id_liv == null || id_pai == null) {
+            var address = $("textarea#address").val();
+            var phone = $("input[name='phone']").val();
+            console.log(address);
+            console.log(phone);
+            if (id_liv == null || id_pai == null || address == null || phone == null) {
                 $("#err").fadeIn();
                 $("#view-err").text("Tous les parties sont requis.");
                 return false; //for not submit informations to server 
@@ -381,7 +438,7 @@ $(function () {
         console.log("clicked");
         var id_commande = $(this).attr("id");
         var total = 0;
-        var row = "";
+        var row = "<tr class='border p-2'><td>Nom</td ><td>image</td><td>Quantité</td><td>Prix total</td></tr >";
         console.log("--------------------------");
         console.log("id_commande: " + id_commande);
         console.log(row);

@@ -31,7 +31,7 @@
     @if (User.IsInRole("Admin"))
     {
         <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Dashboard", routeValues: null, htmlAttributes: new { @class = "nav-link", title = "Manage" })
+            @Html.ActionLink("Bonjour " + User.Identity.GetUserName() + "!", "Index", "Dashboard", routeValues: null, htmlAttributes: new { @class = "nav-link", title = "Manage" })
         </li>
     }
 
@@ -47,7 +47,7 @@
 
     }
 
-    <li><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+    <li><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Déconnexion</a></li>
     @if (User.IsInRole("User"))
     {
     <li class="font-size-14 font-rale ml-3 mt-2">
@@ -67,3 +67,5 @@ else
         <li>@Html.ActionLink("Se connecter", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class= "nav-link" })</li>
     </ul>
 }
+
+

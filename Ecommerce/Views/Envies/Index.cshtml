@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Ecommerce.Models.Envies>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ClientDashboard.cshtml";
+}
+
+<div class="margin-top">
+
+    <h2>Votre liste d'envies</h2>
+
+    <hr />
+    <table class="table-no-searh w-100">
+        <thead>
+            <tr class="border">
+                <th>
+                    Image
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Produit.name)
+                </th>
+
+                <th>
+                    Prix
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User.Address)
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                float prix_unitaire = item.Produit.prix_vente + (item.Produit.prix_vente * item.Produit.tva) / 100;
+                float economie = 0;
+
+                if (item.Produit.Promotion != null)
+                {
+                    economie = (prix_unitaire * item.Produit.Promotion.taux_promotion) / 100;
+                    prix_unitaire = prix_unitaire - economie;
+                }
+                <tr class="border">
+                    <td>
+                        <img src="~/Uploads/Produit_image/@Html.DisplayFor(modelItem => item.Produit.image)" style="height: 120px; width:120px;" alt="produit" class="img-fluid">
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Produit.name)
+                    </td>
+                    <td>
+
+                            <span class="font-weight-bold">@String.Format("{0:0.00}", @prix_unitaire) DHs</span>
+
+                            @if (item.Produit.Promotion != null)
+                            {
+                                <p class=" font-rale">
+
+                                    Economie: <span class="text-success">- @item.Produit.Promotion.taux_promotion % </span>  <br />
+                                    <span class="font-size-16 text-success">@String.Format("{0:0.00}", @economie) DHs</span>
+                                </p>
+                            }
+                    </td>
+                    <td>
+
+                        <a data-delete-id="@item.id" class="text-danger delete-produit-envie pointer">
+                            <i class="material-icons icon ">
+                                delete
+                            </i>
+                            Supprimer
+                        </a>
+                        @Html.Hidden("__RequestVerificationToken", @Html.AntiForgeryToken())
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>

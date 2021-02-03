@@ -176,6 +176,7 @@
     <Compile Include="Controllers\CommandesController.cs" />
     <Compile Include="Controllers\CompteUserController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\EnviesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LignePaniersController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -646,6 +647,7 @@
     <Content Include="Views\Commandes\Details.cshtml" />
     <Content Include="Views\Commandes\Edit.cshtml" />
     <Content Include="Views\Commandes\Index.cshtml" />
+    <Content Include="Views\Envies\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,7 +1,7 @@
 ﻿@using Ecommerce.Models
 @model LoginViewModel
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = "SE CONNECTER";
 }
 <div class="form-center">
 
@@ -14,20 +14,19 @@
                 <h2>@ViewBag.Title.</h2>
 
                 @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
             </div>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group row">
-                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
+                @Html.LabelFor(m => m.Email, new { @class = "col-md-4 control-label" })
+                <div class="col-md-8">
                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group row">
-                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                <div class="col-md-10">
+                @Html.Label("Mot de passe", new { @class = "col-md-4 control-label" })
+                <div class="col-md-8">
                     @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                 </div>
@@ -36,17 +35,17 @@
                 <div class="col-md-offset-2 col-md-10">
                     <div class="checkbox">
                         @Html.CheckBoxFor(m => m.RememberMe)
-                        @Html.LabelFor(m => m.RememberMe)
+                        @Html.Label("Rester Connecté")
                     </div>
                 </div>
             </div>
             <div class="form-group row">
                 <div class=" col-md-12">
-                    <input type="submit" value="Log in" class="btn my-btn btn-save" />
+                    <input type="submit" value="S'inscrire" class="btn my-btn btn-save" />
                 </div>
             </div>
             <p>
-                @Html.ActionLink("Register as a new user", "Register")
+                @Html.ActionLink("Créer un compte", "Register")
             </p>
             @* Enable this once you have account confirmation enabled for password reset functionality
                 <p>

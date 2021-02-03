@@ -9,6 +9,9 @@ namespace Ecommerce.Models
 {
     public class Envies
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int id { get; set; }
+
         [Key, Column(Order = 1)]
         public string id_user { get; set; }
         [ForeignKey("id_user")]
