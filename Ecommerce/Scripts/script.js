@@ -469,5 +469,54 @@ $(function () {
 
 /*--END-- detaills d'un commande  */
 
+    /*--START-- filter commandes  */
+/*    $(function () {
+        $(".filter-commande").click(function (e) {
+            console.log($(this, ".filter-commande").attr('id'));
+            var id = $(this, ".filter-commande").attr('id');
+            $.ajax({
+                url: '/Commandes/All/' + id,
+                type: "GET",
+                success: function (data) {
+
+                }
+
+            });
+        });
+    });*/
+/*--END-- filter commandes  */
+
+
+/*--START-- change commande status  */
+
+    $('#commandes-table tbody').on('click', '#status', function (e) {
+/*        console.log($("#status option:selected").text());
+*/        var status = $($(this),"option:selected").val();
+        var id_commande = $(this).attr("id-commande");
+        if (status == 2) {
+            console.log(status);
+            console.log(id_commande);
+            var data = { id: id_commande }
+            $.ajax({
+                url: '/Commandes/Livre',
+                type: "POST",
+                data:data,
+                success: function (res) {
+                    if (res.success) {
+                        alert(res.responseText);
+                        location.reload();
+
+                    } else {
+                        alert(res.responseText);
+
+                    }
+                }
+
+            });
+        }
+        
+    });
+/*--END-- change commande status  */
+
 
 });

@@ -19,11 +19,12 @@
                 <th>
                     Type de paiement
                 </th>
-                <th>
-                    Status
-                </th>
+
                 <th>
                     @Html.DisplayNameFor(model => model.date_ajout)
+                </th>
+                <th>
+                    Status
                 </th>
                 <th>
 
@@ -34,30 +35,41 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ModeLivraison.libele)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ModePaiement.libele)
-                    </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModeLivraison.libele)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModePaiement.libele)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.date_ajout)
+                </td>
+                <td>
+                    @if (item.StatusCommande.id == 1)
+                    {
+                        <span class="btn btn-primary w-100">
+                            @Html.DisplayFor(modelItem => item.StatusCommande.libele)
+                        </span>
+                    }
+                    else if (item.StatusCommande.id == 2)
+                    {
+                        <span class="btn btn-success w-100">
+                            @Html.DisplayFor(modelItem => item.StatusCommande.libele)
+                        </span>
+                    }
+                </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StatusCommande.libele)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.date_ajout)
-                    </td>
-                    <td>
-                        @*                        @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn btn-save text-white btn-details-commande" })
-                        *@
-                        <a href="#" id="@item.id" class="btn btn-save text-white btn-details-commande" data-toggle="modal" data-target="#exampleModal">Détails</a>
+                <td>
+                    @*                        @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn btn-save text-white btn-details-commande" })
+                    *@
+                    <a href="#" id="@item.id" class="btn btn-save text-white btn-details-commande" data-toggle="modal" data-target="#exampleModal">Détails</a>
 
-                    </td>
-                </tr>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

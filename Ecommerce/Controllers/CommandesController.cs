@@ -16,13 +16,46 @@ namespace Ecommerce.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Commandes
+        [Authorize(Roles = "User")]
         public ActionResult Index()
         {
             ApplicationUser user = db.Users.Where(x => x.UserName.Equals(User.Identity.Name)).FirstOrDefault();
             var commandes = db.Commandes.Where(x => x.Panier.User.UserName.Equals(user.UserName))
                 .Include(c => c.ModeLivraison).Include(c => c.ModePaiement).Include(c => c.Panier).Include(c => c.StatusCommande);
             return View(commandes.ToList());
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult All(int? id)
+        {
+            var commandes = db.Commandes.Include(c => c.ModeLivraison).Include(c => c.ModePaiement).Include(c => c.Panier).Include(c => c.StatusCommande);
+            if (id != null)
+            {
+                
+                commandes = (id==2)? commandes.Where(x => x.id_status == id): commandes.Where(x => x.id_status == 1);
+            }
+            else
+            {
+                commandes = commandes.Where(x => x.id_status == 1);
+            }
+
+            ViewBag.status = new SelectList(db.StatusCommandes, "id", "libele");
+            return View(commandes.ToList());
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult Livre(int? id)
+        {
+            if(id != null)
+            {
+                var commande = db.Commandes.Find(id);
+                commande.id_status = 2;
+                db.Entry(commande).State = EntityState.Modified;
+                db.SaveChanges();
+                return Json(new { success = true, responseText = "La commande a éte ajouter avec les commandes livrées avec succées." }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { success = false, responseText = "Erreur: SERVER ERROR." }, JsonRequestBehavior.AllowGet);
+
         }
 
         // GET: Commandes/Details/5
