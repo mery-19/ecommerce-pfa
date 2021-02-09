@@ -490,8 +490,8 @@ $(function () {
 /*--START-- change commande status  */
 
     $('#commandes-table tbody').on('click', '#status', function (e) {
-/*        console.log($("#status option:selected").text());
-*/        var status = $($(this),"option:selected").val();
+        console.log($("#status option:selected").text());
+        var status = $($(this),"option:selected").val();
         var id_commande = $(this).attr("id-commande");
         if (status == 2) {
             console.log(status);
@@ -517,6 +517,20 @@ $(function () {
         
     });
 /*--END-- change commande status  */
+
+/*--START-- set notification on 0 after click  */
+    $('.not-click').click(function (e) {
+        console.log("hfhf");
+            $.ajax({
+                url: '/Commandes/RestartNot',
+                type: "POST",
+                success: function (res) {
+                   
+                }
+
+            });
+    });
+/*--END-- set notification on 0 after click  */
 
 
 });

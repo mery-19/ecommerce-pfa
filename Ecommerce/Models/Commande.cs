@@ -33,6 +33,9 @@ namespace Ecommerce.Models
         [Display(Name = "Date d'ajout")]
         public DateTime date_ajout { get; set; } = DateTime.Now;
 
+        [Display(Name = "Date de modification")]
+        public DateTime date_update { get; set; } = DateTime.Now;
+
         /******** Add foreign keys *************/
         public int id_panier { get; set; }
         [ForeignKey("id_panier")]

@@ -45,7 +45,9 @@
                         <img src="~/Uploads/Produit_image/@Html.DisplayFor(modelItem => item.Produit.image)" style="height: 120px; width:120px;" alt="produit" class="img-fluid">
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Produit.name)
+                        <a href="~/ProduitDetails/Index/@item.id_produit" target="_blank">
+                            @Html.DisplayFor(modelItem => item.Produit.name)
+                        </a>
                     </td>
                     <td>
 

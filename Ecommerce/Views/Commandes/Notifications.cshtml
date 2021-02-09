@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Ecommerce.Models.Commande>
+
+@{
+    ViewBag.Title = "Notifications";
+    Layout = "~/Views/Shared/_ClientDashboard.cshtml";
+}
+
+<div class="margin-top">
+    <div class="card w-100">
+        <div class="card-header">
+            Notifications
+        </div>
+        <ul class="list-group list-group-flush">
+            @foreach (var item in Model)
+            {
+
+                <li class="list-group-item  ">
+                    Status de commande de Numéro d'id <span class="font-weight-bold">@item.id</span> à été change de "En attente" à "Livré"
+                    <p>@item.date_update.ToString("HH:mm dd/MM/yyyy")</p>
+                </li>
+
+            }
+
+        </ul>
+    </div>
+</div>

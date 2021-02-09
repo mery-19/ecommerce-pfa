@@ -22,13 +22,13 @@ namespace Ecommerce.Controllers
             ApplicationUser user = db.Users.Where(x => x.UserName.Equals(User.Identity.Name)).FirstOrDefault();
             var commandes = db.Commandes.Where(x => x.Panier.User.UserName.Equals(user.UserName))
                 .Include(c => c.ModeLivraison).Include(c => c.ModePaiement).Include(c => c.Panier).Include(c => c.StatusCommande);
-            return View(commandes.ToList());
+            return View(commandes.OrderByDescending(x => x.id).ToList());
         }
 
         [Authorize(Roles = "Admin")]
         public ActionResult All(int? id)
         {
-            var commandes = db.Commandes.Include(c => c.ModeLivraison).Include(c => c.ModePaiement).Include(c => c.Panier).Include(c => c.StatusCommande);
+            var commandes = db.Commandes.OrderByDescending(x => x.id).Include(c => c.ModeLivraison).Include(c => c.ModePaiement).Include(c => c.Panier).Include(c => c.StatusCommande);
             if (id != null)
             {
                 
@@ -50,14 +50,44 @@ namespace Ecommerce.Controllers
             {
                 var commande = db.Commandes.Find(id);
                 commande.id_status = 2;
+                commande.date_update = DateTime.Now;
                 db.Entry(commande).State = EntityState.Modified;
                 db.SaveChanges();
+
+                //--STAR-- set notification
+                UserNotification userNotification = db.UserNotifications.Where(x => x.id_user == commande.Panier.User.Id).FirstOrDefault();
+
+                userNotification.num += 1;
+                db.Entry(userNotification).State = EntityState.Modified;
+                db.SaveChanges();
+                //--END-- set notification 
                 return Json(new { success = true, responseText = "La commande a éte ajouter avec les commandes livrées avec succées." }, JsonRequestBehavior.AllowGet);
             }
             return Json(new { success = false, responseText = "Erreur: SERVER ERROR." }, JsonRequestBehavior.AllowGet);
 
         }
 
+        [Authorize(Roles = "User")]
+        public ActionResult Notifications()
+        {
+            ApplicationUser user = db.Users.Where(x => x.UserName.Equals(User.Identity.Name)).FirstOrDefault();
+            var commandes = db.Commandes.Where(x => x.Panier.User.UserName.Equals(user.UserName) && x.id_status == 2)
+                .Include(c => c.ModeLivraison).Include(c => c.ModePaiement).Include(c => c.Panier).Include(c => c.StatusCommande);
+            return View(commandes.OrderByDescending(x => x.id).ToList());
+        }
+
+        [Authorize(Roles = "User")]
+        [HttpPost]
+        public ActionResult RestartNot()
+        {
+            ApplicationUser user = db.Users.Where(x => x.UserName == User.Identity.Name).FirstOrDefault();
+            UserNotification userNotification = db.UserNotifications.Where(x => x.id_user == user.Id).FirstOrDefault();
+            userNotification.num = 0;
+            db.Entry(userNotification).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json(new { success = true}, JsonRequestBehavior.AllowGet);
+
+        }
         // GET: Commandes/Details/5
         public ActionResult Details(int? id)
         {

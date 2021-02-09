@@ -193,6 +193,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AdminNotification.cs" />
     <Compile Include="Models\BonAchat.cs" />
     <Compile Include="Models\Categorie.cs" />
     <Compile Include="Models\Commande.cs" />
@@ -208,6 +209,7 @@
     <Compile Include="Models\ProduitDetails.cs" />
     <Compile Include="Models\Promotion.cs" />
     <Compile Include="Models\StatusCommande.cs" />
+    <Compile Include="Models\UserNotification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -642,13 +644,10 @@
     <Content Include="Views\ModeLivraisons\Details.cshtml" />
     <Content Include="Views\ModeLivraisons\Edit.cshtml" />
     <Content Include="Views\ModeLivraisons\Index.cshtml" />
-    <Content Include="Views\Commandes\Create.cshtml" />
-    <Content Include="Views\Commandes\Delete.cshtml" />
-    <Content Include="Views\Commandes\Details.cshtml" />
-    <Content Include="Views\Commandes\Edit.cshtml" />
     <Content Include="Views\Commandes\Index.cshtml" />
     <Content Include="Views\Envies\Index.cshtml" />
     <Content Include="Views\Commandes\All.cshtml" />
+    <Content Include="Views\Commandes\Notifications.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

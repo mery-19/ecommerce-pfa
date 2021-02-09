@@ -1,10 +1,13 @@
-﻿
-
+﻿@using Ecommerce.Models
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+@{ 
+    ApplicationDbContext db = new ApplicationDbContext();
+    ApplicationUser user = db.Users.Where(x => x.UserName == User.Identity.Name).FirstOrDefault();
+    var notif = db.UserNotifications.Where(x => x.id_user == user.Id).FirstOrDefault();
+}
 <div class="wrapper d-flex">
     <div class="sideMenu bg-mattBlackLight">
         <div class="sidebar">
@@ -15,6 +18,14 @@
                             view_list
                         </i>
                         <span class="text">menu caché</span>
+                    </a>
+                </li>
+                <li class="nav-item not-click">
+                    <a href="~/Commandes/Notifications" class="nav-link px-2">
+                        <i class="material-icons icon expandView ">
+                            notifications
+                        </i>
+                        <span class="text">Notifications(@notif.num)</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -40,7 +51,7 @@
                         </i><span class="text">Liste d'envies</span>
                     </a>
                 </li>
-               <li class="nav-item">
+                <li class="nav-item">
                     <a href="/CompteUser" class="nav-link px-2">
                         <i class="material-icons icon">
 

@@ -1,5 +1,13 @@
-﻿@{
+﻿@using Ecommerce.Models
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{ 
+    ApplicationDbContext db = new ApplicationDbContext();
+    int en_attente = db.Commandes.Count(x => x.id_status == 1);
+    ViewBag.EnAttente = en_attente;
 }
 
 
@@ -43,14 +51,14 @@
                         <i class="material-icons icon">
                             view_module
                         </i>
-                        <span class="text">Orders</span>
+                        <span class="text">Orders (@ViewBag.EnAttente)</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="~/Promotions" class="nav-link px-2">
                         <i class='fas fa-bullhorn icon' aria-hidden="true"></i>
 
-                        <span class="text">Promotions</span>
+                        <span class="text">Promotions </span>
                     </a>
                 </li>
                 <li class="nav-item">
