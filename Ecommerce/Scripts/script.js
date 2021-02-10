@@ -520,7 +520,6 @@ $(function () {
 
 /*--START-- set notification on 0 after click  */
     $('.not-click').click(function (e) {
-        console.log("hfhf");
             $.ajax({
                 url: '/Commandes/RestartNot',
                 type: "POST",
@@ -532,5 +531,20 @@ $(function () {
     });
 /*--END-- set notification on 0 after click  */
 
+/*--START-- On card item click */
+    $('#top-produit').on('click', '.name-produit', function (e) {
+        var id_produit = $(this).attr("id-produit");
+        console.log(id_produit);
+        window.location.replace("https://localhost:44352/ProduitDetails/Index/" + id_produit);
+        /*$.ajax({
+            url: '/ProduitDetails/Index/' + id_produit,
+            type: "GET",
+            success: function (res) {
+                
+            }
+
+        });*/
+    });
+/*--END-- On card item click */
 
 });

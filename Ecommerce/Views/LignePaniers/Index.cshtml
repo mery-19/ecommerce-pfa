@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Ecommerce.Models.LignePanier>
+    @using Ecommerce.Models
 
 @{
     ViewBag.Title = "Index";
@@ -45,20 +46,8 @@
                 foreach (var item in Model)
                 {
 
-                    float prix_unitaire = item.Produit.prix_vente + (item.Produit.prix_vente * item.Produit.tva) / 100;
-                    float prix_total = prix_unitaire * item.quantite;
-                    float economie = 0;
-                    float economie_total = 0;
 
-                    if (item.Produit.Promotion != null)
-                    {
-                        economie = (prix_unitaire * item.Produit.Promotion.taux_promotion) / 100;
-                        economie_total = economie * item.quantite;
-                        prix_unitaire = prix_unitaire - economie;
-                        prix_total = prix_total - economie_total;
-                    }
-
-
+                    PrixProduit prix = new PrixProduit(item);
 
                     <tr class="border">
                         <td class="p-3">
@@ -88,8 +77,8 @@
                                   "produit" + item.Produit.id.ToString(),
                                   new SelectList(qtys, qtys.Where(x => x == item.quantite).First()), htmlAttributes: new { @class = "panier_qty form-control", @idProduit = item.Produit.id.ToString() })
 
-                                    total += prix_total;
-                                    economie_commande += economie_total;
+                                    total += prix.prix_total;
+                                    economie_commande += prix.economie_total;
 
                                     Session["total"] = total ;
 
@@ -106,14 +95,14 @@
                         </td>
 
                         <td>
-                            <span class="font-weight-bold">@String.Format("{0:0.00}", @prix_unitaire) DHs</span>
+                            <span class="font-weight-bold">@String.Format("{0:0.00}", @prix.prix_unitaire) DHs</span>
 
                             @if (item.Produit.Promotion != null)
                             {
                                 <p class=" font-rale">
 
                                     Economie: <span class="text-success">- @item.Produit.Promotion.taux_promotion % </span>  <br />
-                                    <span class="font-size-16 text-success">@String.Format("{0:0.00}", @economie) DHs</span>
+                                    <span class="font-size-16 text-success">@String.Format("{0:0.00}", @prix.economie) DHs</span>
                                 </p>
                             }
                         </td>
@@ -122,12 +111,12 @@
                             @if (qty > 0)
                             {
 
-                                <span class="font-weight-bold"> @String.Format("{0:0.00}", @prix_total) DHs</span>
+                                <span class="font-weight-bold"> @String.Format("{0:0.00}", @prix.prix_total) DHs</span>
                                 if (item.Produit.Promotion != null)
                                 {
                                     <p class=" font-rale">
                                         Economie:
-                                        <span class="font-size-16 text-success">@String.Format("{0:0.00}", @economie_total) DHs</span>
+                                        <span class="font-size-16 text-success">@String.Format("{0:0.00}", @prix.economie_total) DHs</span>
                                     </p>
                                 }
                             }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -54,7 +55,9 @@ namespace Ecommerce.Controllers
                 }
             }
             /* --END-- See if the user connected and has the product in Panier */
+            List<Produit> produits = db.Produits.ToList();
 
+            ViewBag.produits = allProducs();
             return View(produitDetails);
         }
 
@@ -102,5 +105,32 @@ namespace Ecommerce.Controllers
             }
             //insert id_cart, id_produit qty prices to database
         }
-    }
+
+        public List<ProduitDetails> allProducs()
+        {
+            List<ProduitDetails> myProduits = new List<ProduitDetails>();
+            List<int> ids = db.Database.SqlQuery<int>("SELECT id from (SELECT TOP 10 l.id_produit as id, SUM(l.quantite) as qty FROM LignePaniers l, Commandes c WHERE c.id_panier = l.id_panier  GROUP BY l.id_produit ORDER BY qty DESC) tab;").ToList();
+
+            foreach(int id in ids)
+            {
+                Produit produit = db.Produits.Find(id);
+                ProduitDetails produitDetails = new ProduitDetails();
+
+                produitDetails.Produit = produit;
+                produitDetails.real_price = produit.prix_vente + (produit.prix_vente * produit.tva) / 100;
+                if (produit.id_promotion != null)
+                {
+                    Promotion p = db.Promotions.Find(produit.id_promotion);
+                    produitDetails.save_price = (produitDetails.real_price * p.taux_promotion) / 100;
+                    produitDetails.deal_price = produitDetails.real_price - produitDetails.save_price;
+                }
+
+                myProduits.Add(produitDetails);
+            }
+
+            
+            return myProduits;
+        }
+
+        }
 }

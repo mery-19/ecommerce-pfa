@@ -31,4 +31,5 @@ namespace Ecommerce.Models
         [Display(Name = "Prix total")]
         public float? prix_total { get; set; }
     }
+
 }

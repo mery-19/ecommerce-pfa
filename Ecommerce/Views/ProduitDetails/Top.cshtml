@@ -1,0 +1,55 @@
+﻿@using Ecommerce.Models
+<section id="top-produit">
+    <h4 class="font-rubik font-size-20">
+        MEILLEURS VENTES
+
+    </h4>
+        <hr>
+        <div class="owl-carousel owl-theme">
+
+            @foreach (ProduitDetails item in ViewBag.produits)
+            {
+            <div class="card item m-2 p-2" >
+                @if(item.Produit.quantite_stock <= 0)
+                {
+                <img alt="product1" class="img-fluid produit-img"
+                     src="~/Uploads/epuise.png" style="position:absolute;" />
+                } 
+                @if(item.Produit.Promotion != null)
+                {
+
+                <div class="promotion" style="position:absolute;">
+                    <h6>- @item.Produit.Promotion.taux_promotion %</h6>
+
+                </div>
+                } 
+                <img alt="product1" class="img-fluid produit-img"
+                     src="~/Uploads/Produit_image/@item.Produit.image" />
+
+                    <h5 class="name-produit pointer font-rubik mt-2 " id-produit="@item.Produit.id">@item.Produit.name</h5>
+
+                    @if (item.Produit.Promotion != null)
+                    {
+                        <p>
+                            <strike class="text-black-50">
+                                @String.Format("{0:0.00}", item.real_price) DHs
+                            </strike> <br />
+                            <span class="font-size-20 font-weight-bold text-success">
+                                @String.Format("{0:0.00}", item.deal_price) DHs
+                            </span>
+
+                        </p>
+                    }
+                    else
+                    {
+                        <p>
+                            <span class="font-size-20 font-weight-bold text-success">
+                                @String.Format("{0:0.00}", item.real_price) DHs
+                            </span>
+                        </p>
+                    }                      
+                </div>
+
+                }
+        </div>
+</section>

@@ -63,6 +63,5 @@ namespace Ecommerce.Models
 
         //to know how many times the product commande
         public virtual ICollection<Commande> Commandes { get; set; }
-
     }
 }
