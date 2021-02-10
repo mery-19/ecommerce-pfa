@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Ecommerce.Models.Commande>
+﻿@model PagedList.IPagedList<Ecommerce.Models.Commande>
+@using PagedList;
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Notifications";
@@ -22,5 +24,9 @@
             }
 
         </ul>
+    </div>
+    <div class="container">
+        @Html.PagedListPager(Model, page => Url.Action("Notifications", new { page }))
+
     </div>
 </div>

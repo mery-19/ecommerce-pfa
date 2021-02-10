@@ -218,3 +218,7 @@ D:\mery\ecommerce-pfa\Ecommerce\obj\Debug\Ecommerce.csproj.CoreCompileInputs.cac
 D:\mery\ecommerce-pfa\Ecommerce\obj\Debug\Ecommerce.csproj.CopyComplete
 D:\mery\ecommerce-pfa\Ecommerce\obj\Debug\Ecommerce.dll
 D:\mery\ecommerce-pfa\Ecommerce\obj\Debug\Ecommerce.pdb
+D:\mery\ecommerce-pfa\Ecommerce\bin\PagedList.dll
+D:\mery\ecommerce-pfa\Ecommerce\bin\PagedList.Mvc.dll
+D:\mery\ecommerce-pfa\Ecommerce\bin\PagedList.xml
+D:\mery\ecommerce-pfa\Ecommerce\bin\PagedList.Mvc.xml

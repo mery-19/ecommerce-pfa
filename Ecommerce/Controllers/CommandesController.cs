@@ -9,6 +9,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using Ecommerce.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Ecommerce.Controllers
 {
@@ -68,12 +70,14 @@ namespace Ecommerce.Controllers
         }
 
         [Authorize(Roles = "User")]
-        public ActionResult Notifications()
+        public ActionResult Notifications(int? page)
         {
+            /*PageSize: Number of items*/
             ApplicationUser user = db.Users.Where(x => x.UserName.Equals(User.Identity.Name)).FirstOrDefault();
             var commandes = db.Commandes.Where(x => x.Panier.User.UserName.Equals(user.UserName) && x.id_status == 2)
                 .Include(c => c.ModeLivraison).Include(c => c.ModePaiement).Include(c => c.Panier).Include(c => c.StatusCommande);
-            return View(commandes.OrderByDescending(x => x.id).ToList());
+            int pageSize = 10;
+            return View(commandes.OrderByDescending(x => x.id).ToList().ToPagedList(page ?? 1, pageSize));
         }
 
         [Authorize(Roles = "User")]
