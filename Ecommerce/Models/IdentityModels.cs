@@ -16,6 +16,7 @@ namespace Ecommerce.Models
         public virtual ICollection<Envies> Envies { get; set; }
         public virtual ICollection<Panier> Paniers { get; set; }
         public virtual ICollection<UserNotification> UserNotifications { get; set; }
+        public virtual ICollection<Commentaire> Commentaires { get; set; }
 
         [Display(Name = "Adresse")]
         public string Address { get; set; }
@@ -58,7 +59,7 @@ namespace Ecommerce.Models
             modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogin");
         }
 
-        public virtual DbSet<BonAchat> BonAchats { get; set; }
+        public virtual DbSet<Commentaire> Commentaires { get; set; }
         public virtual DbSet<Categorie> Categories { get; set; }
         public virtual DbSet<ModeLivraison> ModeLivraisons { get; set; }
         public virtual DbSet<ModePaiement> ModePaiements { get; set; }

@@ -6,6 +6,8 @@ using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Ecommerce.Controllers
 {
@@ -13,7 +15,7 @@ namespace Ecommerce.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: ProduitDetails/id
-        public ActionResult Index(int? id)
+        public ActionResult Index(int? id, int? page)
         {
             if (id == null)
             {
@@ -58,6 +60,7 @@ namespace Ecommerce.Controllers
             List<Produit> produits = db.Produits.ToList();
 
             ViewBag.produits = allProducs();
+            ViewBag.commentaires = Commentaires(id,page);
             return View(produitDetails);
         }
 
@@ -132,5 +135,27 @@ namespace Ecommerce.Controllers
             return myProduits;
         }
 
+
+        [HttpPost]
+        public ActionResult AddComment(Commentaire commentaire)
+        {
+            ApplicationUser user = db.Users.Where(x => x.UserName == User.Identity.Name).FirstOrDefault();
+            commentaire.id_user = user.Id;
+            db.Commentaires.Add(commentaire);
+            db.SaveChanges();
+
+            //select id_panier from the commendes
+
+            //dans la ligne paniers we see if the id_product exist
+            //if yes he can comment
+
+            return Redirect(Request.UrlReferrer.ToString());
         }
+
+        public PagedList.IPagedList<Commentaire> Commentaires(int? id, int? page)
+        {
+            PagedList.IPagedList<Commentaire> commentaires =db.Commentaires.Where(x => x.id_produit == id).OrderByDescending(x => x.id).ToList().ToPagedList(page ?? 1, 3);
+            return commentaires;
+        }
+    }
 }

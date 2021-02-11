@@ -200,7 +200,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminNotification.cs" />
-    <Compile Include="Models\BonAchat.cs" />
+    <Compile Include="Models\Commentaire.cs" />
     <Compile Include="Models\Categorie.cs" />
     <Compile Include="Models\Commande.cs" />
     <Compile Include="Models\CompteUser.cs" />
@@ -661,6 +661,7 @@
     <Content Include="Views\Commandes\All.cshtml" />
     <Content Include="Views\Commandes\Notifications.cshtml" />
     <Content Include="Views\ProduitDetails\Top.cshtml" />
+    <Content Include="Views\ProduitDetails\Comments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

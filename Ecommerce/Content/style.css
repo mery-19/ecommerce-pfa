@@ -242,7 +242,13 @@ footer {
     cursor: pointer;
 }
 
+a.page-link:active {
+    background: #2D3E50;
+}
 a.page-link.active {
+    background: #2D3E50;
+}
+a.page-link.active:hover {
     background: #2D3E50;
 }
 

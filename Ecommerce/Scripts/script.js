@@ -536,15 +536,20 @@ $(function () {
         var id_produit = $(this).attr("id-produit");
         console.log(id_produit);
         window.location.replace("https://localhost:44352/ProduitDetails/Index/" + id_produit);
-        /*$.ajax({
-            url: '/ProduitDetails/Index/' + id_produit,
-            type: "GET",
-            success: function (res) {
-                
-            }
-
-        });*/
     });
 /*--END-- On card item click */
 
+    /*--START-- add comment */
+    $('.add-comment').click(function (e) {
+        var comment = $('#commmentaire').val();
+        console.log(comment);
+        if (comment.trim() === "") {
+            alert("Le commentaire est VIDE!");
+            return false;
+        }
+    })
+/*--START-- add comment */
+
+
+ 
 });

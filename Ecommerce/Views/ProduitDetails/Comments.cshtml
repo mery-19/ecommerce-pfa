@@ -1,0 +1,63 @@
+﻿@model Ecommerce.Models.ProduitDetails
+@using Ecommerce.Models
+@using PagedList;
+@using PagedList.Mvc;
+
+<h4 class="font-rubik font-size-20">
+    LES COMMENTAIRES
+</h4>
+
+<div class="row">
+    <div class="col-4">
+        <div class="my-5">
+            @if (User.Identity.Name != "")
+            {
+                using (Html.BeginForm("AddComment", "ProduitDetails", FormMethod.Post))
+                {
+                    <textarea class="form-control mb-2" id="commmentaire" name="commmentaire" style="width:100%;"></textarea>
+                    @Html.Hidden("id_produit", Model.Produit.id)
+                    <button type="submit" class="btn btn-save text-white add-comment">AJOUTER COMMENTAIRE</button>
+                }
+            }
+            else
+            {
+                <h5 class="font-rubik text-danger">Connectez-vous pour ajouter un commentaire.</h5>
+            }
+
+        </div>
+    </div>
+    <div class="col-8">
+        <div class="card w-100">
+            <ul class="list-group list-group-flush">
+                @foreach (Commentaire item in ViewBag.Commentaires)
+                {
+
+                <li class="list-group-item  ">
+                    <p class="font-rubik text-weight-bold" >
+                        <span class="d-flex">
+                            <i class="material-icons icon expandView ">
+                                person
+                            </i>
+                            @item.User.UserName
+                        </span>
+                        <span class="font-size-12 text-muted">
+                            @item.date_ajout
+                        </span>
+                    </p>
+                    <p class="font-size-16 ">
+                        @item.commmentaire
+
+                    </p>
+                </li>
+
+                }
+            </ul>
+        </div>
+        <div>
+
+            @{
+                PagedList.IPagedList<Commentaire> commentaires = ViewBag.commentaires;
+            }
+            @Html.PagedListPager(commentaires, page => Url.Action("Index", new { page }))
+        </div>
+    </div></div>
