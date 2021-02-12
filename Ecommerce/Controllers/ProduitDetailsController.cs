@@ -137,19 +137,31 @@ namespace Ecommerce.Controllers
 
 
         [HttpPost]
-        public ActionResult AddComment(Commentaire commentaire)
+        public ActionResult AddComment(int id_produit, string commentaire)
         {
             ApplicationUser user = db.Users.Where(x => x.UserName == User.Identity.Name).FirstOrDefault();
-            commentaire.id_user = user.Id;
-            db.Commentaires.Add(commentaire);
-            db.SaveChanges();
-
+ 
             //select id_panier from the commendes
+            List<LignePanier> lignes = db.LignePaniers.Where(x => x.id_produit == id_produit && x.Panier.id_user == user.Id).ToList();
+            if(lignes.Count != 0)
+            {
+                foreach(LignePanier ligne in lignes)
+                {
+                    Commande commande = db.Commandes.Where(x => x.id_panier == ligne.Panier.id).FirstOrDefault();
+                    if(commande != null)
+                    {
+                        Commentaire c = new Commentaire();
+                        c.id_user = user.Id;
+                        c.id_produit = id_produit;
+                        c.commentaire = commentaire;
+                        db.Commentaires.Add(c);
+                        db.SaveChanges();
+                        return Json(new { success = true, responseText = "Commentaire ajouté avec succés." }, JsonRequestBehavior.AllowGet);
 
-            //dans la ligne paniers we see if the id_product exist
-            //if yes he can comment
-
-            return Redirect(Request.UrlReferrer.ToString());
+                    }
+                }
+            }
+            return Json(new { success = false, responseText = "Vous ne pouvez pas commenter sur ce produit, car vous ne l'avez pas acheté." }, JsonRequestBehavior.AllowGet);
         }
 
         public PagedList.IPagedList<Commentaire> Commentaires(int? id, int? page)

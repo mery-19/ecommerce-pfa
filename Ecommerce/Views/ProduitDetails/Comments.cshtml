@@ -12,12 +12,15 @@
         <div class="my-5">
             @if (User.Identity.Name != "")
             {
-                using (Html.BeginForm("AddComment", "ProduitDetails", FormMethod.Post))
+                @*using (Html.BeginForm("AddComment", "ProduitDetails", FormMethod.Post))
                 {
                     <textarea class="form-control mb-2" id="commmentaire" name="commmentaire" style="width:100%;"></textarea>
                     @Html.Hidden("id_produit", Model.Produit.id)
                     <button type="submit" class="btn btn-save text-white add-comment">AJOUTER COMMENTAIRE</button>
-                }
+                }*@
+                <textarea class="form-control mb-2" id="commmentaire" name="commmentaire" style="width:100%;"></textarea>
+                @Html.Hidden("id_produit", Model.Produit.id)
+                <button class="btn btn-save text-white add-comment">AJOUTER COMMENTAIRE</button>
             }
             else
             {
@@ -45,7 +48,7 @@
                         </span>
                     </p>
                     <p class="font-size-16 ">
-                        @item.commmentaire
+                        @item.commentaire
 
                     </p>
                 </li>

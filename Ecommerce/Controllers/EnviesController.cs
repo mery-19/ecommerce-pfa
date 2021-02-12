@@ -24,10 +24,13 @@ namespace Ecommerce.Controllers
             return View(envies.ToList());
         }
 
-        [ValidateAntiForgeryToken]
         public ActionResult Add(int id_produit)
         {
             ApplicationUser user = db.Users.Where(x => x.UserName.Equals(User.Identity.Name)).FirstOrDefault();
+            if(user == null)
+            {
+                return Json(new { success = false, responseText = "Connectez-vous pour ajouter le produit au favories." }, JsonRequestBehavior.AllowGet);
+            }
             Envies exist = new Envies();
             exist = db.Envies.Find(user.Id, id_produit);
             if(exist != null )

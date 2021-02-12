@@ -20,11 +20,8 @@
                 <div class="col-sm-6 h-100">
                     <img src="~/Uploads/Produit_image/@Html.DisplayFor(model => model.Produit.image)" alt="product" class="img-fluid">
                     <div class="form-row pt-4 font-size-16 font-baloo">
-                        @*     <div class="col">
-                                <button type="submit" class="btn btn-danger form-control" style="text-transform:uppercase;"><i class="fas fa-shopping-cart"></i> J'achète</button>
-                            </div>*@
                         <div class="col">
-                            <button type="submit" class="btn btn-warning form-control"><i class="far fa-heart"></i> SAUVGARDER</button>
+                            <a class="btn btn-warning form-control envie" id="@Model.Produit.id"><i class="far fa-heart"></i> SAUVGARDER</a>
                         </div>
                     </div>
                 </div>

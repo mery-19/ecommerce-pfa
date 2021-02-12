@@ -23,7 +23,7 @@ namespace Ecommerce.Models
 
         [Display(Name = "Commentaire")]
         [Column(TypeName = "text")]
-        public string commmentaire { get; set; }
+        public string commentaire { get; set; }
 
         [Display(Name = "Date d'ajout")]
         public DateTime date_ajout { get; set; } = DateTime.Now;

@@ -376,10 +376,9 @@ $(function () {
     $(function () {
         $("a.envie").click(function () {
 
-            var token = $("[name='__RequestVerificationToken']").val();
             var id_produit = $(this,".envie").attr('id');
             console.log("id produit: " + id_produit);
-            var data = { id_produit, __RequestVerificationToken: token, };
+            var data = { id_produit};
             console.log(data);
                 $.ajax({
                     url: '/Envies/Add',
@@ -413,7 +412,8 @@ $(function () {
             var phone = $("input[name='phone']").val();
             console.log(address);
             console.log(phone);
-            if (id_liv == null || id_pai == null || address == null || phone == null) {
+            console.log(id_liv);
+            if (id_liv == null || id_pai == null || $.trim(address) == "" || $.trim(phone) == "" ) {
                 $("#err").fadeIn();
                 $("#view-err").text("Tous les parties sont requis.");
                 return false; //for not submit informations to server 
@@ -542,11 +542,27 @@ $(function () {
     /*--START-- add comment */
     $('.add-comment').click(function (e) {
         var comment = $('#commmentaire').val();
-        console.log(comment);
         if (comment.trim() === "") {
             alert("Le commentaire est VIDE!");
             return false;
         }
+        var data = {
+            "id_produit": $("#id_produit").val(),
+            "commentaire": comment
+        };
+        console.log(data);
+        $.ajax({
+            url: '/ProduitDetails/AddComment',
+            type: "POST",
+            data: data,
+            success: function (res) {
+                console.log(res.responseText);
+                alert(res.responseText);
+                if (res.success) {
+                    location.reload();
+                }
+            }
+        });
     })
 /*--START-- add comment */
 
