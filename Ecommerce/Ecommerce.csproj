@@ -578,6 +578,8 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Uploads\epuise.png" />
+    <Content Include="Uploads\bg.jpg" />
+    <Content Include="Uploads\matebook.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

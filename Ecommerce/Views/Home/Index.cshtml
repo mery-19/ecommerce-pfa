@@ -1,3 +1,90 @@
-﻿@{
+﻿@model PagedList.IPagedList<Ecommerce.Models.ProduitDetails>
+
+@using Ecommerce.Models;
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
     ViewBag.Title = "Home Page";
 }
+
+<main>
+    <section class="presentation">
+        <div class="row">
+            <div class="col-md-6 col-12">
+                <div class="introduction text-center mt-5">
+                    <div class="intro-text">
+                        <h1>Shop COMPUTERS & ACCESSOIRES</h1>
+                        <p>Eccomerce website ENSA FES</p>
+                    </div>
+                    <div class="">
+                        <button class="btn btn-save text-white font-weight-bold">CONNECTEZ-VOUS</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-12 text-center">
+                <div class="cover">
+                    <img src="~/Uploads/matebook.png" alt="matebook" />
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="body container">
+        <div class="row">
+
+            @foreach(ProduitDetails item in Model)
+            {
+                <div class="col-md-3 col-sm-3 col-xs-6">
+
+                    <div class="card item m-2 p-2">
+                        @if (item.Produit.quantite_stock <= 0)
+                        {
+                            <img alt="product1" class="img-fluid produit-img"
+                                 src="~/Uploads/epuise.png" style="position:absolute;" />
+                        }
+                        @if (item.Produit.Promotion != null)
+                        {
+
+                            <div class="promotion" style="position:absolute;">
+                                <h6>- @item.Produit.Promotion.taux_promotion %</h6>
+
+                            </div>
+                        }
+                        <img alt="product1" class="img-fluid produit-img"
+                             src="~/Uploads/Produit_image/@item.Produit.image" />
+
+                        <h5 class="name-produit pointer font-rubik mt-2 " id-produit="@item.Produit.id">@item.Produit.name</h5>
+
+                        @if (item.Produit.Promotion != null)
+                        {
+                            <p>
+                                <strike class="text-black-50">
+                                    @String.Format("{0:0.00}", item.real_price) DHs
+                                </strike> <br />
+                                <span class="font-size-20 font-weight-bold text-success">
+                                    @String.Format("{0:0.00}", item.deal_price) DHs
+                                </span>
+
+                            </p>
+                        }
+                        else
+                        {
+                            <p>
+                                <span class="font-size-20 font-weight-bold text-success">
+                                    @String.Format("{0:0.00}", item.real_price) DHs
+                                </span>
+                            </p>
+                        }
+
+                    </div>
+                </div>
+
+            }
+        </div>
+        <div class="text-center">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        </div>
+    </section>
+</main>
+
+@Html.Partial("Footer")

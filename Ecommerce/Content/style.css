@@ -10,6 +10,19 @@ body {
 */
 }
 
+
+.cover img {
+    height: 50vh;
+
+}
+.presentation {
+    background: linear-gradient(to bottom, rgba(255, 124, 91,0.3), rgba(255, 124, 91,0.5));
+    padding: 30px;
+}
+.introduction {
+    padding: 10px;
+    margin: 0 auto;
+}
 .panier-bg {
     background: #2D3E50;
 }
