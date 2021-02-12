@@ -287,7 +287,7 @@ $(function () {
     $("#qty").change(function () {
         console.log($("#qty option:selected").text());
         var qty = $("#qty option:selected").text();
-        var id_produit = $("#Produit_id").val();
+        var id_produit = $("#id").val();
         postQty(qty, id_produit);
     });
 
@@ -533,6 +533,11 @@ $(function () {
 
 /*--START-- On card item click */
     $('#top-produit').on('click', '.name-produit', function (e) {
+        var id_produit = $(this).attr("id-produit");
+        console.log(id_produit);
+        window.location.replace("https://localhost:44352/ProduitDetails/Index/" + id_produit);
+    });
+    $('.body').on('click', '.name-produit', function (e) {
         var id_produit = $(this).attr("id-produit");
         console.log(id_produit);
         window.location.replace("https://localhost:44352/ProduitDetails/Index/" + id_produit);

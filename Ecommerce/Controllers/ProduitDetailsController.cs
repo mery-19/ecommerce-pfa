@@ -23,14 +23,6 @@ namespace Ecommerce.Controllers
             }
             /* --START-- get information of produit */
             Produit produit = db.Produits.Find(id);
-            ProduitDetails produitDetails = new ProduitDetails();
-            produitDetails.Produit = produit;
-            produitDetails.real_price = produit.prix_vente + (produit.prix_vente * produit.tva) / 100;
-            if(produit.Promotion != null)
-            {
-                produitDetails.save_price = (produitDetails.real_price * produit.Promotion.taux_promotion) / 100;
-                produitDetails.deal_price = produitDetails.real_price - produitDetails.save_price;
-            }
             /* --END-- get information of produit */
 
             int qty = produit.quantite_stock;
@@ -61,7 +53,7 @@ namespace Ecommerce.Controllers
 
             ViewBag.produits = allProducs();
             ViewBag.commentaires = Commentaires(id,page);
-            return View(produitDetails);
+            return View(produit);
         }
 
 
@@ -109,26 +101,15 @@ namespace Ecommerce.Controllers
             //insert id_cart, id_produit qty prices to database
         }
 
-        public List<ProduitDetails> allProducs()
+        public List<Produit> allProducs()
         {
-            List<ProduitDetails> myProduits = new List<ProduitDetails>();
+            List<Produit> myProduits = new List<Produit>();
             List<int> ids = db.Database.SqlQuery<int>("SELECT id from (SELECT TOP 10 l.id_produit as id, SUM(l.quantite) as qty FROM LignePaniers l, Commandes c WHERE c.id_panier = l.id_panier  GROUP BY l.id_produit ORDER BY qty DESC) tab;").ToList();
 
             foreach(int id in ids)
             {
                 Produit produit = db.Produits.Find(id);
-                ProduitDetails produitDetails = new ProduitDetails();
-
-                produitDetails.Produit = produit;
-                produitDetails.real_price = produit.prix_vente + (produit.prix_vente * produit.tva) / 100;
-                if (produit.id_promotion != null)
-                {
-                    Promotion p = db.Promotions.Find(produit.id_promotion);
-                    produitDetails.save_price = (produitDetails.real_price * p.taux_promotion) / 100;
-                    produitDetails.deal_price = produitDetails.real_price - produitDetails.save_price;
-                }
-
-                myProduits.Add(produitDetails);
+                myProduits.Add(produit);
             }
 
             

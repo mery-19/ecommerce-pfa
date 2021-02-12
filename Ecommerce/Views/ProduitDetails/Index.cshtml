@@ -1,4 +1,4 @@
-﻿@model Ecommerce.Models.ProduitDetails
+﻿@model Ecommerce.Models.Produit
 @using System.Globalization;
 
 
@@ -13,32 +13,32 @@
 
 <div class="m-5">
 
-    @Html.HiddenFor(model => model.Produit.id)
+    @Html.HiddenFor(model => model.id)
     <section id="product" class="py-3">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 h-100">
-                    <img src="~/Uploads/Produit_image/@Html.DisplayFor(model => model.Produit.image)" alt="product" class="img-fluid">
+                    <img src="~/Uploads/Produit_image/@Html.DisplayFor(model => model.image)" alt="product" class="img-fluid">
                     <div class="form-row pt-4 font-size-16 font-baloo">
                         <div class="col">
-                            <a class="btn btn-warning form-control envie" id="@Model.Produit.id"><i class="far fa-heart"></i> SAUVGARDER</a>
+                            <a class="btn btn-warning form-control envie" id="@Model.id"><i class="far fa-heart"></i> SAUVGARDER</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6 py-5 h-100">
-                    <h5 class="font-baloo font-size-20">@Model.Produit.name</h5>
+                    <h5 class="font-baloo font-size-20">@Model.name</h5>
 
                     <hr class="m-0">
 
                     <table class="my-3">
-                        @if (Model.deal_price != null)
+                        @if (Model.details().deal_price != null)
                         {
                             <tr class="font-rale font-size-14">
 
                                 <td>Prix:</td>
                                 <td>
                                     <strike>
-                                        @String.Format("{0:0.00}", Model.real_price) DHs
+                                        @String.Format("{0:0.00}", Model.details().real_price) DHs
                                     </strike>
                                 </td>
                             </tr>
@@ -47,14 +47,14 @@
                                     prix de transaction:
                                 </td>
                                 <td class="font-size-20 text-danger">
-                                    <span>@String.Format("{0:0.00}", Model.deal_price) DHs</span><small class="text-dark font-size-12">
+                                    <span>@String.Format("{0:0.00}", Model.details().deal_price) DHs</span><small class="text-dark font-size-12">
                                         &nbsp;&nbsp;Toutes taxes comprises
                                     </small>
                                 </td>
                             </tr>
                             <tr class="font-rale font-size-14">
                                 <td>Economie:</td>
-                                <td><span class="font-size-16 text-success">@String.Format("{0:0.00}", Model.save_price) DHs</span></td>
+                                <td><span class="font-size-16 text-success">@String.Format("{0:0.00}", Model.details().save_price) DHs</span></td>
                             </tr>
                         }
                         else
@@ -64,7 +64,7 @@
                                     prix de transaction:
                                 </td>
                                 <td class="font-size-20 text-success">
-                                    <span>@String.Format("{0:0.00}", Model.real_price) DHs</span><small class="text-dark font-size-12">
+                                    <span>@String.Format("{0:0.00}", Model.details().real_price) DHs</span><small class="text-dark font-size-12">
                                         &nbsp;&nbsp;Toutes taxes comprises
                                     </small>
                                 </td>
@@ -111,7 +111,7 @@
                         <h6 class="font-baloo">Description de produit</h6>
                         <hr>
                         <p class="font-rale font-size-14">
-                            @Model.Produit.description
+                            @Model.description
                         </p>
                     </div>
                 </div>

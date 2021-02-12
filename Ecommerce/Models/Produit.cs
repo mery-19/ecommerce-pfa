@@ -65,5 +65,20 @@ namespace Ecommerce.Models
         public virtual ICollection<Commande> Commandes { get; set; }
         public virtual ICollection<Commentaire> Commentaires { get; set; }
 
+
+        public ProduitDetails details() {
+
+            ProduitDetails details = new ProduitDetails();
+            details.real_price = prix_vente + (prix_vente * tva) / 100;
+            if (Promotion != null)
+            {
+                details.save_price = (details.real_price * Promotion.taux_promotion) / 100;
+                details.deal_price = details.real_price - details.save_price;
+            }
+
+            return details;
+        }
+        
+
     }
 }

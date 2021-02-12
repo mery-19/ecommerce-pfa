@@ -1,4 +1,4 @@
-﻿@model Ecommerce.Models.ProduitDetails
+﻿@model Ecommerce.Models.Produit
 @using Ecommerce.Models
 @using PagedList;
 @using PagedList.Mvc;
@@ -19,7 +19,7 @@
                     <button type="submit" class="btn btn-save text-white add-comment">AJOUTER COMMENTAIRE</button>
                 }*@
                 <textarea class="form-control mb-2" id="commmentaire" name="commmentaire" style="width:100%;"></textarea>
-                @Html.Hidden("id_produit", Model.Produit.id)
+                @Html.Hidden("id_produit", Model.id)
                 <button class="btn btn-save text-white add-comment">AJOUTER COMMENTAIRE</button>
             }
             else
