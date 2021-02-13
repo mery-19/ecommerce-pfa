@@ -16,13 +16,30 @@ namespace Ecommerce.Controllers
         public ActionResult Index(int? page)
         {
             List<Produit> produits = db.Produits.ToList();
+            List<Categorie> categories = db.Categories.ToList();
+            ViewBag.categories = categories;
             return View(produits.ToPagedList(page ?? 1, 10));
+        }
+
+        [HttpPost]
+        public JsonResult Index(string Prefix)
+        {
+            string[] produits = db.Produits.Where(x => x.name.Contains(Prefix)).Select(x => x.name).ToArray();
+      
+            return Json(produits, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Categorie(int? page,int id)
+        {
+            Categorie categorie = db.Categories.Find(id);
+            ViewBag.cat_name = categorie.libele;
+            List<Produit> produits = db.Produits.Where(x => x.id_categorie == id).ToList();
+            return View(produits.ToPagedList(page ?? 1, 12));
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
             return View();
         }
 

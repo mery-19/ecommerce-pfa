@@ -664,6 +664,7 @@
     <Content Include="Views\Commandes\Notifications.cshtml" />
     <Content Include="Views\ProduitDetails\Top.cshtml" />
     <Content Include="Views\ProduitDetails\Comments.cshtml" />
+    <Content Include="Views\Home\Categorie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

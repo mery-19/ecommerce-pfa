@@ -10,14 +10,12 @@ body {
 */
 }
 
-
 .cover img {
     height: 50vh;
-
 }
 .presentation {
     background: linear-gradient(to bottom, rgba(255, 124, 91,0.3), rgba(255, 124, 91,0.5));
-    padding: 30px;
+    padding: 20px;
 }
 .introduction {
     padding: 10px;
@@ -287,21 +285,22 @@ a.page-link.active:hover {
     min-height: 300px;
 }
 
-#top-produit .owl-carousel .owl-nav button.owl-prev span,
-#top-produit .owl-carousel .owl-nav button.owl-next span {
+
+.owl-nav button.owl-prev span,
+.owl-nav button.owl-next span {
     font-size: 35px;
     color: #003859;
     padding: 0 1rem;
 }
 
-#top-produit .owl-carousel .owl-nav button {
+ .owl-nav button {
     outline: none;
 }
 
-#top-produit .owl-carousel .item {
+ .owl-carousel .item {
     transition: transform 0.5s ease;
 }
 
-    #top-produit .owl-carousel .item:hover {
+ .owl-carousel .item:hover {
         transform: scale(1.05);
     }

@@ -1,0 +1,78 @@
+﻿@model PagedList.IPagedList<Ecommerce.Models.Produit>
+
+@using Ecommerce.Models;
+@using PagedList;
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Categorie";
+}
+
+<nav class="mt-5" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active text-black-50" aria-current="page"><a href="~/" class="text-black-50">Acceuil</a> > @ViewBag.cat_name</li>
+    </ol>
+</nav>
+<div class="m-5">
+    <section class="body">
+        <div class="row my-5">
+        </div>
+        <h4 class="font-rubik font-size-20">
+            Les produits
+        </h4>
+        <hr>
+        <div class="row">
+
+            @foreach (Produit item in Model)
+            {
+                <div class="col-md-3 col-sm-3 col-xs-6">
+
+                    <div class="card item m-2 p-2">
+                        @if (item.quantite_stock <= 0)
+                        {
+                            <img alt="product1" class="img-fluid produit-img"
+                                 src="~/Uploads/epuise.png" style="position:absolute;" />
+                        }
+                        @if (item.Promotion != null)
+                        {
+
+                            <div class="promotion" style="position:absolute;">
+                                <h6>- @item.Promotion.taux_promotion %</h6>
+                            </div>
+                        }
+                        <img alt="product1" class="img-fluid produit-img"
+                             src="~/Uploads/Produit_image/@item.image" />
+
+                        <h5 class="name-produit pointer font-rubik mt-2 " id-produit="@item.id">@item.name</h5>
+
+                        @if (item.Promotion != null)
+                        {
+                            <p>
+                                <strike class="text-black-50">
+                                    @String.Format("{0:0.00}", item.details().real_price) DHs
+                                </strike> <br />
+                                <span class="font-size-20 font-weight-bold text-success">
+                                    @String.Format("{0:0.00}", item.details().deal_price) DHs
+                                </span>
+
+                            </p>
+                        }
+                        else
+                        {
+                            <p>
+                                <span class="font-size-20 font-weight-bold text-success">
+                                    @String.Format("{0:0.00}", item.details().real_price) DHs
+                                </span>
+                            </p>
+                        }
+
+                    </div>
+                </div>
+
+            }
+        </div>
+        <div class="text-center">
+            @Html.PagedListPager(Model, page => Url.Action("Categorie", new { page }))
+        </div>
+    </section>
+</div>

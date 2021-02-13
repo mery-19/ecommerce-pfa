@@ -569,8 +569,26 @@ $(function () {
             }
         });
     })
-/*--START-- add comment */
-
-
+/*--END-- add comment */
+  /*  var fakedata = ['test1', 'test2', 'test3', 'test4', 'ietsanders'];
+    $("#txt").autocomplete({ source: fakedata });*/
+    $("#txt").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: "/Home/Index",
+                type: "POST",
+                dataType: "json",
+                data: { Prefix: request.term },
+                success: function (data) {
+                    console.log(data);
+                    return response(data);
+                }
+            })
+        },
+        messages: {
+            noResults: '',
+            results: function (resultsCount) { }
+        }
+    });  
  
 });
