@@ -18,7 +18,7 @@
         
     });
     $("#categorie .owl-carousel").owlCarousel({
-        loop: true,
+        loop: false,
         nav: true,
         dots: false,
         responsive: {

@@ -43,9 +43,9 @@
                         <div class="m-2 d-block">
                             <div>
                                 <img alt="product1" class="img-fluid rounded text-center"
-                                     src="~/Uploads/Produit_image/@item.image" style="height:100px; width:100px;" />
+                                     src="~/Uploads/Categorie_image/@item.image" style="height:100px; width:100px;" />
                             </div>
-                            <a href="~/Home/Categorie/@item.id"class="name-produit pointer font-rubik mt-2 text-black-50" id-produit="@item.id">@item.libele</a>
+                            <a href="~/Home/Categorie/@item.id" class="name-produit pointer font-rubik mt-2 text-black-50" id-produit="@item.id">@item.libele</a>
                         </div>
                     }
                 </div>
@@ -55,15 +55,22 @@
         </section>
 
         <section class="body">
-            <div class="row my-5">
-                <div class="col-md-8 col-12 d-flex">
-                    <input type="text" id="txt" name="txt" class="form-control mr-2 w-100" placeholder="Cherchez un produit, ou une catégorie" />
-                    <button class="btn btn-save text-white font-weight-bold search-btn">Chercher</button>
+
+            <div class="row d-flex my-5 w-100">
+                <div class="">
+
+                    @using (Html.BeginForm("Search", "Home", FormMethod.Get))
+                    {
+                        <div class="d-flex">
+
+                            <input type="text" id="txt" name="txt" class="form-control mr-2" placeholder="Produit ou catégorie" style="width:800px;" />
+                            <button type="submit" class="btn btn-save text-white font-weight-bold search-btn">Rechercher</button>
+                        </div>
+                    }
                 </div>
 
-
-
             </div>
+
             <h4 class="font-rubik font-size-20">
                 Les produits
             </h4>
@@ -122,7 +129,12 @@
                 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
             </div>
         </section>
+        <hr />
+        @Html.Partial("Top")
     </div>
+
 </main>
+
+
 
 @Html.Partial("Footer")

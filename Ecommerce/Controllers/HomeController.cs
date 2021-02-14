@@ -18,6 +18,7 @@ namespace Ecommerce.Controllers
             List<Produit> produits = db.Produits.ToList();
             List<Categorie> categories = db.Categories.ToList();
             ViewBag.categories = categories;
+            Top();
             return View(produits.ToPagedList(page ?? 1, 10));
         }
 
@@ -25,8 +26,10 @@ namespace Ecommerce.Controllers
         public JsonResult Index(string Prefix)
         {
             string[] produits = db.Produits.Where(x => x.name.Contains(Prefix)).Select(x => x.name).ToArray();
-      
-            return Json(produits, JsonRequestBehavior.AllowGet);
+            string[] categories = db.Categories.Where(x => x.libele.Contains(Prefix)).Select(x => x.libele).ToArray();
+            IEnumerable<string> result = produits.Concat(categories);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Categorie(int? page,int id)
@@ -35,6 +38,27 @@ namespace Ecommerce.Controllers
             ViewBag.cat_name = categorie.libele;
             List<Produit> produits = db.Produits.Where(x => x.id_categorie == id).ToList();
             return View(produits.ToPagedList(page ?? 1, 12));
+        }
+
+        public ActionResult Search(int? page,string txt)
+        {
+            ViewBag.txt = txt;
+            List<Produit> produits = db.Produits.Where(x => x.name.Contains(txt) || x.Categorie.libele.Contains(txt)).ToList();
+            return View(produits.ToPagedList(page ?? 1, 10));
+        }
+
+        public ActionResult Top()
+        {
+            List<Produit> myProduits = new List<Produit>();
+            List<int> ids = db.Database.SqlQuery<int>("SELECT id from (SELECT TOP 10 l.id_produit as id, SUM(l.quantite) as qty FROM LignePaniers l, Commandes c WHERE c.id_panier = l.id_panier  GROUP BY l.id_produit ORDER BY qty DESC) tab;").ToList();
+
+            foreach (int id in ids)
+            {
+                Produit produit = db.Produits.Find(id);
+                myProduits.Add(produit);
+            }
+            ViewBag.produits = myProduits;
+            return PartialView(myProduits);
         }
 
         public ActionResult About()

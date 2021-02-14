@@ -100,9 +100,9 @@ $(function () {
             return false; //for not submit informations to server 
         }
     });
-/*--END-- on save category with empty image */
+    /*--END-- on save category with empty image */
 
-/*--START-- on delete item*/
+    /*--START-- on delete item*/
     $(function () {
         $("a.delete-link-produit").click(function () {
 
@@ -204,7 +204,7 @@ $(function () {
             var checkstr = confirm('are you sure you want to delete this?');
             if (checkstr == true) {
                 $.ajax({
-                    url: '/Envies/Delete/' + $(this,".delete-produit-envie").attr('data-delete-id'),
+                    url: '/Envies/Delete/' + $(this, ".delete-produit-envie").attr('data-delete-id'),
                     type: "POST",
                     data: {
                         __RequestVerificationToken: token,
@@ -218,15 +218,15 @@ $(function () {
         );
     });
 
-/*--Start-- on delete item*/
+    /*--Start-- on delete item*/
 
     $(function () {
         $('#Produits').selectpicker();
-       
+
     });
 
 
-/* --START-- Create promotions with multiple product*/
+    /* --START-- Create promotions with multiple product*/
     $(function () {
         $("#create").click(function (e) {
             e.preventDefault();
@@ -241,22 +241,22 @@ $(function () {
                 console.log($(this).val());
             });
 
-            taux =  $("input[name=taux_promotion]").val();
+            taux = $("input[name=taux_promotion]").val();
             date = $("input[name=date_expiration]").val();
             libele = $("input[name=libele]").val();
             description = $("input[name=description]").val();
             data = {
-                taux_promotion:taux,
-                date_expiration:date,
+                taux_promotion: taux,
+                date_expiration: date,
                 libele,
                 description,
-               obj
+                obj
             }
             // send select ittems to controlelr
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
-                url:"/Promotions/CreateTest",
+                url: "/Promotions/CreateTest",
                 data: JSON.stringify(data),
                 success: function (data) {
                     console.log(data);
@@ -268,7 +268,7 @@ $(function () {
                         alert("Probléme d'envoyer les informations.");
 
                     }
-                    
+
                 },
                 error: function (errorThrown) {
                     alert(errorThrown);
@@ -277,11 +277,11 @@ $(function () {
 
         });
     })
-/* --END-- Create promotions with multiple product*/
+    /* --END-- Create promotions with multiple product*/
 
 
 
-/* --START-- On quantity change*/
+    /* --START-- On quantity change*/
 
     //in details page
     $("#qty").change(function () {
@@ -299,14 +299,14 @@ $(function () {
         console.log(dropdowns[i].id);
         id_dropdowns.push(dropdowns[i].id);
     }
-        for (var i = 0; i < id_dropdowns.length; i++) {
-                var id = "#" + id_dropdowns[i]
-                console.log(id_dropdowns[i]);
-                $(id).change(function () {
-                    var qty = $("option:selected", this).text();
-                    var id_produit = $(this).attr("idProduit");
-                    postQty(qty, id_produit);
-            })
+    for (var i = 0; i < id_dropdowns.length; i++) {
+        var id = "#" + id_dropdowns[i]
+        console.log(id_dropdowns[i]);
+        $(id).change(function () {
+            var qty = $("option:selected", this).text();
+            var id_produit = $(this).attr("idProduit");
+            postQty(qty, id_produit);
+        })
     }
 
     //post function
@@ -334,9 +334,9 @@ $(function () {
 
 
     };
-/* --END-- On quantity change*/
+    /* --END-- On quantity change*/
 
-/* --START-- Delete from panier*/
+    /* --START-- Delete from panier*/
 
     $(function () {
         $("a.delete-link-panier").click(function () {
@@ -351,7 +351,7 @@ $(function () {
                 $.ajax({
                     url: '/LignePaniers/DeleleLignePanier',
                     type: "POST",
-                    data:data,
+                    data: data,
                     success: function (res) {
                         console.log(res);
                         if (res.success) {
@@ -369,40 +369,40 @@ $(function () {
         );
     });
 
-/* --END-- Delete from panier*/
+    /* --END-- Delete from panier*/
 
-/* --START-- Mettre au cote*/
+    /* --START-- Mettre au cote*/
 
     $(function () {
         $("a.envie").click(function () {
 
-            var id_produit = $(this,".envie").attr('id');
+            var id_produit = $(this, ".envie").attr('id');
             console.log("id produit: " + id_produit);
-            var data = { id_produit};
+            var data = { id_produit };
             console.log(data);
-                $.ajax({
-                    url: '/Envies/Add',
-                    type: "POST",
-                    data: data,
-                    success: function (res) {
-                        console.log(res);
-                        if (res.success) {
-                            alert(res.responseText);
-                            location.reload();
+            $.ajax({
+                url: '/Envies/Add',
+                type: "POST",
+                data: data,
+                success: function (res) {
+                    console.log(res);
+                    if (res.success) {
+                        alert(res.responseText);
+                        location.reload();
 
-                        } else {
-                            alert(res.responseText);
+                    } else {
+                        alert(res.responseText);
 
-                        }
                     }
-                });
-            }
+                }
+            });
+        }
         );
     });
 
-/* --END-- Mettre au cote*/
+    /* --END-- Mettre au cote*/
 
-/*--START-- on finaliser commande*/
+    /*--START-- on finaliser commande*/
     $(function () {
         $("#finaliser-commande").click(function (e) {
             console.log("clicked");
@@ -413,22 +413,22 @@ $(function () {
             console.log(address);
             console.log(phone);
             console.log(id_liv);
-            if (id_liv == null || id_pai == null || $.trim(address) == "" || $.trim(phone) == "" ) {
+            if (id_liv == null || id_pai == null || $.trim(address) == "" || $.trim(phone) == "") {
                 $("#err").fadeIn();
                 $("#view-err").text("Tous les parties sont requis.");
                 return false; //for not submit informations to server 
             }
         });
     });
-/*--END-- on finaliser commande */
+    /*--END-- on finaliser commande */
 
-/*--START-- close the alert */
+    /*--START-- close the alert */
     $(".close_err").click(function (e) {
         e.preventDefault();
-                   $("#err").fadeOut();
-            return false; //for not submit informations to server 
+        $("#err").fadeOut();
+        return false; //for not submit informations to server 
     });
-/*--END-- close the alert */
+    /*--END-- close the alert */
 
 
     /*--START-- detaills d'un commande */
@@ -467,31 +467,31 @@ $(function () {
     });
 
 
-/*--END-- detaills d'un commande  */
+    /*--END-- detaills d'un commande  */
 
     /*--START-- filter commandes  */
-/*    $(function () {
-        $(".filter-commande").click(function (e) {
-            console.log($(this, ".filter-commande").attr('id'));
-            var id = $(this, ".filter-commande").attr('id');
-            $.ajax({
-                url: '/Commandes/All/' + id,
-                type: "GET",
-                success: function (data) {
-
-                }
-
+    /*    $(function () {
+            $(".filter-commande").click(function (e) {
+                console.log($(this, ".filter-commande").attr('id'));
+                var id = $(this, ".filter-commande").attr('id');
+                $.ajax({
+                    url: '/Commandes/All/' + id,
+                    type: "GET",
+                    success: function (data) {
+    
+                    }
+    
+                });
             });
-        });
-    });*/
-/*--END-- filter commandes  */
+        });*/
+    /*--END-- filter commandes  */
 
 
-/*--START-- change commande status  */
+    /*--START-- change commande status  */
 
     $('#commandes-table tbody').on('click', '#status', function (e) {
         console.log($("#status option:selected").text());
-        var status = $($(this),"option:selected").val();
+        var status = $($(this), "option:selected").val();
         var id_commande = $(this).attr("id-commande");
         if (status == 2) {
             console.log(status);
@@ -500,7 +500,7 @@ $(function () {
             $.ajax({
                 url: '/Commandes/Livre',
                 type: "POST",
-                data:data,
+                data: data,
                 success: function (res) {
                     if (res.success) {
                         alert(res.responseText);
@@ -514,24 +514,24 @@ $(function () {
 
             });
         }
-        
-    });
-/*--END-- change commande status  */
 
-/*--START-- set notification on 0 after click  */
+    });
+    /*--END-- change commande status  */
+
+    /*--START-- set notification on 0 after click  */
     $('.not-click').click(function (e) {
-            $.ajax({
-                url: '/Commandes/RestartNot',
-                type: "POST",
-                success: function (res) {
-                   
-                }
+        $.ajax({
+            url: '/Commandes/RestartNot',
+            type: "POST",
+            success: function (res) {
 
-            });
+            }
+
+        });
     });
-/*--END-- set notification on 0 after click  */
+    /*--END-- set notification on 0 after click  */
 
-/*--START-- On card item click */
+    /*--START-- On card item click */
     $('#top-produit').on('click', '.name-produit', function (e) {
         var id_produit = $(this).attr("id-produit");
         console.log(id_produit);
@@ -542,7 +542,7 @@ $(function () {
         console.log(id_produit);
         window.location.replace("https://localhost:44352/ProduitDetails/Index/" + id_produit);
     });
-/*--END-- On card item click */
+    /*--END-- On card item click */
 
     /*--START-- add comment */
     $('.add-comment').click(function (e) {
@@ -569,9 +569,9 @@ $(function () {
             }
         });
     })
-/*--END-- add comment */
-  /*  var fakedata = ['test1', 'test2', 'test3', 'test4', 'ietsanders'];
-    $("#txt").autocomplete({ source: fakedata });*/
+    /*--END-- add comment */
+    /*  var fakedata = ['test1', 'test2', 'test3', 'test4', 'ietsanders'];
+      $("#txt").autocomplete({ source: fakedata });*/
     $("#txt").autocomplete({
         source: function (request, response) {
             $.ajax({
@@ -589,6 +589,15 @@ $(function () {
             noResults: '',
             results: function (resultsCount) { }
         }
-    });  
- 
+    });
+
+    $('.search-btn').click(function () {
+
+        var txt = $("#txt").val();
+        if ($.trim(txt) == "") {
+            alert("Le champs de recherche est vide.");
+            return false;
+        }
+    });
+
 });
