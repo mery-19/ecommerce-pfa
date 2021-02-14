@@ -52,12 +52,12 @@ namespace Ecommerce.Models
 
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Email requis.")]
         [Display(Name = "Email")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Email est invalid.")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Le mot de passe requis.")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
