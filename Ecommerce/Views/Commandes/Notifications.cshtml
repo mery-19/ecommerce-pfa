@@ -6,7 +6,10 @@
     ViewBag.Title = "Notifications";
     Layout = "~/Views/Shared/_ClientDashboard.cshtml";
 }
-
+@{ 
+    float i = ViewBag.notif;
+    int c = 0;
+}
 <div class="margin-top">
     <div class="card w-100">
         <div class="card-header">
@@ -15,10 +18,22 @@
         <ul class="list-group list-group-flush">
             @foreach (var item in Model)
             {
-                <li class="list-group-item  ">
-                    Status de commande de Numéro d'id <span class="font-weight-bold">@item.id</span> à été change de "En attente" à "Livré"
-                    <p>@item.date_update.ToString("HH:mm dd/MM/yyyy")</p>
-                </li>
+                if (c < i)
+                {
+                    <li class="list-group-item  bg-warning">
+                        Status de commande de Numéro d'id <span class="font-weight-bold">@item.id</span> à été change de "En attente" à "Livré"
+                        <p>@item.date_update.ToString("HH:mm dd/MM/yyyy")</p>
+                    </li>
+                }
+                else
+                {
+                    <li class="list-group-item">
+                        Status de commande de Numéro d'id <span class="font-weight-bold">@item.id</span> à été change de "En attente" à "Livré"
+                        <p>@item.date_update.ToString("HH:mm dd/MM/yyyy")</p>
+                    </li>
+                }
+
+                c++;
             }
 
         </ul>

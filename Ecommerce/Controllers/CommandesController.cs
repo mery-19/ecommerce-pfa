@@ -76,6 +76,14 @@ namespace Ecommerce.Controllers
             ApplicationUser user = db.Users.Where(x => x.UserName.Equals(User.Identity.Name)).FirstOrDefault();
             var commandes = db.Commandes.Where(x => x.Panier.User.UserName.Equals(user.UserName) && x.id_status == 2)
                 .Include(c => c.ModeLivraison).Include(c => c.ModePaiement).Include(c => c.Panier).Include(c => c.StatusCommande);
+
+            /*--START-- to know the num of notifications and restart not*/
+            UserNotification userNotification = db.UserNotifications.Where(x => x.id_user == user.Id).FirstOrDefault();
+            ViewBag.notif = userNotification.num;
+            userNotification.num = 0;
+            db.Entry(userNotification).State = EntityState.Modified;
+            db.SaveChanges();
+            /*--END-- to know the num of notifications and restart not*/
             int pageSize = 10;
             return View(commandes.OrderByDescending(x => x.id).ToList().ToPagedList(page ?? 1, pageSize));
         }

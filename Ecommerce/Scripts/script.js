@@ -519,7 +519,7 @@ $(function () {
     /*--END-- change commande status  */
 
     /*--START-- set notification on 0 after click  */
-    $('.not-click').click(function (e) {
+/*    $('.not-click').click(function (e) {
         $.ajax({
             url: '/Commandes/RestartNot',
             type: "POST",
@@ -528,7 +528,7 @@ $(function () {
             }
 
         });
-    });
+    });*/
     /*--END-- set notification on 0 after click  */
 
     /*--START-- On card item click */
