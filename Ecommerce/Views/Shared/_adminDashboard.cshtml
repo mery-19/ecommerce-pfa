@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@{ 
+@{
     ApplicationDbContext db = new ApplicationDbContext();
     int en_attente = db.Commandes.Count(x => x.id_status == 1);
     ViewBag.EnAttente = en_attente;
@@ -99,3 +99,7 @@
     </div>
 </div>
 
+
+@section chartSection{
+    @RenderSection("chart", required: false)
+}

@@ -2,10 +2,64 @@
     Layout = "~/Views/Shared/_adminDashboard.cshtml";
 }
 
-<div class="margin-top">
-
-
+<div class="m-5">
     <h2>dashboard</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-8 col-12 p-2 bg-orange-bold">
+            <div id="register-client">
+
+            </div>
+        </div>
+        <div class="col-md-4 col-12 p-2 ">
+
+        </div>
+    </div>
+    <div id="container" style="width:100%; height:400px;"></div>
 
 </div>
 
+@section chart{
+    <script>
+        $(document).ready(function () {
+            var users = @Html.Raw(Json.Encode(ViewBag.users));
+            var months = @Html.Raw(Json.Encode(ViewBag.months));
+
+            months[4] = null;
+
+            Highcharts.chart('register-client', {
+
+                chart: {
+                    type: 'areaspline'
+                },
+                title: {
+                    text: 'le Nombre total des utilisateurs inscris chaque mois.'
+                },
+                xAxis: {
+                    categories: months
+                },
+                yAxis: {
+                    title: {
+                        text: 'Nombre total'
+                    }
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: false
+                    }
+                },
+                series: [{
+                    name: 'Nombre total des utilisateurs',
+                    data: users
+                }]
+
+            });
+
+
+        });
+    </script>
+
+    }

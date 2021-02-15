@@ -304,3 +304,12 @@ a.page-link.active:hover {
  .owl-carousel .item:hover {
         transform: scale(1.05);
     }
+
+.bg-orange-bold {
+    background-color: rgba(255, 124, 91,0.3);
+    font-weight: bold;
+}
+
+.min-height-70 {
+    min-height: 70vh;
+}

@@ -18,6 +18,7 @@ namespace Ecommerce.Controllers
             List<Produit> produits = db.Produits.ToList();
             List<Categorie> categories = db.Categories.ToList();
             ViewBag.categories = categories;
+            
             Top();
             return View(produits.ToPagedList(page ?? 1, 10));
         }

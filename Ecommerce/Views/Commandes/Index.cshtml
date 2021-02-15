@@ -6,7 +6,12 @@
 
 <div class="margin-top">
     <h2>Mes commandes</h2>
-
+    <div class="row my-5">
+        <a href="~/Commandes" class="btn btn-warning ml-3 filter-commande">Toutes mes commandes</a>
+        <a href="~/Commandes/Index/1" class="btn btn-primary ml-3 filter-commande" id="1">En attente</a>
+        <a href="~/Commandes/Index/2" class="btn btn-success ml-3 filter-commande" id="2">Livré</a>
+    </div>
+<hr />
     <table class="table" id="commandes-table">
         <thead>
             <tr>
@@ -35,41 +40,41 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ModeLivraison.libele)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ModePaiement.libele)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.date_ajout)
-                </td>
-                <td>
-                    @if (item.StatusCommande.id == 1)
-                    {
-                        <span class="btn btn-primary w-100">
-                            @Html.DisplayFor(modelItem => item.StatusCommande.libele)
-                        </span>
-                    }
-                    else if (item.StatusCommande.id == 2)
-                    {
-                        <span class="btn btn-success w-100">
-                            @Html.DisplayFor(modelItem => item.StatusCommande.libele)
-                        </span>
-                    }
-                </td>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModeLivraison.libele)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModePaiement.libele)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.date_ajout)
+                    </td>
+                    <td>
+                        @if (item.StatusCommande.id == 1)
+                        {
+                            <span class="btn btn-primary w-100">
+                                @Html.DisplayFor(modelItem => item.StatusCommande.libele)
+                            </span>
+                        }
+                        else if (item.StatusCommande.id == 2)
+                        {
+                            <span class="btn btn-success w-100">
+                                @Html.DisplayFor(modelItem => item.StatusCommande.libele)
+                            </span>
+                        }
+                    </td>
 
-                <td>
-                    @*                        @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn btn-save text-white btn-details-commande" })
-                    *@
-                    <a href="#" id="@item.id" class="btn btn-save text-white btn-details-commande" data-toggle="modal" data-target="#exampleModal">Détails</a>
+                    <td>
+                        @*                        @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn btn-save text-white btn-details-commande" })
+                        *@
+                        <a href="#" id="@item.id" class="btn btn-save text-white btn-details-commande" data-toggle="modal" data-target="#exampleModal">Détails</a>
 
-                </td>
-            </tr>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

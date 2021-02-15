@@ -19,11 +19,18 @@ namespace Ecommerce.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         [Authorize(Roles = "User")]
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
+
             ApplicationUser user = db.Users.Where(x => x.UserName.Equals(User.Identity.Name)).FirstOrDefault();
             var commandes = db.Commandes.Where(x => x.Panier.User.UserName.Equals(user.UserName))
                 .Include(c => c.ModeLivraison).Include(c => c.ModePaiement).Include(c => c.Panier).Include(c => c.StatusCommande);
+             if (id != null)
+            {
+                
+                commandes = (id==2)? commandes.Where(x => x.id_status == id): commandes.Where(x => x.id_status == 1);
+            }
+
             return View(commandes.OrderByDescending(x => x.id).ToList());
         }
 
@@ -38,7 +45,8 @@ namespace Ecommerce.Controllers
             }
             else
             {
-                commandes = commandes.Where(x => x.id_status == 1);
+                commandes =  commandes.Where(x => x.id_status == 1);
+
             }
 
             ViewBag.status = new SelectList(db.StatusCommandes, "id", "libele");
