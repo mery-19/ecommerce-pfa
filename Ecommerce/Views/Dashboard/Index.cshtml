@@ -3,30 +3,87 @@
 }
 
 <div class="m-5">
-    <h2>dashboard</h2>
-    <hr />
-    <div class="row">
-        <div class="col-md-8 col-12 p-2 bg-orange-bold">
-            <div id="register-client">
-
+    <div class="row justify-content-center">
+        <div class="col-md-3">
+            <div class="card p-5">
+                nb_client(this month)
             </div>
         </div>
-        <div class="col-md-4 col-12 p-2 ">
-
+        <div class="col-md-3">
+            <div class="card p-5">
+                commande_livre(this month)
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-5">
+                net_argent(this month)
+            </div>
         </div>
     </div>
-    <div id="container" style="width:100%; height:400px;"></div>
+    <hr />
+    <div class="card row">
+        <div id="commandes"></div>
+    </div>
+        <div class="row">
+            <div class="card col-md-8 col-12 p-5">
+                <div id="register-client"></div>
+            </div>
+            <div class="col-md-4 col-12 h-50">
+                <div id="top-users"></div>
+            </div>
+        </div>
+        <div id="container" style="width:100%; height:400px;"></div>
 
-</div>
+    </div>
 
-@section chart{
-    <script>
+    @section chart{
+        <script>
         $(document).ready(function () {
             var users = @Html.Raw(Json.Encode(ViewBag.users));
             var months = @Html.Raw(Json.Encode(ViewBag.months));
+            var topUsers = @Html.Raw(Json.Encode(ViewBag.top_users));
+            var commandes = @Html.Raw(Json.Encode(ViewBag.nb_commandes));
+            var nb_commandes_livre = @Html.Raw(Json.Encode(ViewBag.nb_commandes_livre));
+            var nb_commandes_attente = @Html.Raw(Json.Encode(ViewBag.nb_commandes_attente));
 
-            months[4] = null;
+            Highcharts.chart('commandes', {
 
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'le Nombre total des commandes ajoutées chaque mois.'
+                },
+                xAxis: {
+                    categories: months
+                },
+                yAxis: {
+                    title: {
+                        text: 'Nombre total'
+                    }
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: false
+                    }
+                },
+                series: [{
+                    name: 'Nombre total des commandes',
+                    data: commandes
+                },{
+                    name: 'Nombre total des commandes livrées',
+                        data: nb_commandes_livre
+                },{
+                    name: 'Nombre total des commandes en attente',
+                        data: nb_commandes_attente
+                },]
+
+            });
+
+            console.log(topUsers);
             Highcharts.chart('register-client', {
 
                 chart: {
@@ -59,7 +116,42 @@
             });
 
 
+
+            Highcharts.chart('top-users', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'TOP 5 Clients'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Achat',
+                    colorByPoint: true,
+                    data: topUsers
+                }]
+            });
         });
-    </script>
+        </script>
 
     }

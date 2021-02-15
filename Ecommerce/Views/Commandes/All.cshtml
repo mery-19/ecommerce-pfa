@@ -36,7 +36,9 @@
                 <th>
                     Type de paiement
                 </th>
-
+                <th>
+                    Client
+                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.date_ajout)
                 </th>
@@ -55,34 +57,36 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ModeLivraison.libele)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ModePaiement.libele)
-                    </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModeLivraison.libele)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModePaiement.libele)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Panier.User.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.date_ajout)
+                </td>
 
+                @if (Request["id"] != "2")
+                {
                     <td>
-                        @Html.DisplayFor(modelItem => item.date_ajout)
+                        @Html.DropDownList("status", null, htmlAttributes: new { @class = "form-control", id_commande = item.id })
                     </td>
+                }
+                <td>
+                    @*                        @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn btn-save text-white btn-details-commande" })
+                    *@
+                    <a href="#" id="@item.id" class="btn btn-save text-white btn-details-commande" data-toggle="modal" data-target="#exampleModal">Détails</a>
 
-                    @if (Request["id"] != "2")
-                    {
-                        <td>
-                            @Html.DropDownList("status", null, htmlAttributes: new { @class = "form-control", id_commande = item.id })
-                        </td>
-                    }
-                    <td>
-                        @*                        @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn btn-save text-white btn-details-commande" })
-                        *@
-                        <a href="#" id="@item.id" class="btn btn-save text-white btn-details-commande" data-toggle="modal" data-target="#exampleModal">Détails</a>
-
-                    </td>
-                </tr>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
