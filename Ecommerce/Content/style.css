@@ -53,6 +53,9 @@ body {
 .font-size-20 {
     font-size: 20px;
 }
+.font-size-24 {
+    font-size: 24px;
+}
 
 .table-no-searh {
     margin: 10px;
@@ -312,4 +315,8 @@ a.page-link.active:hover {
 
 .min-height-70 {
     min-height: 70vh;
+}
+
+.text-orange {
+    color: #FF7C5B;
 }
