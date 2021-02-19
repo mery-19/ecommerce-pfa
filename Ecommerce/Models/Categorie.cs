@@ -19,7 +19,5 @@ namespace Ecommerce.Models
 
         [Display(Name = "Upload image")]
         public string image { get; set; }
-
-        public virtual ICollection<Produit> Produits { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace Ecommerce.Controllers
         {
             return View(db.Categories.ToList());
         }
-
+        
         // GET: Categories/Details/5
         public ActionResult Details(int? id)
         {

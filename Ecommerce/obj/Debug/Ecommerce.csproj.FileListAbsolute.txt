@@ -222,3 +222,9 @@ D:\mery\ecommerce-pfa\Ecommerce\bin\PagedList.dll
 D:\mery\ecommerce-pfa\Ecommerce\bin\PagedList.Mvc.dll
 D:\mery\ecommerce-pfa\Ecommerce\bin\PagedList.xml
 D:\mery\ecommerce-pfa\Ecommerce\bin\PagedList.Mvc.xml
+D:\mery\ecommerce-pfa\Ecommerce\bin\System.Net.Http.Formatting.dll
+D:\mery\ecommerce-pfa\Ecommerce\bin\System.Web.Http.dll
+D:\mery\ecommerce-pfa\Ecommerce\bin\System.Web.Http.WebHost.dll
+D:\mery\ecommerce-pfa\Ecommerce\bin\System.Net.Http.Formatting.xml
+D:\mery\ecommerce-pfa\Ecommerce\bin\System.Web.Http.xml
+D:\mery\ecommerce-pfa\Ecommerce\bin\System.Web.Http.WebHost.xml
