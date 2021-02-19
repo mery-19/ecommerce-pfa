@@ -38,12 +38,12 @@
     else if (User.IsInRole("User"))
     {
         <li>
-            @Html.ActionLink("Bonjour " + User.Identity.GetUserName() + "!", "Index", "ClientDashboard", routeValues: null, htmlAttributes: new { @class = "nav-link", title = "Manage" })
+            @Html.ActionLink("Bonjour " + User.Identity.GetUserName() + "!", "Index", "CompteUser", routeValues: null, htmlAttributes: new { @class = "nav-link", title = "Manage" })
         </li>
     }
     else
     {
-        @Html.ActionLink("Bonjour " + User.Identity.GetUserName() + "!", "Index", "ClientDashboard", routeValues: null, htmlAttributes: new { @class = "nav-link", title = "Manage" })
+        @Html.ActionLink("Bonjour " + User.Identity.GetUserName() + "!", "Index", "CompteUser", routeValues: null, htmlAttributes: new { @class = "nav-link", title = "Manage" })
 
     }
 

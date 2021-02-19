@@ -20,7 +20,7 @@ namespace Ecommerce.Controllers
             ViewBag.categories = categories;
             
             Top();
-            return View(produits.ToPagedList(page ?? 1, 10));
+            return View(produits.ToPagedList(page ?? 1, 12));
         }
 
         [HttpPost]

@@ -7,6 +7,7 @@
     ApplicationDbContext db = new ApplicationDbContext();
     ApplicationUser user = db.Users.Where(x => x.UserName == User.Identity.Name).FirstOrDefault();
     var notif = db.UserNotifications.Where(x => x.id_user == user.Id).FirstOrDefault();
+   
 }
 <div class="wrapper d-flex">
     <div class="sideMenu bg-mattBlackLight">
@@ -25,7 +26,16 @@
                         <i class="material-icons icon expandView ">
                             notifications
                         </i>
-                        <span class="text">Notifications(@notif.num)</span>
+                        @if (notif == null)
+                        {
+                            <span class="text">Notifications(0)</span>
+
+                        }
+                        else
+                        {
+                            <span class="text">Notifications(@notif.num)</span>
+
+                        }
                     </a>
                 </li>
                 <li class="nav-item">

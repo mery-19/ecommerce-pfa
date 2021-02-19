@@ -6,7 +6,22 @@
 }
 
 <div class="margin-top">
-    <h2>Les Administrateurs</h2>
+
+    <div class="row justify-content-around">
+        <div class="col-md-6 col-12">
+            <h2>Les Administrateurs</h2>
+        </div>
+        <div class="col-md-6 col-12">
+            <p>
+                <a href="@Url.Action( "RegisterNewAdmin", "Account")" class="btn btn-orange text-white d-flex w-75 justify-content-around">
+                    <i class="material-icons icon">control_point </i><span> Ajouter un nouveau administrateur</span>
+                </a>
+                @*        @Html.ActionLink("créer un nouveau", "Create", new { @class = "btn btn-save" })
+                *@
+            </p>
+        </div>
+    </div>
+
     <hr />
 
     <table class="table" id="usersTable">

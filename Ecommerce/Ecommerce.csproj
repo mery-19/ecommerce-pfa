@@ -190,6 +190,7 @@
     <Compile Include="Controllers\ProduitDetailsController.cs" />
     <Compile Include="Controllers\ProduitsController.cs" />
     <Compile Include="Controllers\PromotionsController.cs" />
+    <Compile Include="Controllers\UserManager.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -669,6 +670,7 @@
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\Top.cshtml" />
     <Content Include="Views\ApplicationUsers\Admins.cshtml" />
+    <Content Include="Views\Account\RegisterNewAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

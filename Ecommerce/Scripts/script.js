@@ -165,7 +165,7 @@ $(function () {
                         __RequestVerificationToken: token,
                     },
                     success: function () {
-                        window.location.replace("https://localhost:44352/ApplicationUsers/Index");
+                        location.reload();
                     }
                 });
             }

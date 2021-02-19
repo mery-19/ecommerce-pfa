@@ -193,6 +193,43 @@ namespace Ecommerce.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
+        public ActionResult RegisterNewAdmin()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterNewAdmin(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    UserManager.AddToRole(user.Id, "Admin");
+                    // --START-- create a panier for the new user
+                    Panier panier = new Panier() { id_user = user.Id };
+                    UserNotification notif = new UserNotification() { num = 0, id_user = user.Id };
+                    db.Paniers.Add(panier);
+                    db.UserNotifications.Add(notif);
+                    db.SaveChanges();
+                    // --END-- create a panier for the new user
+
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    return RedirectToAction("Admins", "ApplicationUsers");
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
@@ -402,7 +439,9 @@ namespace Ecommerce.Controllers
                         UserManager.AddToRole(user.Id, "User");
                         // --START-- create a panier for the new user
                         Panier panier = new Panier() { id_user = user.Id };
+                        UserNotification notif = new UserNotification() { num = 0, id_user = user.Id };
                         db.Paniers.Add(panier);
+                        db.UserNotifications.Add(notif);
                         db.SaveChanges();
                         // --END-- create a panier for the new user
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
