@@ -27,7 +27,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <input type="file" name="image" class="form-control" />
+                    <input type="file" name="imageCat" id="imageCat" class="form-control" />
                     <img src="~/Uploads/Categorie_image/@Html.DisplayFor(model => model.image)" class="img-thumbnail" style="width:48px; height:48px;" />
                     @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control d-none" } })
                     @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })

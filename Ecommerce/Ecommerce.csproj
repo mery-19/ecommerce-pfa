@@ -668,6 +668,7 @@
     <Content Include="Views\Home\Categorie.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\Top.cshtml" />
+    <Content Include="Views\ApplicationUsers\Admins.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

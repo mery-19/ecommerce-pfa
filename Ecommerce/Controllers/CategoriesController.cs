@@ -84,15 +84,15 @@ namespace Ecommerce.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Categorie categorie, HttpPostedFileBase image)
+        public ActionResult Edit(Categorie categorie, HttpPostedFileBase imageCat)
         {
             if (ModelState.IsValid)
             {
-                if(image != null)
+                if(imageCat != null)
                 {
-                    string path = Path.Combine(Server.MapPath("~/Uploads/Categorie_image"), image.FileName);
-                    image.SaveAs(path);
-                    categorie.image = image.FileName;
+                    string path = Path.Combine(Server.MapPath("~/Uploads/Categorie_image"), imageCat.FileName);
+                    imageCat.SaveAs(path);
+                    categorie.image = imageCat.FileName;
                 }
 
                 db.Entry(categorie).State = EntityState.Modified;

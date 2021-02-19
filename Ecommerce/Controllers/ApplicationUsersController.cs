@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Ecommerce.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Ecommerce.Controllers
 {
@@ -18,7 +19,14 @@ namespace Ecommerce.Controllers
         // GET: ApplicationUsers
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            List<ApplicationUser> users = db.Users.Where(x => x.Roles.Any(s => s.RoleId == "2")).ToList();
+            return View(users);
+        }
+
+        public ActionResult Admins()
+        {
+            List<ApplicationUser> users = db.Users.Where(x => x.Roles.Any(s => s.RoleId == "1")).ToList();
+            return View(users);
         }
 
         // GET: ApplicationUsers/Details/5

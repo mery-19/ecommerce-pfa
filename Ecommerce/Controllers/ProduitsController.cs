@@ -101,15 +101,15 @@ namespace Ecommerce.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Produit produit, HttpPostedFileBase image)
+        public ActionResult Edit(Produit produit, HttpPostedFileBase imagePro)
         {
             if (ModelState.IsValid)
             {
-                if(image != null)
+                if(imagePro != null)
                 {
-                    string path = Path.Combine(Server.MapPath("~/Uploads/Produit_image"), image.FileName);
-                    image.SaveAs(path);
-                    produit.image = image.FileName;
+                    string path = Path.Combine(Server.MapPath("~/Uploads/Produit_image"), imagePro.FileName);
+                    imagePro.SaveAs(path);
+                    produit.image = imagePro.FileName;
                 }
                 
                 produit.date_modification = DateTime.Now;

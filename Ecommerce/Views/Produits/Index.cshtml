@@ -27,6 +27,9 @@
         <thead>
             <tr>
                 <th>
+                    Id
+                </th>
+                <th>
                     Nom
                 </th>
                 <th>
@@ -53,6 +56,9 @@
             {
             <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.name)
                 </td>
                 <td>
@@ -67,8 +73,8 @@
                     <img src="~/Uploads/Produit_image/@Html.DisplayFor(model => item.image)" class="img-thumbnail" style="width:48px; height:48px;" />
                 </td>
                 <td>
-@*                    @Html.DisplayFor(modelItem => item.date_ajout.ToShortDateString())
-*@                    @Convert.ToDateTime(item.date_ajout).ToString("dd/MM/yyyy")
+                    @*                    @Html.DisplayFor(modelItem => item.date_ajout.ToShortDateString())
+                    *@                    @Convert.ToDateTime(item.date_ajout).ToString("dd/MM/yyyy")
 
                 </td>
 

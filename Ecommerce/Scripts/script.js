@@ -94,7 +94,8 @@ $(document).ready(function () {
 $(function () {
     $("#SaveCategory").click(function () {
         console.log("clicked");
-        if ($("#categoryImage").val() == "") {
+        console.log($("#categoryImage").val());
+        if ($("#image").val() == "") {
             $("#err").fadeIn();
             $("#view-err").text("l'image de catégorie requis.");
             return false; //for not submit informations to server 
@@ -104,7 +105,7 @@ $(function () {
 
     /*--START-- on delete item*/
     $(function () {
-        $("a.delete-link-produit").click(function () {
+        $('#produitTable tbody').on('click', '.delete-link-produit', function (e) {
 
             var token = $("[name='__RequestVerificationToken']").val();
 
@@ -240,17 +241,23 @@ $(function () {
                 obj.push($(this).val());
                 console.log($(this).val());
             });
-
-            taux = $("input[name=taux_promotion]").val();
-            date = $("input[name=date_expiration]").val();
-            libele = $("input[name=libele]").val();
-            description = $("input[name=description]").val();
+            var token = $("[name='__RequestVerificationToken']").val();
+            var taux = $("input[name=taux_promotion]").val();
+            var date = $("input[name=date_expiration]").val();
+            var libele = $("input[name=libele]").val();
+            var description = $("input[name=description]").val();
             data = {
                 taux_promotion: taux,
                 date_expiration: date,
                 libele,
                 description,
-                obj
+                obj,
+                __RequestVerificationToken: token
+            }
+            console.log(obj.length);
+            if (taux_promotion == "" || date_expiration == "" || libele == "" || description == "" || obj.length == 0) {
+                alert("Error: Tous les champs sont requis.")
+                return false;
             }
             // send select ittems to controlelr
             $.ajax({
@@ -266,7 +273,6 @@ $(function () {
                     }
                     else {
                         alert("Probléme d'envoyer les informations.");
-
                     }
 
                 },

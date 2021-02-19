@@ -7,7 +7,6 @@
 <div class="m-5">
     <div class="card">
         <div class="card-header d-flex justify-content-xl-between">
-            <h4>@DateTime.Now.ToString("Y", new CultureInfo("fr-CA"))</h4>
             <select name="date" id="date" size="1" style="width:200px;" class="form-control">
                 <option value="-1">Sélectionnez un mois</option>
                 <option value="1">Janvier</option>
@@ -69,7 +68,7 @@
     </div>
     <hr />
     <div class="container">
-      
+
         <div class="row">
             <div class="col-md-7 col-12" style="border-right:2px;">
                 <div id="top-products"></div>
@@ -86,16 +85,22 @@
                 <div id="register-client"></div>
             </div>
         </div>
+        <div class="row mt-2">
+            <div class="card col-12">
+                <div id="gain"></div>
+            </div>
+        </div>
     </div>
 </div>
 @section chart{
     <script>
         $(document).ready(function () {
-
-            $("#date").change(function () {
+                $("#date option[value=" +@Html.Raw(ViewBag.mois)+"]").prop("selected", true);
+                $("#date").change(function () {
                 console.log($("#date option:selected").val());
                 var mois = $("#date option:selected").val();
-                window.location.replace("https://localhost:44352/Dashboard/Index?mois="+mois);
+                window.location.replace("https://localhost:44352/Dashboard/Index?mois=" + mois);
+
 
             });
 
@@ -107,6 +112,9 @@
             var commandes = @Html.Raw(Json.Encode(ViewBag.nb_commandes));
             var nb_commandes_livre = @Html.Raw(Json.Encode(ViewBag.nb_commandes_livre));
             var nb_commandes_attente = @Html.Raw(Json.Encode(ViewBag.nb_commandes_attente));
+            var tva = @Html.Raw(Json.Encode(ViewBag.tva));
+            var ht = @Html.Raw(Json.Encode(ViewBag.ht));
+            var total = @Html.Raw(Json.Encode(ViewBag.total));
 
             Highcharts.chart('commandes', {
 
@@ -145,7 +153,6 @@
 
             });
 
-            console.log(topUsers);
             Highcharts.chart('register-client', {
 
                 chart: {
@@ -249,6 +256,44 @@
                     data: topProducts
                 }]
             });
+
+            Highcharts.chart('gain', {
+
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: "Chiffre d'affaires de chaque mois en DHs."
+                },
+                xAxis: {
+                    categories: months
+                },
+                yAxis: {
+                    title: {
+                        text: 'Total (DHs)'
+                    }
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: false
+                    }
+                },
+                series: [{
+                    name: 'Prix total',
+                    data: total
+                }, {
+                    name: 'Prix hors tax',
+                    data: ht
+                }, {
+                    name: 'Prix TVA',
+                    data: tva
+                },]
+
+            });
+
         });
     </script>
 

@@ -17,9 +17,13 @@
                         <h1>Shop COMPUTERS & ACCESSOIRES</h1>
                         <p>Eccomerce website ENSA FES</p>
                     </div>
-                    <div class="">
-                        <button class="btn btn-save text-white font-weight-bold">CONNECTEZ-VOUS</button>
-                    </div>
+                    @if (User.Identity.Name == "")
+                    {
+                        <div class="">
+                            <a href="~/Account/Login" class="btn btn-save text-white font-weight-bold">CONNECTEZ-VOUS</a>
+                        </div>
+                    }
+
                 </div>
             </div>
             <div class="col-md-6 col-12 text-center">

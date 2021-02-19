@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Ecommerce.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Admins";
+    Layout = "~/Views/Shared/_adminDashboard.cshtml";
+}
+
+<div class="margin-top">
+    <h2>Les Administrateurs</h2>
+    <hr />
+
+    <table class="table" id="usersTable">
+        <thead>
+            <tr>
+                <th>
+                    Nom d'utilisateur
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    Numéro de téléphone
+                </th>
+                <th>
+                    Adresse
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.date_ajout)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.date_ajout)
+                    </td>
+
+
+
+                    <td>
+                        <a data-delete-id="@item.Id" class="text-danger delete-link-user pointer">
+                            <i class="material-icons icon ">
+                                delete
+                            </i>
+                        </a>
+                        @Html.Hidden("__RequestVerificationToken", @Html.AntiForgeryToken())
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

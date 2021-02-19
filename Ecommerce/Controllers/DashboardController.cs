@@ -27,8 +27,10 @@ namespace Ecommerce.Controllers
             List<int> nb_commandes = new List<int>();
             List<int> nb_commandes_livre = new List<int>();
             List<int> nb_commandes_attente = new List<int>();
+            List<float> tva = new List<float>();
+            List<float> ht = new List<float>();
+            List<float> total = new List<float>();
 
-           
 
             for (int i = 1; i <= 12; i++)
             {
@@ -36,6 +38,9 @@ namespace Ecommerce.Controllers
                 nb_commandes.Add(commandes.Count(x => x.date_ajout.Year == DateTime.Now.Year && x.date_ajout.Month == i));
                 nb_commandes_livre.Add(commandes.Count(x => x.date_update.Month == i && x.date_update.Year == DateTime.Now.Year && x.id_status ==2));
                 nb_commandes_attente.Add(commandes.Count(x => x.date_ajout.Month == i && x.date_ajout.Year == DateTime.Now.Year && x.id_status==1));
+                tva.Add(commandes.Where(x => x.date_update.Month == i && x.date_update.Year == DateTime.Now.Year && x.id_status == 2).Sum(x => x.prix_tva));
+                ht.Add(commandes.Where(x => x.date_update.Month == i && x.date_update.Year == DateTime.Now.Year && x.id_status == 2).Sum(x => x.prix_ht));
+                total.Add(commandes.Where(x => x.date_update.Month == i && x.date_update.Year == DateTime.Now.Year && x.id_status == 2).Sum(x => x.prix_total));
                 months.Add(i);
             }
             ViewBag.months = months;
@@ -43,6 +48,9 @@ namespace Ecommerce.Controllers
             ViewBag.nb_commandes = nb_commandes;
             ViewBag.nb_commandes_livre = nb_commandes_livre;
             ViewBag.nb_commandes_attente = nb_commandes_attente;
+            ViewBag.tva = tva;
+            ViewBag.ht = ht;
+            ViewBag.total = total;
 
             statisticsOfTheMonth(mois);
             statisticsOfTop();
@@ -100,6 +108,7 @@ namespace Ecommerce.Controllers
             ViewBag.top_products = top_products;
 
         }
+
     }
 
     class TopUser
@@ -110,7 +119,7 @@ namespace Ecommerce.Controllers
 
     class TopProduct
     {
-        int id;
+        public int id;
         public string name { get; set; }
         public int y { get; set; }
     }

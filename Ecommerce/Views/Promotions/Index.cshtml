@@ -26,6 +26,9 @@
         <thead>
             <tr>
                 <th>
+                    @Html.DisplayNameFor(model => model.id)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.libele)
                 </th>
                 <th>
@@ -48,44 +51,47 @@
 
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.libele)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.taux_promotion)
-                    </td>
-                    <td>
-                        @Convert.ToDateTime(item.date_expiration).ToString("dd/MM/yyyy")
-                    </td>
-                    <td>
-                        @Convert.ToDateTime(item.date_ajout).ToString("dd/MM/yyyy")
-                    </td>
-                    <td>
-                        <a href="@Url.Action("Edit", "Promotions", new { id = item.id })" class="text-warning">
-                            <i class="material-icons icon ">
-                                edit
-                            </i>
-                        </a>
-                        <a href="@Url.Action("Details", "Promotions", new { id = item.id })" class="text-success">
-                            <i class="material-icons icon ">
-                                visibility
-                            </i>
-                        </a>
-                        @*                    <button type="button" class="btn btn-primary modal_promo" data-id="@item.id" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
-                        *@  <a data-delete-id="@item.id" class="text-danger delete-link-promo pointer">
-                            <i class="material-icons icon ">
-                                delete
-                            </i>
-                        </a>
-                        @Html.Hidden("__RequestVerificationToken", @Html.AntiForgeryToken())
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.libele)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.taux_promotion)
+                </td>
+                <td>
+                    @Convert.ToDateTime(item.date_expiration).ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    @Convert.ToDateTime(item.date_ajout).ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", "Promotions", new { id = item.id })" class="text-warning">
+                        <i class="material-icons icon ">
+                            edit
+                        </i>
+                    </a>
+                    <a href="@Url.Action("Details", "Promotions", new { id = item.id })" class="text-success">
+                        <i class="material-icons icon ">
+                            visibility
+                        </i>
+                    </a>
+                    @*                    <button type="button" class="btn btn-primary modal_promo" data-id="@item.id" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
+                    *@  <a data-delete-id="@item.id" class="text-danger delete-link-promo pointer">
+                        <i class="material-icons icon ">
+                            delete
+                        </i>
+                    </a>
+                    @Html.Hidden("__RequestVerificationToken", @Html.AntiForgeryToken())
 
 
-                    </td>
-                </tr>
+                </td>
+            </tr>
             }
         </tbody>
 
