@@ -15,21 +15,16 @@ namespace Ecommerce.Controllers
     public class CategoriesApiController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+       
 
         // GET: api/CategoriesApi
-        public List<Produit> GetCategories()
+        
+        public List<Categorie> GetProduits()
         {
             db.Configuration.LazyLoadingEnabled = false;
             db.Configuration.ProxyCreationEnabled = false;
-
-            List<Produit> produits = db.Produits.Include(x => x.User).ToList();
-            return produits;
+            return db.Categories.ToList();
         }
-        /* [HttpGet]
-         public List<Produit> GetProduits()
-         {
-             return db.Produits.ToList();
-         }*/
         // GET: api/CategoriesApi/5
         [ResponseType(typeof(Categorie))]
         public IHttpActionResult GetCategorie(int id)
@@ -82,6 +77,8 @@ namespace Ecommerce.Controllers
         [ResponseType(typeof(Categorie))]
         public IHttpActionResult PostCategorie(Categorie categorie)
         {
+            db.Configuration.LazyLoadingEnabled = false;
+            db.Configuration.ProxyCreationEnabled = false;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

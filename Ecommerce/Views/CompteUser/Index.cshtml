@@ -7,11 +7,14 @@
 }
 else if (User.IsInRole("User"))
 {
-Layout = "~/Views/Shared/_ClientDashboard.cshtml";
+    Layout = "~/Views/Shared/_ClientDashboard.cshtml";
 
 }
 
 <div class="margin-top container">
+
+    <p class="text-success">@ViewBag.StatusMessage</p>
+
     <h4>
         Votre compte
     </h4>

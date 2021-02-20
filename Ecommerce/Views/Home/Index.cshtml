@@ -9,13 +9,14 @@
 }
 
 <main>
+
     <section class="presentation">
         <div class="row">
             <div class="col-md-6 col-12">
                 <div class="introduction text-center mt-5">
                     <div class="intro-text">
-                        <h1>Shop COMPUTERS & ACCESSOIRES</h1>
-                        <p>Eccomerce website ENSA FES</p>
+                        <h1 class="text-uppercase">Shop COMPUTERS & Electronic component</h1>
+                        <p>Ecomerce website ENSA FES</p>
                     </div>
                     @if (User.Identity.Name == "")
                     {
@@ -59,10 +60,9 @@
         </section>
 
         <section class="body">
-
+            @*--START-- Search bar*@
             <div class="row d-flex my-5 w-100">
                 <div class="">
-
                     @using (Html.BeginForm("Search", "Home", FormMethod.Get))
                     {
                         <div class="d-flex">
@@ -72,15 +72,16 @@
                         </div>
                     }
                 </div>
-
             </div>
+            @*--END-- Search bar*@
 
             <h4 class="font-rubik font-size-20">
                 Les produits
             </h4>
             <hr>
-            <div class="row">
 
+            @*--START-- show all products*@
+            <div class="row">
                 @foreach (Produit item in Model)
                 {
                     <div class="col-md-3 col-sm-3 col-xs-6">
@@ -88,18 +89,23 @@
                         <div class="card item m-2 p-2">
                             @if (item.quantite_stock <= 0)
                             {
+                                //image for "épuisé" SOLD OUT
                                 <img alt="product1" class="img-fluid produit-img"
                                      src="~/Uploads/epuise.png" style="position:absolute;" />
                             }
                             @if (item.Promotion != null)
                             {
-
+                                //div for taux de promotion
                                 <div class="promotion" style="position:absolute;">
                                     <h6>- @item.Promotion.taux_promotion %</h6>
                                 </div>
                             }
-                            <img alt="product1" class="img-fluid produit-img"
-                                 src="~/Uploads/Produit_image/@item.image" />
+                            
+                            @*Image of product*@
+                            <img alt="product" class=""
+                                 src="~/Uploads/Produit_image/@item.image" 
+                                 
+                                 style="height:150px;"/>
 
                             <h5 class="name-produit pointer font-rubik mt-2 " id-produit="@item.id">@item.name</h5>
 
@@ -129,6 +135,8 @@
 
                 }
             </div>
+            @*--END-- show all products*@
+
             <div class="text-center">
                 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
             </div>

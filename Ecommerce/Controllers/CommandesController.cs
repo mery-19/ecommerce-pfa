@@ -31,7 +31,7 @@ namespace Ecommerce.Controllers
                 commandes = (id==2)? commandes.Where(x => x.id_status == id): commandes.Where(x => x.id_status == 1);
             }
 
-            return View(commandes.OrderByDescending(x => x.id).ToList());
+            return View(commandes.OrderByDescending(x => x.date_ajout).ToList());
         }
 
         [Authorize(Roles = "Admin")]

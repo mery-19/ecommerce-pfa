@@ -128,15 +128,15 @@ $(function () {
     });
 
     $(function () {
-        $("a.delete-link-categorie").click(function () {
+        $('#categorie tbody').on('click', '.delete-link-categorie', function (e) {
 
             var token = $("[name='__RequestVerificationToken']").val();
 
-            console.log(token);
+            console.log($(this).attr('data-delete-id'));
             var checkstr = confirm('are you sure you want to delete this?');
             if (checkstr == true) {
                 $.ajax({
-                    url: '/Categories/Delete/' + $(".delete-link-categorie").attr('data-delete-id'),
+                    url: '/Categories/Delete/' + $(this).attr('data-delete-id'),
                     type: "POST",
                     data: {
                         __RequestVerificationToken: token,
@@ -151,15 +151,15 @@ $(function () {
     });
 
     $(function () {
-        $("a.delete-link-user").click(function () {
+        $('#usersTable tbody').on('click', '.delete-link-user', function (e) {
 
             var token = $("[name='__RequestVerificationToken']").val();
-
-            console.log(token);
+            console.log("clicked");
+            console.log($(this).attr('data-delete-id'));
             var checkstr = confirm('are you sure you want to delete this?');
             if (checkstr == true) {
                 $.ajax({
-                    url: '/ApplicationUsers/Delete/' + $(".delete-link-user").attr('data-delete-id'),
+                    url: '/ApplicationUsers/Delete/' + $(this).attr('data-delete-id'),
                     type: "POST",
                     data: {
                         __RequestVerificationToken: token,
@@ -174,15 +174,14 @@ $(function () {
     });
 
     $(function () {
-        $("a.delete-link-promo").click(function () {
-
+        $('#promo tbody').on('click', '.delete-link-promo', function (e) {
             var token = $("[name='__RequestVerificationToken']").val();
 
-            console.log(token);
+            console.log($(this).attr('data-delete-id'));
             var checkstr = confirm('are you sure you want to delete this?');
             if (checkstr == true) {
                 $.ajax({
-                    url: '/Promotions/Delete/' + $(".delete-link-promo").attr('data-delete-id'),
+                    url: '/Promotions/Delete/' + $(this).attr('data-delete-id'),
                     type: "POST",
                     data: {
                         __RequestVerificationToken: token,
@@ -198,10 +197,8 @@ $(function () {
 
     $(function () {
         $("a.delete-produit-envie").click(function () {
-
             var token = $("[name='__RequestVerificationToken']").val();
-
-            console.log(token);
+            console.log($(this, ".delete-produit-envie").attr('data-delete-id'));
             var checkstr = confirm('are you sure you want to delete this?');
             if (checkstr == true) {
                 $.ajax({
@@ -223,7 +220,6 @@ $(function () {
 
     $(function () {
         $('#Produits').selectpicker();
-
     });
 
 
@@ -285,10 +281,7 @@ $(function () {
     })
     /* --END-- Create promotions with multiple product*/
 
-
-
     /* --START-- On quantity change*/
-
     //in details page
     $("#qty").change(function () {
         console.log($("#qty option:selected").text());
@@ -475,23 +468,6 @@ $(function () {
 
     /*--END-- detaills d'un commande  */
 
-    /*--START-- filter commandes  */
-    /*    $(function () {
-            $(".filter-commande").click(function (e) {
-                console.log($(this, ".filter-commande").attr('id'));
-                var id = $(this, ".filter-commande").attr('id');
-                $.ajax({
-                    url: '/Commandes/All/' + id,
-                    type: "GET",
-                    success: function (data) {
-    
-                    }
-    
-                });
-            });
-        });*/
-    /*--END-- filter commandes  */
-
 
     /*--START-- change commande status  */
 
@@ -523,19 +499,6 @@ $(function () {
 
     });
     /*--END-- change commande status  */
-
-    /*--START-- set notification on 0 after click  */
-/*    $('.not-click').click(function (e) {
-        $.ajax({
-            url: '/Commandes/RestartNot',
-            type: "POST",
-            success: function (res) {
-
-            }
-
-        });
-    });*/
-    /*--END-- set notification on 0 after click  */
 
     /*--START-- On card item click */
     $('#top-produit').on('click', '.name-produit', function (e) {
@@ -575,9 +538,11 @@ $(function () {
             }
         });
     })
-    /*--END-- add comment */
-    /*  var fakedata = ['test1', 'test2', 'test3', 'test4', 'ietsanders'];
-      $("#txt").autocomplete({ source: fakedata });*/
+/*--END-- add comment */
+
+/*--START-- Autocomplete for search Product*/
+
+    //text is the text given on search input
     $("#txt").autocomplete({
         source: function (request, response) {
             $.ajax({
@@ -596,6 +561,8 @@ $(function () {
             results: function (resultsCount) { }
         }
     });
+
+/*--END-- Autocomplete for search Product*/
 
     $('.search-btn').click(function () {
 

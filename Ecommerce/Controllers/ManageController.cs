@@ -238,7 +238,14 @@ namespace Ecommerce.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+
+                ManageController.ManageMessageId message = ManageMessageId.ChangePasswordSuccess;
+                ViewBag.StatusMessage = message == ManageMessageId.ChangePasswordSuccess ? "Votre mot de passe a été changé."
+               : message == ManageMessageId.SetPasswordSuccess ? "Votre mot de passe a été défini."
+               : message == ManageMessageId.SetTwoFactorSuccess ? "Votre fournisseur d'authentification à deux facteurs a été défini."
+               : message == ManageMessageId.Error ? "Une erreur est survenue."
+               : "";
+                return RedirectToAction("Index", "CompteUser", new { Message = ManageMessageId.ChangePasswordSuccess });
             }
             AddErrors(result);
             return View(model);
@@ -267,7 +274,7 @@ namespace Ecommerce.Controllers
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     }
-                    return RedirectToAction("Index", new { Message = ManageMessageId.SetPasswordSuccess });
+                    return RedirectToAction("Index", "CompteUser", new { Message = ManageMessageId.SetPasswordSuccess });
                 }
                 AddErrors(result);
             }

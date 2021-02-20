@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Ecommerce.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Ecommerce.Controllers
 {
@@ -59,7 +60,7 @@ namespace Ecommerce.Controllers
             if (ModelState.IsValid)
             {
                 string name =  System.Web.HttpContext.Current.User.Identity.Name;
-                ApplicationUser user = db.Users.Where(x => x.UserName.Equals(name)).FirstOrDefault();
+                ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
                 produit.id_user = user.Id;
                 produit.date_ajout = DateTime.Now;
                 string path = Path.Combine(Server.MapPath("~/Uploads/Produit_image"), image.FileName);
