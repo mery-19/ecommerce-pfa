@@ -18,14 +18,17 @@
                         <h1 class="text-uppercase">Shop COMPUTERS & Electronic component</h1>
                         <p>Ecomerce website ENSA FES</p>
                     </div>
-                    @if (User.Identity.Name == "")
-                    {
-                        <div class="">
-                            <a href="~/Account/Login" class="btn btn-save text-white font-weight-bold">CONNECTEZ-VOUS</a>
-                        </div>
-                    }
-
+                    <div class="mt-2">
+                        @using (Html.BeginForm("Search", "Home", FormMethod.Get))
+                        {
+                            <div class="d-flex justify-content-center">
+                                <input type="text" id="txt" name="txt" class="form-control mr-2" placeholder="Produit ou catégorie" style="width:800px;" />
+                                <button type="submit" class="btn btn-save text-white font-weight-bold search-btn">Rechercher</button>
+                            </div>
+                        }
+                    </div>
                 </div>
+              
             </div>
             <div class="col-md-6 col-12 text-center">
                 <div class="cover">
@@ -60,21 +63,6 @@
         </section>
 
         <section class="body">
-            @*--START-- Search bar*@
-            <div class="row d-flex my-5 w-100">
-                <div class="">
-                    @using (Html.BeginForm("Search", "Home", FormMethod.Get))
-                    {
-                        <div class="d-flex">
-
-                            <input type="text" id="txt" name="txt" class="form-control mr-2" placeholder="Produit ou catégorie" style="width:800px;" />
-                            <button type="submit" class="btn btn-save text-white font-weight-bold search-btn">Rechercher</button>
-                        </div>
-                    }
-                </div>
-            </div>
-            @*--END-- Search bar*@
-
             <h4 class="font-rubik font-size-20">
                 Les produits
             </h4>

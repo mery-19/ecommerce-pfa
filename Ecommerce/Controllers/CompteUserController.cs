@@ -1,4 +1,5 @@
 ﻿using Ecommerce.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -37,8 +38,7 @@ namespace Ecommerce.Controllers
             /* if (ModelState.IsValid)
              {*/
             ApplicationUser thisUser = new ApplicationUser();
-            thisUser = db.Users.Where(x => x.UserName.Equals(user.name)).FirstOrDefault();
-
+            thisUser = db.Users.Find(User.Identity.GetUserId());
             thisUser.PhoneNumber = user.phone;
             thisUser.Address = user.address;
             db.Entry(thisUser).State = EntityState.Modified;

@@ -15,7 +15,7 @@ body {
 }
 .presentation {
     background: linear-gradient(to bottom, rgba(255, 124, 91,0.3), rgba(255, 124, 91,0.5));
-    padding: 20px;
+    padding: 10px;
 }
 .introduction {
     padding: 10px;
