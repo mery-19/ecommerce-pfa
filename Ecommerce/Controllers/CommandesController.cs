@@ -157,7 +157,7 @@ namespace Ecommerce.Controllers
             lignePaniers = panier.LignePaniers.ToList();
             foreach (LignePanier ligne in lignePaniers)
             {
-                if (ligne.Produit.Promotion != null)
+                if (ligne.Produit.Promotion != null && ligne.Produit.Promotion.date_expiration > DateTime.Now)
                 {
                     prix_ht = ligne.Produit.prix_vente * ligne.quantite;
                     prix_ht = prix_ht - (prix_ht * ligne.Produit.Promotion.taux_promotion) / 100;
@@ -207,11 +207,13 @@ namespace Ecommerce.Controllers
                 Session["coutPanier"] = 0;
             }
 
+           
             return Redirect(Url.Action("Index", "LignePaniers"));
 /*            return Redirect(Request.UrlReferrer.ToString());
 */        }
 
 
+       
         [HttpPost]
 /*        [ValidateAntiForgeryToken]
 */        public void showProductInCommande(int id)

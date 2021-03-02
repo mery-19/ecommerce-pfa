@@ -95,7 +95,7 @@
                         <td>
                             <span class="font-weight-bold">@String.Format("{0:0.00}", @prix.prix_unitaire) DHs</span>
 
-                            @if (item.Produit.Promotion != null)
+                            @if (item.Produit.Promotion != null && item.Produit.Promotion.date_expiration>DateTime.Now)
                             {
                                 <p class=" font-rale">
 
@@ -110,7 +110,7 @@
                             {
 
                                 <span class="font-weight-bold"> @String.Format("{0:0.00}", @prix.prix_total) DHs</span>
-                                if (item.Produit.Promotion != null)
+                                if (item.Produit.Promotion != null && item.Produit.Promotion.date_expiration > DateTime.Now)
                                 {
                                     <p class=" font-rale">
                                         Economie:

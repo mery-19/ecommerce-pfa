@@ -46,7 +46,7 @@
     @if (@Session["total"] != null)
     {
 
-        <h4 class="pl-4">Total: <span class="font-rubik text-success">@Session["total"].ToString()DHs</span></h4>
+        <h4 class="pl-4">Total: <span class="font-rubik text-success">@String.Format("{0:0.00}",Session["total"].ToString()) DHs</span></h4>
     }
 
     <hr />

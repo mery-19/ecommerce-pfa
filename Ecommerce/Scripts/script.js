@@ -409,6 +409,7 @@ $(function () {
             var id_pai = $("input[name='id_paiement']:checked").val();
             var address = $("textarea#address").val();
             var phone = $("input[name='phone']").val();
+           
             console.log(address);
             console.log(phone);
             console.log(id_liv);
@@ -417,6 +418,11 @@ $(function () {
                 $("#view-err").text("Tous les parties sont requis.");
                 return false; //for not submit informations to server 
             }
+            if (id_pai == 2) {
+                window.location.href = "https://localhost:44352/Payment/PaymentWithPayPal";
+                return false;
+            }
+
         });
     });
     /*--END-- on finaliser commande */

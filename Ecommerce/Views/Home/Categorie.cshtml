@@ -34,7 +34,7 @@
                                 <img alt="product1" class="img-fluid produit-img"
                                      src="~/Uploads/epuise.png" style="position:absolute;" />
                             }
-                            @if (item.Promotion != null)
+                            @if (item.Promotion != null && item.Promotion.date_expiration > DateTime.Now)
                             {
 
                                 <div class="promotion" style="position:absolute;">
@@ -46,7 +46,7 @@
 
                             <h5 class="name-produit pointer font-rubik mt-2 " id-produit="@item.id">@item.name</h5>
 
-                            @if (item.Promotion != null)
+                            @if (item.Promotion != null && item.Promotion.date_expiration > DateTime.Now)
                             {
                                 <p>
                                     <strike class="text-black-50">

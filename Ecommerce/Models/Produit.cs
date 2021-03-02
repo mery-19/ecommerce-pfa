@@ -70,7 +70,7 @@ namespace Ecommerce.Models
 
             ProduitDetails details = new ProduitDetails();
             details.real_price = prix_vente + (prix_vente * tva) / 100;
-            if (Promotion != null)
+            if (Promotion != null && Promotion.date_expiration > DateTime.Now)
             {
                 details.save_price = (details.real_price * Promotion.taux_promotion) / 100;
                 details.deal_price = details.real_price - details.save_price;

@@ -14,7 +14,7 @@ namespace Ecommerce.Models
             economie = 0;
             economie_total = 0;
 
-            if (lignePanier.Produit.Promotion != null)
+            if (lignePanier.Produit.Promotion != null && lignePanier.Produit.Promotion.date_expiration > DateTime.Now)
             {
                 economie = (prix_unitaire * lignePanier.Produit.Promotion.taux_promotion) / 100;
                 economie_total = economie * lignePanier.quantite;
