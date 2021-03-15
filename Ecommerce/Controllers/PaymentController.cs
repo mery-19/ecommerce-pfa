@@ -143,7 +143,7 @@ namespace Ecommerce.Controllers
                     float save_price = (real_price * ligne.Produit.Promotion.taux_promotion) / 100;
                     real_price = real_price - save_price;
                 }
-                decimal m1 = Convert.ToDecimal(real_price);
+                decimal m1 = Convert.ToDecimal(real_price) * Convert.ToDecimal(0.11);
                 decimal d1 = Math.Round(m1, 2);
                 itemList.items.Add(new Item()
                 {
