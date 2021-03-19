@@ -457,8 +457,9 @@ $(function () {
             success: function (data) {
                 $.each(JSON.parse(data), function (i, v) {
 
-                    console.log("enter 1");
-                    row += "<tr class='border'><td>" + v.name + "</td><td>  <img src='/Uploads/Produit_image/" + v.image + "' style='height: 120px; width: 120px; ' alt='produit' class='img-fluid'> </td><td>" + v.qty + "</td><td>" + v.prix.toFixed(2) + " DHs";
+                    row += "<tr class='border'><td>" + v.name + "</td><td>  <img src='/Uploads/Produit_image/" +
+                        v.image + "' style='height: 120px; width: 120px; ' alt='produit' class='img-fluid'> </td><td>" +
+                        v.qty + "</td><td>" + v.prix.toFixed(2) + " DHs";
                     total += parseFloat(v.prix);
                     console.log("enter 1");
                 });

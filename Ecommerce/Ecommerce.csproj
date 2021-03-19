@@ -247,6 +247,7 @@
     <Compile Include="Controllers\ClientDashboardController.cs" />
     <Compile Include="Controllers\CommandesController.cs" />
     <Compile Include="Controllers\CompteUserController.cs" />
+    <Compile Include="Controllers\ControllersApi\PromotionApiController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EnviesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -255,6 +256,7 @@
     <Compile Include="Controllers\ModeLivraisonsController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\ProduitDetailsController.cs" />
+    <Compile Include="Controllers\ProduitsApiController.cs" />
     <Compile Include="Controllers\ProduitsController.cs" />
     <Compile Include="Controllers\PromotionsController.cs" />
     <Compile Include="Controllers\UserManager.cs" />
