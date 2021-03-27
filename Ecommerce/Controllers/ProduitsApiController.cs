@@ -27,6 +27,25 @@ namespace Ecommerce.Controllers
         }
 
         [HttpGet]
+        public List<Produit> GetProduits(String top)
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+            db.Configuration.ProxyCreationEnabled = false;
+
+            List<Produit> myProduits = new List<Produit>();
+            List<int> ids = db.Database.SqlQuery<int>("SELECT id from (SELECT TOP 10 l.id_produit as id, SUM(l.quantite) as qty FROM LignePaniers l, Commandes c WHERE c.id_panier = l.id_panier  GROUP BY l.id_produit ORDER BY qty DESC) tab;").ToList();
+
+            foreach (int id in ids)
+            {
+                Produit produit = db.Produits.Find(id);
+                myProduits.Add(produit);
+            }
+            
+
+            return myProduits;
+        }
+        
+        [HttpGet]
         public IQueryable<Produit> GetProduits(int id_cat)
         {
             db.Configuration.LazyLoadingEnabled = false;

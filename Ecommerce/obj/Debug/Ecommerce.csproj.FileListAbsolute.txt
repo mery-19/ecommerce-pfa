@@ -262,3 +262,5 @@ D:\mery\ecommerce-pfa\Ecommerce\bin\System.Numerics.Vectors.xml
 D:\mery\ecommerce-pfa\Ecommerce\bin\System.Runtime.CompilerServices.Unsafe.xml
 D:\mery\ecommerce-pfa\Ecommerce\bin\System.Text.Encodings.Web.xml
 D:\mery\ecommerce-pfa\Ecommerce\bin\System.Web.Cors.dll
+D:\mery\ecommerce-pfa\Ecommerce\bin\System.Web.Http.Owin.dll
+D:\mery\ecommerce-pfa\Ecommerce\bin\System.Web.Http.Owin.xml

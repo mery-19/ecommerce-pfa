@@ -10,5 +10,10 @@ namespace Ecommerce.Controllers
         {
             throw new NotImplementedException();
         }
+
+        internal static object FindByEmail(object email)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
