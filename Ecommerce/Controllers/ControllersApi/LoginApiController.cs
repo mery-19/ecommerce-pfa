@@ -45,13 +45,24 @@ namespace Ecommerce.Controllers.ControllersApi
         }
 
 
-        [HttpGet]
-         public async Task<ApplicationUser> FindUser(string userName, string password)
+        [HttpPost]
+         public async Task<ApplicationUser> login(LoginViewModel model)
         {
+            
             db.Configuration.LazyLoadingEnabled = false;
             db.Configuration.ProxyCreationEnabled = false;
-            ApplicationUser user = await UserManager.FindAsync(userName,password);
-            return db.Users.Find(user.Id);
+            var user = UserManager.FindByEmail(model.Email);
+            if(user != null)
+            {
+                ApplicationUser resultUser = await UserManager.FindAsync(user.UserName, model.Password);
+                return (resultUser != null)? db.Users.Find(resultUser.Id):null;
+            }
+            else
+            {
+                return null;
+            }
+            
+           
         }
     }
 }
