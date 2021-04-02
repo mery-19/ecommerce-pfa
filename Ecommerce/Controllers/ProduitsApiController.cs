@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Ecommerce.Models;
@@ -44,7 +40,21 @@ namespace Ecommerce.Controllers
 
             return myProduits;
         }
-        
+
+        [HttpGet]
+        public int GetQty(String name, int id_produit)
+        {
+            ApplicationUser user = new ApplicationUser();
+            user = db.Users.Where(x => x.UserName.Equals(name)).FirstOrDefault();
+            if (user != null)
+            {
+                Panier panier = user.Paniers.Last();
+                LignePanier l = db.LignePaniers.Where(x => x.id_panier == panier.id && x.id_produit == id_produit).ToList().LastOrDefault();
+                return l.quantite;
+            }
+            return 0;
+        }
+
         [HttpGet]
         public IQueryable<Produit> GetProduits(int id_cat)
         {
