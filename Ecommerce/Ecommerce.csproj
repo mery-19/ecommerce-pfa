@@ -250,7 +250,9 @@
     <Compile Include="Controllers\ClientDashboardController.cs" />
     <Compile Include="Controllers\CommandesController.cs" />
     <Compile Include="Controllers\CompteUserController.cs" />
+    <Compile Include="Controllers\ControllersApi\CommandeApiController.cs" />
     <Compile Include="Controllers\ControllersApi\LoginApiController.cs" />
+    <Compile Include="Controllers\ControllersApi\NotifictionsApiController.cs" />
     <Compile Include="Controllers\ControllersApi\PanierApiController.cs" />
     <Compile Include="Controllers\ControllersApi\PromotionApiController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -755,6 +757,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\Categorie_image\" />
     <Folder Include="Uploads\Produit_image\" />
+    <Folder Include="Views\Notifications\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
