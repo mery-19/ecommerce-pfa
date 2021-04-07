@@ -251,6 +251,7 @@
     <Compile Include="Controllers\CommandesController.cs" />
     <Compile Include="Controllers\CompteUserController.cs" />
     <Compile Include="Controllers\ControllersApi\CommandeApiController.cs" />
+    <Compile Include="Controllers\ControllersApi\EnvieApiController.cs" />
     <Compile Include="Controllers\ControllersApi\LoginApiController.cs" />
     <Compile Include="Controllers\ControllersApi\NotifictionsApiController.cs" />
     <Compile Include="Controllers\ControllersApi\PanierApiController.cs" />

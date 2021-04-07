@@ -34,7 +34,7 @@ namespace Ecommerce.Controllers.ControllersApi
                         quantite = lp.quantite,
                         prix = lp.Produit.details().deal_price,
                         quantite_disponible = lp.Produit.quantite_stock
-                    }); ;
+                    }); 
                 }
                 return ligneProduits;
             }
