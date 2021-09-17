@@ -48,9 +48,20 @@ namespace Ecommerce.Controllers
             user = db.Users.Where(x => x.UserName.Equals(name)).FirstOrDefault();
             if (user != null)
             {
-                Panier panier = user.Paniers.Last();
-                LignePanier l = db.LignePaniers.Where(x => x.id_panier == panier.id && x.id_produit == id_produit).ToList().LastOrDefault();
-                return l.quantite;
+                try
+                {
+                    Panier panier = user.Paniers.Last();
+                    LignePanier l = db.LignePaniers.Where(x => x.id_panier == panier.id && x.id_produit == id_produit).ToList().LastOrDefault();
+                    if (l == null)
+                        return 0;
+                    else
+                        return l.quantite;
+                }
+                catch(Exception e)
+                {
+                    return 0;
+                }
+             
             }
             return 0;
         }

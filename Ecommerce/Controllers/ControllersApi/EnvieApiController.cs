@@ -39,5 +39,39 @@ namespace Ecommerce.Controllers.ControllersApi
             
         }
 
+        public bool Delete(String id_user,int id_produit)
+        {
+            Envies envies = db.Envies.Where(x => x.id_user == id_user && x.id_produit == id_produit).FirstOrDefault();
+            db.Envies.Remove(envies);
+            db.SaveChanges();
+            return true;
+
+        }
+
+        [HttpGet]
+        public bool add(String id_user, int id_produit)
+        {
+           
+            Envies exist = new Envies();
+            exist = db.Envies.Find(id_user, id_produit);
+            if (exist != null)
+                return false;
+
+            Envies envie = new Envies();
+            envie.id_produit = id_produit;
+            envie.id_user = id_user;
+            db.Envies.Add(envie);
+            int res = db.SaveChanges();
+            if (res != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
     }
 }
